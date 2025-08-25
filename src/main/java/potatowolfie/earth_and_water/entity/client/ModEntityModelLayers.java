@@ -13,7 +13,12 @@ public class ModEntityModelLayers {
             new EntityModelLayer(Identifier.of(EarthWater.MOD_ID, "water_charge"), "main");
 
     public static final EntityModelLayer BORE = new EntityModelLayer(
-            Identifier.of("earth-and-water", "bore"), "main");
+            Identifier.of(EarthWater.MOD_ID, "bore"), "main"
+    );
+
+    public static final EntityModelLayer BRINE = new EntityModelLayer(
+            Identifier.of(EarthWater.MOD_ID, "brine"), "main"
+    );
 
     public static final EntityModelLayer SPIKED_SHIELD = new EntityModelLayer(
             Identifier.of("earth-and-water", "spiked_shield"), "main");

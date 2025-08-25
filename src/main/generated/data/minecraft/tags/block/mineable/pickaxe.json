@@ -37,6 +37,21 @@
     "earth-and-water:prismarine_tile_wall",
     "earth-and-water:mixed_prismarine_tiles",
     "earth-and-water:chiseled_dark_prismarine",
-    "earth-and-water:oxygen_block"
+    "earth-and-water:dark_prismarine_wall",
+    "earth-and-water:oxygen_block",
+    "earth-and-water:limestone",
+    "earth-and-water:limestone_stairs",
+    "earth-and-water:limestone_slab",
+    "earth-and-water:limestone_wall",
+    "earth-and-water:polished_limestone",
+    "earth-and-water:polished_limestone_stairs",
+    "earth-and-water:polished_limestone_slab",
+    "earth-and-water:polished_limestone_wall",
+    "earth-and-water:limestone_bricks",
+    "earth-and-water:limestone_brick_stairs",
+    "earth-and-water:limestone_brick_slab",
+    "earth-and-water:limestone_brick_wall",
+    "earth-and-water:limestone_pillar",
+    "earth-and-water:chiseled_limestone_bricks"
   ]
 }

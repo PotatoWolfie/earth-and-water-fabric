@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "earth-and-water:steel_block",
+    "earth-and-water:steel_ingot",
+    "earth-and-water:steel_nugget"
+  ]
+}

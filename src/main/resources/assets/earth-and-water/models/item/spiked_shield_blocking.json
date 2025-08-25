@@ -3,8 +3,11 @@
 	"parent": "builtin/entity",
 	"gui_light": "front",
 	"textures": {
-		"1": "earth-and-water:item/spiked_shield",
+		"1": "earth-and-water:entity/spiked_shield_base_nopattern",
 		"particle": "block/dark_oak_planks"
+	},
+	"components": {
+		"minecraft:special_model_type": "earth_and_water:spiked_banner_shield"
 	},
 	"display": {
 		"thirdperson_righthand": {

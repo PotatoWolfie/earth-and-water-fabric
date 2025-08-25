@@ -54,6 +54,22 @@ public class ModLootTableGenerator extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.PRISMARINE_TILE_WALL);
         addDrop(ModBlocks.MIXED_PRISMARINE_TILES);
         addDrop(ModBlocks.CHISELED_DARK_PRISMARINE);
+        addDrop(ModBlocks.DARK_PRISMARINE_WALL);
+
+        addDrop(ModBlocks.LIMESTONE);
+        addDrop(ModBlocks.LIMESTONE_STAIRS);
+        addDrop(ModBlocks.LIMESTONE_SLAB, slabDrops(ModBlocks.LIMESTONE_SLAB));
+        addDrop(ModBlocks.LIMESTONE_WALL);
+        addDrop(ModBlocks.POLISHED_LIMESTONE);
+        addDrop(ModBlocks.POLISHED_LIMESTONE_STAIRS);
+        addDrop(ModBlocks.POLISHED_LIMESTONE_SLAB, slabDrops(ModBlocks.POLISHED_LIMESTONE_SLAB));
+        addDrop(ModBlocks.POLISHED_LIMESTONE_WALL);
+        addDrop(ModBlocks.LIMESTONE_BRICKS);
+        addDrop(ModBlocks.LIMESTONE_BRICK_STAIRS);
+        addDrop(ModBlocks.LIMESTONE_BRICK_SLAB, slabDrops(ModBlocks.LIMESTONE_BRICK_SLAB));
+        addDrop(ModBlocks.LIMESTONE_BRICK_WALL);
+        addDrop(ModBlocks.LIMESTONE_PILLAR);
+        addDrop(ModBlocks.CHISELED_LIMESTONE_BRICKS);
 
         addDrop(ModBlocks.OXYGEN_BLOCK);
         addDrop(ModBlocks.STEEL_BLOCK);

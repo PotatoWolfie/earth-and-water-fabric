@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "down": "earth-and-water:block/mixed_prismarine_tiles",
-    "east": "earth-and-water:block/mixed_prismarine_tiles",
-    "north": "earth-and-water:block/mixed_prismarine_tiles_side",
+    "down": "earth-and-water:block/mixed_prismarine_tiles_side",
+    "east": "earth-and-water:block/mixed_prismarine_tiles_side",
+    "north": "earth-and-water:block/mixed_prismarine_tiles",
     "particle": "earth-and-water:block/mixed_prismarine_tiles",
-    "south": "earth-and-water:block/mixed_prismarine_tiles_side",
-    "up": "earth-and-water:block/mixed_prismarine_tiles",
-    "west": "earth-and-water:block/mixed_prismarine_tiles"
+    "south": "earth-and-water:block/mixed_prismarine_tiles",
+    "up": "earth-and-water:block/mixed_prismarine_tiles_side",
+    "west": "earth-and-water:block/mixed_prismarine_tiles_side"
   }
 }

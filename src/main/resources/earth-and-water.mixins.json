@@ -3,7 +3,9 @@
   "package": "potatowolfie.earth_and_water.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractCauldronBlockMixin",
     "ConduitBlockEntityMixin",
+    "LivingEntityMixin",
     "ShieldBlockingMixin",
     "ShieldDecorationRecipeMixin"
   ],
@@ -11,5 +13,7 @@
     "defaultRequire": 1
   },
   "client": [
+    "BrineCameraMixin",
+    "BrineSpectatorMixin"
   ]
 }

@@ -3,21 +3,19 @@ package potatowolfie.earth_and_water.item.custom;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.WindChargeEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ProjectileItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import potatowolfie.earth_and_water.entity.client.EarthChargeProjectileEntity;
+import potatowolfie.earth_and_water.entity.custom.EarthChargeProjectileEntity;
 
 public class EarthChargeItem extends Item implements ProjectileItem {
     private static final int COOLDOWN = 100;
@@ -27,7 +25,7 @@ public class EarthChargeItem extends Item implements ProjectileItem {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient()) {
             EarthChargeProjectileEntity earthChargeProjectileEntity = new EarthChargeProjectileEntity(world, user);
 
@@ -56,10 +54,10 @@ public class EarthChargeItem extends Item implements ProjectileItem {
                 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F)
         );
         ItemStack itemStack = user.getStackInHand(hand);
-        user.getItemCooldownManager().set(this, COOLDOWN);
+        user.getItemCooldownManager().set(itemStack, COOLDOWN);
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         itemStack.decrementUnlessCreative(1, user);
-        return TypedActionResult.success(itemStack, world.isClient());
+        return ActionResult.SUCCESS;
     }
 
     @Override

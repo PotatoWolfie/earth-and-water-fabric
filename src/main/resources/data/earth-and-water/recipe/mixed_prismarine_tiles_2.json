@@ -1,17 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
+  "category": "building",
+  "group": "mixed_prismarine_tiles",
   "key": {
-    "#": {
-      "item": "earth-and-water:prismarine_tiles"
-    },
-    "X": {
-      "item": "minecraft:dark_prismarine"
-    }
+    "#": [
+      "earth-and-water:prismarine_tiles"
+    ],
+    "X": [
+      "minecraft:dark_prismarine"
+    ]
   },
   "pattern": [
-    "X#",
-    "#X"
+    "#X",
+    "X#"
   ],
   "result": {
     "count": 4,

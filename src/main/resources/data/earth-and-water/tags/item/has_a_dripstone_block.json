@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:dripstone_block",
+    "earth-and-water:dripstone_stairs",
+    "earth-and-water:dripstone_slab",
+    "earth-and-water:dripstone_wall",
+    "earth-and-water:dripstone_bricks",
+    "earth-and-water:dripstone_brick_stairs",
+    "earth-and-water:dripstone_brick_slab",
+    "earth-and-water:dripstone_brick_wall",
+    "earth-and-water:polished_dripstone",
+    "earth-and-water:polished_dripstone_stairs",
+    "earth-and-water:polished_dripstone_slab",
+    "earth-and-water:polished_dripstone_wall",
+    "earth-and-water:polished_dripstone_tiles",
+    "earth-and-water:dripstone_pillar",
+    "earth-and-water:chiseled_dripstone_bricks"
+  ]
+}

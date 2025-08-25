@@ -6,6 +6,9 @@
     "earth-and-water:dark_dripstone_slab",
     "earth-and-water:dark_dripstone_brick_slab",
     "earth-and-water:polished_dark_dripstone_slab",
-    "earth-and-water:prismarine_tile_slab"
+    "earth-and-water:prismarine_tile_slab",
+    "earth-and-water:limestone_slab",
+    "earth-and-water:polished_limestone_slab",
+    "earth-and-water:limestone_brick_slab"
   ]
 }

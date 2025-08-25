@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "earth-and-water:block/limestone",
+    "side": "earth-and-water:block/limestone",
+    "top": "earth-and-water:block/limestone"
+  }
+}

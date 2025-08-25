@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "earth-and-water:block/polished_limestone_slab"
+    },
+    "type=double": {
+      "model": "earth-and-water:block/polished_limestone"
+    },
+    "type=top": {
+      "model": "earth-and-water:block/polished_limestone_slab_top"
+    }
+  }
+}

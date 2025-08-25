@@ -1,13 +1,22 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "item": "earth-and-water:brine_rod"
-    }
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " K ",
+    "KBK",
+    " K "
   ],
+  "key": {
+    "K": [
+      "minecraft:kelp"
+    ],
+    "B": [
+      "earth-and-water:oxygen_block"
+    ]
+  },
   "result": {
-    "count": 4,
-    "id": "earth-and-water:water_charge"
-  }
+    "id": "earth-and-water:water_charge",
+    "count": 4
+  },
+  "show_notification": true
 }

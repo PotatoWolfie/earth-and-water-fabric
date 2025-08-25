@@ -5,6 +5,10 @@
     "earth-and-water:prismarine_tile_wall",
     "earth-and-water:dark_dripstone_wall",
     "earth-and-water:polished_dark_dripstone_wall",
-    "earth-and-water:dark_dripstone_brick_wall"
+    "earth-and-water:dark_dripstone_brick_wall",
+    "earth-and-water:dark_prismarine_wall",
+    "earth-and-water:limestone_wall",
+    "earth-and-water:polished_limestone_wall",
+    "earth-and-water:limestone_brick_wall"
   ]
 }

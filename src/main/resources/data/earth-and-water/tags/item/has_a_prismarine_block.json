@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "earth-and-water:chiseled_prismarine_bricks",
+    "earth-and-water:prismarine_pillar",
+    "earth-and-water:prismarine_tiles",
+    "earth-and-water:prismarine_tile_stairs",
+    "earth-and-water:prismarine_tile_slab",
+    "earth-and-water:prismarine_tile_wall",
+    "earth-and-water:mixed_prismarine_tiles"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "earth_and_water:entity/spiked_shield_base"
+    },
+    {
+      "type": "single",
+      "resource": "earth_and_water:entity/spiked_shield_base_nopattern"
+    }
+  ]
+}

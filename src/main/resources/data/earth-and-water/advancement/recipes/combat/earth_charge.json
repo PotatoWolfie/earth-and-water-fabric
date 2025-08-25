@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bore_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "earth-and-water:bore_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "earth-and-water:earth_charge"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bore_rod"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "earth-and-water:earth_charge"
+    ]
+  }
+}

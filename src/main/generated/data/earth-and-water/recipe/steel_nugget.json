@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": {
-      "item": "earth-and-water:steel_ingot"
-    }
+    "X": "earth-and-water:steel_ingot"
   },
   "pattern": [
     "X"

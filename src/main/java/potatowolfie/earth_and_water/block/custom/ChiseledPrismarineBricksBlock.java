@@ -39,7 +39,6 @@ public class ChiseledPrismarineBricksBlock extends Block {
         }
     }
 
-    @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
                                                 WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (world instanceof World) {
@@ -50,7 +49,6 @@ public class ChiseledPrismarineBricksBlock extends Block {
         return shouldBeActive != state.get(ACTIVE) ? state.with(ACTIVE, shouldBeActive) : state;
     }
 
-    @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         boolean shouldBeActive = checkForWater(world, pos);
         if (shouldBeActive != state.get(ACTIVE)) {

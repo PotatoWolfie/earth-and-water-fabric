@@ -2,31 +2,42 @@ package potatowolfie.earth_and_water.entity;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.mob.BlazeEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import potatowolfie.earth_and_water.EarthWater;
-import potatowolfie.earth_and_water.entity.client.BoreEntity;
-import potatowolfie.earth_and_water.entity.client.EarthChargeProjectileEntity;
-import potatowolfie.earth_and_water.entity.client.WaterChargeProjectileEntity;
+import potatowolfie.earth_and_water.entity.custom.BrineEntity;
+import potatowolfie.earth_and_water.entity.custom.BoreEntity;
+import potatowolfie.earth_and_water.entity.custom.EarthChargeProjectileEntity;
+import potatowolfie.earth_and_water.entity.custom.WaterChargeProjectileEntity;
 
 public class ModEntities {
 
     public static final EntityType<EarthChargeProjectileEntity> EARTH_CHARGE = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(EarthWater.MOD_ID, "earth_charge"),
             EntityType.Builder.<EarthChargeProjectileEntity>create(EarthChargeProjectileEntity::new, SpawnGroup.MISC)
-                    .dimensions(0.3125F, 0.3125F).build());
+                    .dimensions(0.3125F, 0.3125F)
+                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(EarthWater.MOD_ID, "earth_charge"))));
 
     public static final EntityType<WaterChargeProjectileEntity> WATER_CHARGE = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(EarthWater.MOD_ID, "water_charge"),
             EntityType.Builder.<WaterChargeProjectileEntity>create(WaterChargeProjectileEntity::new, SpawnGroup.MISC)
-                    .dimensions(0.3125F, 0.3125F).build());
+                    .dimensions(0.3125F, 0.3125F)
+                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(EarthWater.MOD_ID, "water_charge"))));
 
     public static final EntityType<BoreEntity> BORE = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(EarthWater.MOD_ID, "bore"),
-            EntityType.Builder.<BoreEntity>create(BoreEntity::new, SpawnGroup.MONSTER)
-                    .maxTrackingRange(64).dimensions(0.6F, 1.8F).build());
+            EntityType.Builder.create(BoreEntity::new, SpawnGroup.MONSTER)
+                    .maxTrackingRange(64).dimensions(0.6F, 1.8F)
+                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(EarthWater.MOD_ID, "bore"))));
+
+    public static final EntityType<BrineEntity> BRINE = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(EarthWater.MOD_ID, "brine"),
+            EntityType.Builder.create(BrineEntity::new, SpawnGroup.MONSTER)
+                    .maxTrackingRange(64).dimensions(0.8F, 1.8F)
+                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(EarthWater.MOD_ID, "brine"))));
 
     public static void registerModEntities() {
         EarthWater.LOGGER.info("Registering Mod Entities for " + EarthWater.MOD_ID);

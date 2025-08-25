@@ -31,7 +31,7 @@ public abstract class ShieldDecorationRecipeMixin extends SpecialCraftingRecipe 
         ItemStack banner = ItemStack.EMPTY;
         boolean hasSpikedShield = false;
 
-        for (int i = 0; i < input.getSize(); ++i) {
+        for (int i = 0; i < input.size(); ++i) {
             ItemStack stack = input.getStackInSlot(i);
             if (stack.isEmpty()) continue;
 
@@ -45,7 +45,7 @@ public abstract class ShieldDecorationRecipeMixin extends SpecialCraftingRecipe 
             return;
         }
 
-        for (int i = 0; i < input.getSize(); ++i) {
+        for (int i = 0; i < input.size(); ++i) {
             ItemStack stack = input.getStackInSlot(i);
             if (stack.isEmpty()) continue;
 
@@ -83,7 +83,7 @@ public abstract class ShieldDecorationRecipeMixin extends SpecialCraftingRecipe 
         ItemStack shield = ItemStack.EMPTY;
         boolean hasSpikedShield = false;
 
-        for (int i = 0; i < input.getSize(); ++i) {
+        for (int i = 0; i < input.size(); ++i) {
             ItemStack stack = input.getStackInSlot(i);
             if (stack.isEmpty()) continue;
 

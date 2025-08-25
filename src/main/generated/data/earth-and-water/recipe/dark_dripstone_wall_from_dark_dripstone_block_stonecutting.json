@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "earth-and-water:dark_dripstone_block"
-  },
+  "ingredient": "earth-and-water:dark_dripstone_block",
   "result": {
     "count": 1,
     "id": "earth-and-water:dark_dripstone_wall"

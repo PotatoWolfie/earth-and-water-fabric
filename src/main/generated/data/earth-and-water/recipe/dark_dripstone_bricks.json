@@ -2,16 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "earth-and-water:polished_dark_dripstone"
-    }
+    "#": "earth-and-water:polished_dark_dripstone"
   },
   "pattern": [
-    "SS",
-    "SS"
+    "##",
+    "##"
   ],
   "result": {
-    "count": 4,
+    "count": 1,
     "id": "earth-and-water:dark_dripstone_bricks"
   }
 }

@@ -1,12 +1,12 @@
 package potatowolfie.earth_and_water.datagen;
 
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TexturedModel;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.Models;
+import net.minecraft.client.data.TexturedModel;
 import potatowolfie.earth_and_water.block.ModBlocks;
 import potatowolfie.earth_and_water.item.ModItems;
 
@@ -48,6 +48,24 @@ public class ModModelProvider extends FabricModelProvider {
         polisheddripstoneTexturePool.slab(ModBlocks.POLISHED_DRIPSTONE_SLAB);
         polisheddripstoneTexturePool.wall(ModBlocks.POLISHED_DRIPSTONE_WALL);
 
+        BlockStateModelGenerator.BlockTexturePool limestoneTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.LIMESTONE);
+        limestoneTexturePool.stairs(ModBlocks.LIMESTONE_STAIRS);
+        limestoneTexturePool.slab(ModBlocks.LIMESTONE_SLAB);
+        limestoneTexturePool.wall(ModBlocks.LIMESTONE_WALL);
+
+        BlockStateModelGenerator.BlockTexturePool polishedLimestoneTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_LIMESTONE);
+        polishedLimestoneTexturePool.stairs(ModBlocks.POLISHED_LIMESTONE_STAIRS);
+        polishedLimestoneTexturePool.slab(ModBlocks.POLISHED_LIMESTONE_SLAB);
+        polishedLimestoneTexturePool.wall(ModBlocks.POLISHED_LIMESTONE_WALL);
+
+        BlockStateModelGenerator.BlockTexturePool limestoneBricksTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.LIMESTONE_BRICKS);
+        limestoneBricksTexturePool.stairs(ModBlocks.LIMESTONE_BRICK_STAIRS);
+        limestoneBricksTexturePool.slab(ModBlocks.LIMESTONE_BRICK_SLAB);
+        limestoneBricksTexturePool.wall(ModBlocks.LIMESTONE_BRICK_WALL);
+
+        blockStateModelGenerator.registerAxisRotated(ModBlocks.LIMESTONE_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
+        blockStateModelGenerator.registerGeneric(ModBlocks.CHISELED_LIMESTONE_BRICKS);
+
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.STEEL_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.OXYGEN_BLOCK);
 
@@ -59,6 +77,9 @@ public class ModModelProvider extends FabricModelProvider {
         prismarinetilesTexturePool.slab(ModBlocks.PRISMARINE_TILE_SLAB);
         prismarinetilesTexturePool.wall(ModBlocks.PRISMARINE_TILE_WALL);
 
+        BlockStateModelGenerator.BlockTexturePool darkprismarineTexturePool = blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.DARK_PRISMARINE);
+        darkprismarineTexturePool.wall(ModBlocks.DARK_PRISMARINE_WALL);
+
         blockStateModelGenerator.registerAxisRotated(ModBlocks.DRIPSTONE_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
         blockStateModelGenerator.registerAxisRotated(ModBlocks.DARK_DRIPSTONE_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
         blockStateModelGenerator.registerAxisRotated(ModBlocks.DARK_PRISMARINE_PILLAR, TexturedModel.END_FOR_TOP_CUBE_COLUMN, TexturedModel.END_FOR_TOP_CUBE_COLUMN_HORIZONTAL);
@@ -68,7 +89,6 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.BORE_ROD, Models.GENERATED);
-        itemModelGenerator.register(ModItems.BORE_SPAWN_EGG, Models.GENERATED);
         itemModelGenerator.register(ModItems.BRINE_ROD, Models.GENERATED);
         itemModelGenerator.register(ModItems.STEEL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.STEEL_NUGGET, Models.GENERATED);
@@ -78,6 +98,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.REINFORCED_KEY, Models.GENERATED);
         itemModelGenerator.register(ModItems.WHIP, Models.HANDHELD_ROD);
         itemModelGenerator.register(ModItems.BATTLE_AXE, Models.HANDHELD);
-
+        itemModelGenerator.register(ModItems.BORE_SPAWN_EGG, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.BRINE_SPAWN_EGG, Models.HANDHELD);
     }
 }

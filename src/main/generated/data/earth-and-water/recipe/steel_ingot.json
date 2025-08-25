@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "earth-and-water:steel_block"
-    }
+    "earth-and-water:steel_block"
   ],
   "result": {
     "count": 9,

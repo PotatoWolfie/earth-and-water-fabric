@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockView;
 
 public class ChiseledDarkPrismarineBlock extends Block {
     public static final IntProperty Y_LEVEL_STATE = IntProperty.of("y_level", 0, 3);
@@ -34,10 +33,8 @@ public class ChiseledDarkPrismarineBlock extends Block {
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (!state.isOf(newState.getBlock())) {
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
+    public void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        super.onStateReplaced(state, world, pos, moved);
     }
 
     @Override

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "earth-and-water:block/chiseled_limestone_bricks_top",
+    "east": "earth-and-water:block/chiseled_limestone_bricks",
+    "north": "earth-and-water:block/chiseled_limestone_bricks",
+    "particle": "earth-and-water:block/chiseled_limestone_bricks",
+    "south": "earth-and-water:block/chiseled_limestone_bricks",
+    "up": "earth-and-water:block/chiseled_limestone_bricks_top",
+    "west": "earth-and-water:block/chiseled_limestone_bricks"
+  }
+}

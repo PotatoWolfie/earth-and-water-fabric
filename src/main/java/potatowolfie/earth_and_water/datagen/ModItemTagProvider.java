@@ -19,33 +19,21 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS)
+        valueLookupBuilder(ItemTags.TRIM_MATERIALS)
                 .add(ModItems.STEEL_INGOT);
-
-        getOrCreateTagBuilder(ItemTags.TRIM_TEMPLATES)
-                .add(ModItems.BLOCK_ARMOR_TRIM_SMITHING_TEMPLATE)
-                .add(ModItems.GUARD_ARMOR_TRIM_SMITHING_TEMPLATE)
-                .add(ModItems.SPIKED_SHIELD_UPGRADE_SMITHING_TEMPLATE);
-
-        getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE)
+        valueLookupBuilder(ItemTags.SWORD_ENCHANTABLE)
                 .add(ModItems.BATTLE_AXE)
                 .add(ModItems.WHIP);
-        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE)
+        valueLookupBuilder(ItemTags.DURABILITY_ENCHANTABLE)
                 .add(ModItems.BATTLE_AXE)
                 .add(ModItems.WHIP)
                 .add(ModItems.SPIKED_SHIELD);
-        getOrCreateTagBuilder(ItemTags.MINING_ENCHANTABLE)
+        valueLookupBuilder(ItemTags.MINING_ENCHANTABLE)
                 .add(ModItems.BATTLE_AXE);
-        getOrCreateTagBuilder(ItemTags.WEAPON_ENCHANTABLE)
+        valueLookupBuilder(ItemTags.WEAPON_ENCHANTABLE)
                 .add(ModItems.BATTLE_AXE)
                 .add(ModItems.WHIP);
-        getOrCreateTagBuilder(ItemTags.SHARP_WEAPON_ENCHANTABLE)
+        valueLookupBuilder(ItemTags.SHARP_WEAPON_ENCHANTABLE)
                 .add(ModItems.BATTLE_AXE);
-
-        getOrCreateTagBuilder(ItemTags.TRIM_TEMPLATES)
-                .add(ModItems.GUARD_ARMOR_TRIM_SMITHING_TEMPLATE)
-                .add(ModItems.GUARD_ARMOR_TRIM_SMITHING_TEMPLATE);
-        getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS)
-                .add(ModItems.STEEL_INGOT);
     }
 }

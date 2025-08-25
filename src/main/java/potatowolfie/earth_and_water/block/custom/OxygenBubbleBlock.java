@@ -3,6 +3,7 @@ package potatowolfie.earth_and_water.block.custom;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -20,6 +21,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 
 public class OxygenBubbleBlock extends Block implements Waterloggable {
     public static final MapCodec<OxygenBubbleBlock> CODEC = createCodec(OxygenBubbleBlock::new);
@@ -51,7 +53,6 @@ public class OxygenBubbleBlock extends Block implements Waterloggable {
         return VoxelShapes.empty();
     }
 
-    @Override
     public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
         return true;
     }
@@ -62,7 +63,7 @@ public class OxygenBubbleBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler entityCollisionHandler) {
         if (!world.isClient && entity instanceof LivingEntity living && state.get(WATERLOGGED)) {
             if (living.isSubmergedInWater()) {
                 int currentAir = living.getAir();
@@ -105,13 +106,13 @@ public class OxygenBubbleBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, 
-            WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView,
+                                                BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        world.scheduleBlockTick(pos, this, SCHEDULED_TICK_DELAY);
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        tickView.scheduleBlockTick(pos, this, SCHEDULED_TICK_DELAY);
+        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
     @Override

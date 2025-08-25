@@ -24,7 +24,6 @@ public class BreathGivingEffect extends StatusEffect {
         return duration % UPDATE_INTERVAL == 0;
     }
 
-    @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (entity == null) {
             return false;

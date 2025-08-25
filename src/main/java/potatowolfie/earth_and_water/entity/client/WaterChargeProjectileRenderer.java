@@ -1,5 +1,7 @@
 package potatowolfie.earth_and_water.entity.client;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -11,8 +13,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import potatowolfie.earth_and_water.EarthWater;
+import potatowolfie.earth_and_water.entity.custom.WaterChargeProjectileEntity;
 
-public class WaterChargeProjectileRenderer extends EntityRenderer <WaterChargeProjectileEntity> {
+@Environment(EnvType.CLIENT)
+public class WaterChargeProjectileRenderer extends EntityRenderer<WaterChargeProjectileEntity, WaterChargeProjectileRenderState> {
     private static final float field_52258 = MathHelper.square(3.5F);
     public static final Identifier TEXTURE = Identifier.of(EarthWater.MOD_ID, "textures/entity/water_charge/water_charge.png");
     protected WaterChargeProjectileModel model;
@@ -22,43 +26,54 @@ public class WaterChargeProjectileRenderer extends EntityRenderer <WaterChargePr
         model = new WaterChargeProjectileModel(ctx.getPart(ModEntityModelLayers.WATER_CHARGE));
     }
 
-    public void render(
-            WaterChargeProjectileEntity waterChargeProjectileEntity, float f, float g, MatrixStack matrixStack,
-            VertexConsumerProvider vertexConsumerProvider, int i) {
-        if (waterChargeProjectileEntity.age >= 2 || !(this.dispatcher.camera.getFocusedEntity().squaredDistanceTo(waterChargeProjectileEntity) < (double) field_52258)) {
+    public void render(WaterChargeProjectileRenderState waterChargeProjectileRenderState, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+        if (waterChargeProjectileRenderState.age >= 2 || !(this.dispatcher.camera.getFocusedEntity().squaredDistanceTo(waterChargeProjectileRenderState.x, waterChargeProjectileRenderState.y, waterChargeProjectileRenderState.z) < (double) field_52258)) {
             matrixStack.push();
 
             matrixStack.translate(0, 1.525, 0);
 
-            if (waterChargeProjectileEntity.isStuck()) {
-                if (waterChargeProjectileEntity.isStuckToEntity()) {
-                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(waterChargeProjectileEntity.getRenderingRotation()));
+            if (waterChargeProjectileRenderState.isStuck) {
+                if (waterChargeProjectileRenderState.isStuckToEntity) {
+                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(waterChargeProjectileRenderState.renderingRotation));
                 } else {
-                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(waterChargeProjectileEntity.getYaw()));
-                    matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(waterChargeProjectileEntity.getPitch()));
+                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(waterChargeProjectileRenderState.yaw));
+                    matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(waterChargeProjectileRenderState.pitch));
                 }
-            } else if (waterChargeProjectileEntity.isGrounded()) {
-                matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(waterChargeProjectileEntity.getYaw()));
-                matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(waterChargeProjectileEntity.getPitch()));
+            } else if (waterChargeProjectileRenderState.isGrounded) {
+                matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(waterChargeProjectileRenderState.yaw));
+                matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(waterChargeProjectileRenderState.pitch));
             }
 
             matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
 
-            if (!waterChargeProjectileEntity.isStuck()) {
-                matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(waterChargeProjectileEntity.getRenderingRotation()));
+            if (!waterChargeProjectileRenderState.isStuck) {
+                matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(waterChargeProjectileRenderState.renderingRotation));
             }
 
             VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutout(TEXTURE));
-            this.model.setAngles(waterChargeProjectileEntity, 0.0F, 0.0F, 0, 0.0F, 0.0F);
+            this.model.setAngles(waterChargeProjectileRenderState);
             this.model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV);
 
             matrixStack.pop();
-            super.render(waterChargeProjectileEntity, f, g, matrixStack, vertexConsumerProvider, i);
+            super.render(waterChargeProjectileRenderState, matrixStack, vertexConsumerProvider, i);
         }
     }
 
-    @Override
-    public Identifier getTexture(WaterChargeProjectileEntity entity) {
+    public Identifier getTexture(WaterChargeProjectileRenderState waterChargeProjectileRenderState) {
         return TEXTURE;
+    }
+
+    public WaterChargeProjectileRenderState createRenderState() {
+        return new WaterChargeProjectileRenderState();
+    }
+
+    public void updateRenderState(WaterChargeProjectileEntity waterChargeProjectileEntity, WaterChargeProjectileRenderState waterChargeProjectileRenderState, float f) {
+        super.updateRenderState(waterChargeProjectileEntity, waterChargeProjectileRenderState, f);
+        waterChargeProjectileRenderState.isStuck = waterChargeProjectileEntity.isStuck();
+        waterChargeProjectileRenderState.isStuckToEntity = waterChargeProjectileEntity.isStuckToEntity();
+        waterChargeProjectileRenderState.isGrounded = waterChargeProjectileEntity.isGrounded();
+        waterChargeProjectileRenderState.renderingRotation = waterChargeProjectileEntity.getRenderingRotation();
+        waterChargeProjectileRenderState.yaw = waterChargeProjectileEntity.getYaw();
+        waterChargeProjectileRenderState.pitch = waterChargeProjectileEntity.getPitch();
     }
 }

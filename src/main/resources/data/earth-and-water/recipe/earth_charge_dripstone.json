@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " D ",
+    "DBD",
+    " D "
+  ],
+  "key": {
+    "D": [
+      "minecraft:pointed_dripstone"
+    ],
+    "B": [
+      "minecraft:dripstone_block"
+    ]
+  },
+  "result": {
+    "id": "earth-and-water:earth_charge",
+    "count": 4
+  },
+  "show_notification": true
+}

@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "find_conduit_monument": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "minecraft:mineshaft"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "Find a Conduit Monument"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:conduit"
+    },
+    "title": {
+      "translate": "Atlantean Eye"
+    },
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "find_conduit_monument"
+    ]
+  ]
+}

@@ -2,12 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:string"
-    },
-    "X": {
-      "item": "earth-and-water:brine_rod"
-    }
+    "#": [
+      "minecraft:string"
+    ],
+    "X": [
+      "earth-and-water:brine_rod"
+    ]
   },
   "pattern": [
     "  X",

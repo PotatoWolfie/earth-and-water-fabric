@@ -17,6 +17,11 @@ public class ModTags {
         public static final TagKey<Block> INCORRECT_FOR_PRISMARINE_TOOL = createTag("incorrect_for_prismarine_tool");
         public static final TagKey<Block> IS_REINFORCED_SPAWNER = createTag("is_reinforced_spawner");
         public static final TagKey<Block> E_W_CONDUIT_FRAME_BLOCKS = createTag("e_w_conduit_frame_blocks");
+        public static final TagKey<Block> HAS_A_DRIPSTONE_BLOCK = createTag("has_a_dripstone_block");
+        public static final TagKey<Block> HAS_A_DARK_DRIPSTONE_BLOCK = createTag("has_a_dark_dripstone_block");
+        public static final TagKey<Block> HAS_A_PRISMARINE_BLOCK = createTag("has_a_prismarine_block");
+        public static final TagKey<Block> HAS_A_DARK_PRSIMARINE_BLOCK = createTag("has_a_dark_prismarine_block");
+        public static final TagKey<Block> HAS_STEEL = createTag("has_steel");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(EarthWater.MOD_ID, name));
@@ -24,8 +29,11 @@ public class ModTags {
     }
 
     public static class Item {
+        public static final TagKey<net.minecraft.item.Item> BATTLE_AXE = createTag("battle_axe");
         public static final TagKey<net.minecraft.item.Item> BATTLE_AXE_ENCHANTABLE = createTag("battle_axe_enchantable");
         public static final TagKey<net.minecraft.item.Item> SPIKED_SHIELD = createTag("spiked_shield");
+        public static final TagKey<net.minecraft.item.Item> STEEL_REPAIR = createTag("steel_repair");
+        public static final TagKey<net.minecraft.item.Item> PRISMARINE_REPAIR = createTag("prismarine_repair");
 
         private static TagKey<net.minecraft.item.Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(EarthWater.MOD_ID, name));
@@ -33,7 +41,6 @@ public class ModTags {
     }
 
     public static class Entities {
-        public static final TagKey<EntityType<?>> SPIKED_SHIELD_DISABLING = createTag("spiked_shield_disabling");
 
         private static TagKey<EntityType<?>> createTag(String name) {
             return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(EarthWater.MOD_ID, name));

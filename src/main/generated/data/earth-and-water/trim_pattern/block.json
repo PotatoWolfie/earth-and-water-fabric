@@ -3,6 +3,5 @@
   "decal": false,
   "description": {
     "translate": "trim_pattern.earth-and-water.block"
-  },
-  "template_item": "earth-and-water:block_armor_trim_smithing_template"
+  }
 }

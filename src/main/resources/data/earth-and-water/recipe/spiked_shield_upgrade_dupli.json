@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": [
+      "minecraft:diamond"
+    ],
+    "C": [
+      "earth-and-water:steel_block"
+    ],
+    "S": [
+      "earth-and-water:spiked_shield_upgrade_smithing_template"
+    ]
+  },
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "id": "earth-and-water:spiked_shield_upgrade_smithing_template"
+  }
+}

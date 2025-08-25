@@ -6,6 +6,9 @@
     "earth-and-water:dark_dripstone_stairs",
     "earth-and-water:dark_dripstone_brick_stairs",
     "earth-and-water:polished_dark_dripstone_stairs",
-    "earth-and-water:prismarine_tile_stairs"
+    "earth-and-water:prismarine_tile_stairs",
+    "earth-and-water:limestone_stairs",
+    "earth-and-water:polished_limestone_stairs",
+    "earth-and-water:limestone_brick_stairs"
   ]
 }

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "earth-and-water:dark_dripstone_block"
-    }
+    "#": "earth-and-water:dark_dripstone_block"
   },
   "pattern": [
     "###",

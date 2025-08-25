@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "down": "earth-and-water:block/polished_dripstone_tiles",
-    "east": "earth-and-water:block/polished_dripstone_tiles",
-    "north": "earth-and-water:block/polished_dripstone_tiles_side",
+    "down": "earth-and-water:block/polished_dripstone_tiles_side",
+    "east": "earth-and-water:block/polished_dripstone_tiles_side",
+    "north": "earth-and-water:block/polished_dripstone_tiles",
     "particle": "earth-and-water:block/polished_dripstone_tiles",
-    "south": "earth-and-water:block/polished_dripstone_tiles_side",
-    "up": "earth-and-water:block/polished_dripstone_tiles",
-    "west": "earth-and-water:block/polished_dripstone_tiles"
+    "south": "earth-and-water:block/polished_dripstone_tiles",
+    "up": "earth-and-water:block/polished_dripstone_tiles_side",
+    "west": "earth-and-water:block/polished_dripstone_tiles_side"
   }
 }

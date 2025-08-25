@@ -1,0 +1,37 @@
+{
+  "type": "earth-and-water:dark_dripstone_cluster",
+  "config": {
+    "chance_of_dripstone_column_at_max_distance_from_center": 0.02,
+    "density": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 0.7,
+      "min_inclusive": 0.3
+    },
+    "dripstone_block_layer_thickness": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 0
+    },
+    "floor_to_ceiling_search_range": 30,
+    "height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 19,
+      "min_inclusive": 3
+    },
+    "height_deviation": 16,
+    "max_distance_from_center_affecting_height_bias": 16,
+    "max_distance_from_edge_affecting_chance_of_dripstone_column": 13,
+    "max_stalagmite_stalactite_height_diff": 8,
+    "radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 8,
+      "min_inclusive": 2
+    },
+    "wetness": {
+      "type": "minecraft:trapezoid",
+      "max": 0.7,
+      "min": 0.2,
+      "plateau": 0.5
+    }
+  }
+}

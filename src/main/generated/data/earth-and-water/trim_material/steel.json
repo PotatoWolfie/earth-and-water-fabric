@@ -3,7 +3,5 @@
   "description": {
     "color": "#AFC9C9",
     "translate": "trim_material.earth-and-water.steel"
-  },
-  "ingredient": "earth-and-water:steel_ingot",
-  "item_model_index": 0.2
+  }
 }
