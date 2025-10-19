@@ -37,12 +37,12 @@ public class LivingEntityMixin {
                     Item shieldItem = shieldStack.getItem();
 
                     if (shieldItem instanceof ShieldItem || shieldItem instanceof SpikedShieldItem) {
-                        self.getWorld().playSound(null,
+                        self.getEntityWorld().playSound(null,
                                 self.getX(), self.getY(), self.getZ(),
                                 SoundEvents.ITEM_SHIELD_BREAK,
                                 SoundCategory.PLAYERS,
                                 0.8F,
-                                0.8F + self.getWorld().getRandom().nextFloat() * 0.4F);
+                                0.8F + self.getEntityWorld().getRandom().nextFloat() * 0.4F);
 
                         if (self instanceof PlayerEntity playerTarget) {
                             playerTarget.getItemCooldownManager().set(new ItemStack(Items.SHIELD), SHIELD_DISABLE_DURATION);
@@ -52,10 +52,10 @@ public class LivingEntityMixin {
                             }
 
                             playerTarget.clearActiveItem();
-                            playerTarget.getWorld().sendEntityStatus(playerTarget, (byte)30);
+                            playerTarget.getEntityWorld().sendEntityStatus(playerTarget, (byte)30);
                         } else {
                             self.clearActiveItem();
-                            self.getWorld().sendEntityStatus(self, (byte)30);
+                            self.getEntityWorld().sendEntityStatus(self, (byte)30);
                         }
 
                         return;

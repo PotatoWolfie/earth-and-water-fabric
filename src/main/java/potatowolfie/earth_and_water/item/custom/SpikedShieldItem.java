@@ -33,7 +33,7 @@ public class SpikedShieldItem extends ShieldItem {
             LivingEntity attacker = getActualAttacker(damageSource);
 
             if (attacker != null && attacker != user) {
-                if (user.getWorld() instanceof ServerWorld serverWorld) {
+                if (user.getEntityWorld() instanceof ServerWorld serverWorld) {
                     DamageSource reflectedSource = user.getDamageSources().thorns(user);
                     attacker.damage(serverWorld, reflectedSource, amount);
                 }

@@ -1,4 +1,4 @@
-// 1.21.8	-999999999-01-01T00:00:00	Earth & Water/Model Definitions
+// 1.21.9	-999999999-01-01T00:00:00	Earth & Water/Model Definitions
 55d044b16771bc328a059d08d98c13f78cc6e2fc assets/earth-and-water/blockstates/chiseled_limestone_bricks.json
 15583ebc7e55860bdc17dfc6e9e38bf952116fa1 assets/earth-and-water/blockstates/dark_dripstone_block.json
 2bd3b47a53b60c15d263d41147fbd7f92fbc8cd5 assets/earth-and-water/blockstates/dark_dripstone_brick_slab.json
@@ -106,10 +106,10 @@ b509fbd4591cf963f12428b9f1c19766d0ee0797 assets/earth-and-water/items/polished_l
 b5de732f9919b0027ac3fe13f684781ac4c577a4 assets/earth-and-water/items/prismarine_tile_wall.json
 13943e8e428f72892cf4b35bf440c5bb56e8c3de assets/earth-and-water/items/prismarine_tiles.json
 01fe97a0f0dcfbceebb7f61860057204f36bb1f5 assets/earth-and-water/items/reinforced_key.json
-a27fcb497716149ee520337462ecdbd551e5478a assets/earth-and-water/items/spiked_shield_upgrade_smithing_template.json
 22b88e829d937b338986b43561c152aa939eaa28 assets/earth-and-water/items/steel_block.json
 7d2f656d8830dcd2642548cc5cc3f4e32393e407 assets/earth-and-water/items/steel_ingot.json
 f9278ac67adb687360e1246d755337741f36c84a assets/earth-and-water/items/steel_nugget.json
+93b7cb1eb0509636547033cc21f1763aa559a769 assets/earth-and-water/items/steel_upgrade_smithing_template.json
 2abb3c118cf53d30f03cddba4c98456f50263871 assets/earth-and-water/items/whip.json
 5eeec47f31181633966e1807c178303524fca8f8 assets/earth-and-water/models/block/chiseled_limestone_bricks.json
 c5171e278203bf4b6c59efd5e8d309ccf4d46ac1 assets/earth-and-water/models/block/dark_dripstone_block.json
@@ -237,9 +237,9 @@ d5a3f60b3e91accc09f03e78fdbdf6ce4829eca5 assets/earth-and-water/models/item/batt
 5177176eaf0799461efc2766141ecc0f965333c3 assets/earth-and-water/models/item/brine_spawn_egg.json
 f5a26ec6e70b20197ba030905df64f1313ed9504 assets/earth-and-water/models/item/guard_armor_trim_smithing_template.json
 1494f394a8c69bee3bbd8085986a6c8ebd177933 assets/earth-and-water/models/item/reinforced_key.json
-7cbfe16a1c573414dde9a44d4275fa459f9cc68f assets/earth-and-water/models/item/spiked_shield_upgrade_smithing_template.json
 39475009c5a2c238d7c979f1726f80c2e742cdbd assets/earth-and-water/models/item/steel_ingot.json
 d48061445ce349f43e53fd31803ad521cfb20512 assets/earth-and-water/models/item/steel_nugget.json
+94a5d47d30209d6b6638628dc010fb906e3954bd assets/earth-and-water/models/item/steel_upgrade_smithing_template.json
 72f7cfa8559c435656ff6e1cf8cee02652449cb1 assets/earth-and-water/models/item/whip.json
 1ab12d8d5e28102dbcbf579781f7c490a075f886 assets/minecraft/blockstates/dark_prismarine.json
 10fc77a63eb1bb8a267dc390434e10bf8bc8f13a assets/minecraft/blockstates/dripstone_block.json

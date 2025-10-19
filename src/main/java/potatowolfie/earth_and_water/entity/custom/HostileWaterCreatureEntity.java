@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.control.MoveControl;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
@@ -20,12 +21,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
+import java.util.EnumSet;
+
 public abstract class HostileWaterCreatureEntity extends HostileEntity {
 
     protected HostileWaterCreatureEntity(EntityType<? extends HostileWaterCreatureEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
-        this.moveControl = new HostileWaterCreatureEntity.WaterMoveControl(this);
+        this.moveControl = new MoveControl(this);
     }
 
     public boolean canSpawn(WorldView world) {
@@ -37,7 +40,7 @@ public abstract class HostileWaterCreatureEntity extends HostileEntity {
     }
 
     protected int getXpToDrop() {
-        return 1 + this.getWorld().random.nextInt(3);
+        return 1 + this.getEntityWorld().random.nextInt(3);
     }
 
     @Override
@@ -66,6 +69,161 @@ public abstract class HostileWaterCreatureEntity extends HostileEntity {
         this.tickWaterBreathingAir(i);
     }
 
+    public static class SeekWaterGoal extends Goal {
+        private final HostileWaterCreatureEntity entity;
+        private final double speed;
+        private BlockPos targetWaterPos;
+
+        public SeekWaterGoal(HostileWaterCreatureEntity entity, double speed) {
+            this.entity = entity;
+            this.speed = speed;
+            this.setControls(EnumSet.of(Goal.Control.MOVE));
+        }
+
+        @Override
+        public boolean canStart() {
+            if (this.entity.isTouchingWater()) {
+                return false;
+            }
+
+            this.targetWaterPos = findNearbyWater();
+            return this.targetWaterPos != null;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return !this.entity.isTouchingWater() &&
+                    this.targetWaterPos != null &&
+                    !this.entity.getNavigation().isIdle();
+        }
+
+        @Override
+        public void start() {
+            if (this.targetWaterPos != null) {
+                this.entity.getNavigation().startMovingTo(
+                        this.targetWaterPos.getX(),
+                        this.targetWaterPos.getY(),
+                        this.targetWaterPos.getZ(),
+                        this.speed
+                );
+            }
+        }
+
+        @Override
+        public void stop() {
+            this.targetWaterPos = null;
+        }
+
+        private BlockPos findNearbyWater() {
+            BlockPos entityPos = this.entity.getBlockPos();
+            int searchRange = 16;
+
+            for (int range = 4; range <= searchRange; range += 4) {
+                for (int x = -range; x <= range; x += 2) {
+                    for (int y = -8; y <= 8; y += 2) {
+                        for (int z = -range; z <= range; z += 2) {
+                            BlockPos checkPos = entityPos.add(x, y, z);
+                            if (this.entity.getEntityWorld().getFluidState(checkPos).isIn(FluidTags.WATER)) {
+                                return checkPos;
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+    }
+
+    public static class SwimInWaterGoal extends Goal {
+        private final HostileWaterCreatureEntity entity;
+        private final double speed;
+        private final int chance;
+        private double targetX;
+        private double targetY;
+        private double targetZ;
+
+        public SwimInWaterGoal(HostileWaterCreatureEntity entity, double speed, int chance) {
+            this.entity = entity;
+            this.speed = speed;
+            this.chance = chance;
+            this.setControls(EnumSet.of(Goal.Control.MOVE));
+        }
+
+        @Override
+        public boolean canStart() {
+            if (this.entity.hasPassengers() || this.entity.getTarget() != null) {
+                return false;
+            }
+
+            if (this.entity.getRandom().nextInt(this.chance) != 0) {
+                return false;
+            }
+
+            return this.entity.isTouchingWater();
+        }
+
+        @Override
+        public void start() {
+            this.chooseWaterTarget();
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return !this.entity.getNavigation().isIdle() && this.entity.isTouchingWater();
+        }
+
+        @Override
+        public void stop() {
+            this.entity.getNavigation().stop();
+        }
+
+        @Override
+        public void tick() {
+            if (this.entity.getRandom().nextInt(150) == 0 ||
+                    this.entity.squaredDistanceTo(this.targetX, this.targetY, this.targetZ) < 1.0D) {
+                this.chooseWaterTarget();
+            }
+        }
+
+        private void chooseWaterTarget() {
+            Vec3d currentPos = this.entity.getEntityPos();
+            int range = 15;
+            int minDistance = 8;
+
+            for (int attempts = 0; attempts < 20; attempts++) {
+                double offsetX = (this.entity.getRandom().nextDouble() - 0.5D) * range * 2;
+                double offsetY = (this.entity.getRandom().nextDouble() - 0.5D) * range * 2;
+                double offsetZ = (this.entity.getRandom().nextDouble() - 0.5D) * range * 2;
+
+                double potentialX = currentPos.x + offsetX;
+                double potentialY = currentPos.y + offsetY;
+                double potentialZ = currentPos.z + offsetZ;
+
+                double distanceSquared = (potentialX - currentPos.x) * (potentialX - currentPos.x) +
+                        (potentialY - currentPos.y) * (potentialY - currentPos.y) +
+                        (potentialZ - currentPos.z) * (potentialZ - currentPos.z);
+
+                if (distanceSquared < minDistance * minDistance) {
+                    continue;
+                }
+
+                BlockPos checkPos = new BlockPos((int)potentialX, (int)potentialY, (int)potentialZ);
+
+                if (this.entity.getEntityWorld().getFluidState(checkPos).isIn(FluidTags.WATER)) {
+                    this.targetX = potentialX;
+                    this.targetY = potentialY;
+                    this.targetZ = potentialZ;
+                    this.entity.getNavigation().startMovingTo(this.targetX, this.targetY, this.targetZ, this.speed);
+                    return;
+                }
+            }
+
+            this.targetX = currentPos.x;
+            this.targetY = currentPos.y;
+            this.targetZ = currentPos.z;
+        }
+    }
+
     @Override
     public boolean isPushedByFluids() {
         return false;
@@ -77,7 +235,7 @@ public abstract class HostileWaterCreatureEntity extends HostileEntity {
     }
 
     private boolean hasAI() {
-        return !this.isAiDisabled() && this.getWorld().getDifficulty() != Difficulty.PEACEFUL;
+        return !this.isAiDisabled() && this.getEntityWorld().getDifficulty() != Difficulty.PEACEFUL;
     }
 
     @Override
@@ -101,6 +259,17 @@ public abstract class HostileWaterCreatureEntity extends HostileEntity {
 
     public abstract boolean shouldDropXp();
 
+    public boolean isFullySubmerged() {
+        double entityHeight = this.getHeight();
+        Vec3d pos = this.getEntityPos();
+
+        boolean bottomSubmerged = this.getEntityWorld().getFluidState(new BlockPos((int)pos.x, (int)pos.y, (int)pos.z)).isIn(FluidTags.WATER);
+        boolean middleSubmerged = this.getEntityWorld().getFluidState(new BlockPos((int)pos.x, (int)(pos.y + entityHeight * 0.5), (int)pos.z)).isIn(FluidTags.WATER);
+        boolean topSubmerged = this.getEntityWorld().getFluidState(new BlockPos((int)pos.x, (int)(pos.y + entityHeight), (int)pos.z)).isIn(FluidTags.WATER);
+
+        return bottomSubmerged && middleSubmerged && topSubmerged;
+    }
+
     @Override
     public void writeCustomData(WriteView nbt) {
         super.writeCustomData(nbt);
@@ -111,54 +280,95 @@ public abstract class HostileWaterCreatureEntity extends HostileEntity {
         super.readCustomData(nbt);
     }
 
-    static class WaterMoveControl extends MoveControl {
+    public static class BrineSwimGoal extends Goal {
         private final HostileWaterCreatureEntity entity;
 
-        public WaterMoveControl(HostileWaterCreatureEntity entity) {
-            super(entity);
+        public BrineSwimGoal(HostileWaterCreatureEntity entity) {
             this.entity = entity;
+            this.setControls(EnumSet.of(Goal.Control.MOVE));
+        }
+
+        @Override
+        public boolean canStart() {
+            return true;
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return true;
         }
 
         @Override
         public void tick() {
-            if (this.entity.isTouchingWater()) {
-                if (this.state == MoveControl.State.MOVE_TO) {
-                    double d = this.targetX - this.entity.getX();
-                    double e = this.targetY - this.entity.getY();
-                    double f = this.targetZ - this.entity.getZ();
-                    double g = Math.sqrt(d * d + e * e + f * f);
+            if (this.entity.getTarget() != null) {
+                return;
+            }
 
-                    if (g < 2.5000003E-7) {
-                        this.entity.setForwardSpeed(0.0F);
-                    } else {
-                        float h = (float)(MathHelper.atan2(f, d) * 180.0 / Math.PI) - 90.0F;
-                        this.entity.setYaw(this.wrapDegrees(this.entity.getYaw(), h, 10.0F));
-                        this.entity.bodyYaw = this.entity.getYaw();
-                        this.entity.headYaw = this.entity.getYaw();
-                        float i = (float)(this.speed * this.entity.getAttributeValue(EntityAttributes.MOVEMENT_SPEED));
+            if (this.entity.age % 80 == 0) {
+                BlockPos targetPos = findRandomWaterBlock();
+                if (targetPos != null) {
+                    this.entity.getNavigation().startMovingTo(
+                            targetPos.getX() + 0.5,
+                            targetPos.getY() + 0.5,
+                            targetPos.getZ() + 0.5,
+                            1.0
+                    );
+                }
+            }
 
-                        if (this.entity.isTouchingWater()) {
-                            this.entity.setMovementSpeed(i * 0.02F);
-                            float j = -((float)(MathHelper.atan2(e, Math.sqrt(d * d + f * f)) * 180.0 / Math.PI));
-                            j = MathHelper.clamp(MathHelper.wrapDegrees(j), -85.0F, 85.0F);
-                            this.entity.setPitch(this.wrapDegrees(this.entity.getPitch(), j, 5.0F));
-                            float k = MathHelper.cos(this.entity.getPitch() * (float) (Math.PI / 180.0));
-                            float l = MathHelper.sin(this.entity.getPitch() * (float) (Math.PI / 180.0));
-                            this.entity.forwardSpeed = k * i;
-                            this.entity.upwardSpeed = -l * i;
-                        } else {
-                            this.entity.setMovementSpeed(i * 0.1F);
+            if (!this.entity.isTouchingWater() && this.entity.age % 20 == 0) {
+                BlockPos waterPos = findNearbyWater();
+                if (waterPos != null) {
+                    this.entity.getNavigation().startMovingTo(
+                            waterPos.getX() + 0.5,
+                            waterPos.getY() + 0.5,
+                            waterPos.getZ() + 0.5,
+                            1.5
+                    );
+                }
+            }
+        }
+
+        private BlockPos findRandomWaterBlock() {
+            BlockPos entityPos = this.entity.getBlockPos();
+
+            for (int attempt = 0; attempt < 30; attempt++) {
+                int offsetX = this.entity.getRandom().nextInt(15) - 7;
+                int offsetY = this.entity.getRandom().nextInt(15) - 7;
+                int offsetZ = this.entity.getRandom().nextInt(15) - 7;
+
+                BlockPos testPos = entityPos.add(offsetX, offsetY, offsetZ);
+
+                if (isDeepWater(testPos)) {
+                    return testPos;
+                }
+            }
+
+            return null;
+        }
+
+        private boolean isDeepWater(BlockPos pos) {
+            return this.entity.getEntityWorld().getFluidState(pos).isIn(FluidTags.WATER) &&
+                    this.entity.getEntityWorld().getFluidState(pos.up()).isIn(FluidTags.WATER) &&
+                    this.entity.getEntityWorld().getFluidState(pos.up(2)).isIn(FluidTags.WATER);
+        }
+
+        private BlockPos findNearbyWater() {
+            BlockPos entityPos = this.entity.getBlockPos();
+
+            for (int range = 4; range <= 16; range += 4) {
+                for (int x = -range; x <= range; x += 2) {
+                    for (int y = -8; y <= 8; y += 2) {
+                        for (int z = -range; z <= range; z += 2) {
+                            BlockPos testPos = entityPos.add(x, y, z);
+                            if (this.entity.getEntityWorld().getFluidState(testPos).isIn(FluidTags.WATER)) {
+                                return testPos;
+                            }
                         }
                     }
-                } else {
-                    this.entity.setMovementSpeed(0.0F);
-                    this.entity.setSidewaysSpeed(0.0F);
-                    this.entity.setUpwardSpeed(0.0F);
-                    this.entity.setForwardSpeed(0.0F);
                 }
-            } else {
-                super.tick();
             }
+            return null;
         }
     }
 

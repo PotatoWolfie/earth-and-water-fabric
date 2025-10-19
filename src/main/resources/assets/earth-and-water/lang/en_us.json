@@ -7,9 +7,9 @@
   "item.earth-and-water.steel_nugget": "Steel Nugget",
   "item.earth-and-water.reinforced_key": "Reinforced Key",
   "tooltip.earth-and-water.reinforced_key": "Used to activate or deactivate Reinforced Spawners. Has 2 uses.",
-  "item.earth-and-water.spiked_shield_upgrade_smithing_template": "Smithing Template",
-  "item.earth-and-water.block_armor_trim_smithing_template": "Smithing Template",
-  "item.earth-and-water.guard_armor_trim_smithing_template": "Smithing Template",
+  "item.earth-and-water.steel_upgrade_smithing_template": "Steel Upgrade",
+  "item.earth-and-water.block_armor_trim_smithing_template": "Block Armor Trim",
+  "item.earth-and-water.guard_armor_trim_smithing_template": "Guard Armor Trim",
   "item.earth-and-water.spiked_shield": "Spiked Shield",
   "item.earth-and-water.whip": "Whip",
   "item.earth-and-water.battle_axe": "Battle Axe",
@@ -32,6 +32,9 @@
   "item.earth-and-water.spiked_shield.red": "Red Spiked Shield",
   "item.earth-and-water.spiked_shield.white": "White Spiked Shield",
   "item.earth-and-water.spiked_shield.yellow": "Yellow Spiked Shield",
+
+  "item.earth-and-water.smithing_template.steel_upgrade.applies_to": "Shields",
+  "item.earth-and-water.smithing_template.steel_upgrade.ingredients": "Steel Ingot",
 
   "block.earth-and-water.steel_block": "Steel Block",
   "block.earth-and-water.mixed_prismarine_tiles": "Mixed Prismarine Tiles",
@@ -125,21 +128,24 @@
   "tag.item.earth-and-water.steel_repair": "Steel Repair",
   "tag.item.earth-and-water.prismarine_repair": "Prismarine Repair",
 
+  "tooltip.earth-and-water.tooltipempty": "",
   "tooltip.earth-and-water.whip.tooltip1": "§7When Attacking Underwater:",
   "tooltip.earth-and-water.whip.tooltip2": " §2Stuns Opponent",
+  "tooltip.earth-and-water.whip.tooltip3": "§7When Attacking On Surface:",
+  "tooltip.earth-and-water.whip.tooltip4": " §c-50% Damage",
   "tooltip.earth-and-water.reinforced_spawner.tooltipempty": " ",
   "tooltip.earth-and-water.reinforced_spawner.tooltip1": "§7Interact with Spawn Egg:",
   "tooltip.earth-and-water.reinforced_spawner.tooltip2": " §9Sets Mob Type",
-  "tooltip.earth-and-water.reinforced_spawner.tooltip3": "§7Interact with Empty Hand:",
-  "tooltip.earth-and-water.reinforced_spawner.tooltip4": " §9Toggles Infinite Waves",
+  "tooltip.earth-and-water.reinforced_spawner.tooltip3": "§7Interact with Reinforced Key:",
+  "tooltip.earth-and-water.reinforced_spawner.tooltip4": " §9Toggles Waves",
   "tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip1": "§7Spiked Shield Upgrade",
   "tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip2": " §9Shields",
   "tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip3": " §9Steel",
-  "tooltip.earth-and-water.armor_trim_template.tooltipempty": " ",
   "tooltip.earth-and-water.armor_trim_template.tooltip1": "§7Applies to:",
   "tooltip.earth-and-water.armor_trim_template.tooltip3": "§7Ingredients:",
   "tooltip.earth-and-water.battle_axe.tooltip1": "§7On Right Click:",
   "tooltip.earth-and-water.battle_axe.tooltip2": " §2Dash Forward",
+  "tooltip.earth-and-water.reinforced_spawner.desc2": " Sets Mob Type",
 
   "trim_pattern.earth-and-water.block": "Block Armor Trim",
   "trim_pattern.earth-and-water.guard": "Guard Armor Trim",
@@ -155,5 +161,11 @@
   "sounds.earth-and-water.battle_axe_dash": "Battle Axe Dashing",
 
   "death.attack.battle_axe": "%1$s was cleaved by %2$s",
-  "death.attack.battle_axe.item": "%1$s was cleaved by %2$s using %3$s"
+  "death.attack.battle_axe.item": "%1$s was cleaved by %2$s using %3$s",
+
+  "advancement.earth-and-water.mob_lock.title": "Mob Lock",
+  "advancement.earth-and-water.mob_lock.description": "Turn a Reinforced Spawner off using a Reinforced Key",
+
+  "modmenu.descriptionTranslation.earth-and-water": "Why stop at just the Blaze and Breeze when you could finish the elements: Earth, Water, Air, and Fire?",
+  "modmenu.planet_minecraft": "Planet Minecraft"
 }

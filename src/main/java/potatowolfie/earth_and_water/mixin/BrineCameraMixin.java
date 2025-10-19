@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import potatowolfie.earth_and_water.entity.custom.BrineEntity;
+import potatowolfie.earth_and_water.entity.brine.BrineEntity;
 
 @Mixin(GameRenderer.class)
 public class BrineCameraMixin {

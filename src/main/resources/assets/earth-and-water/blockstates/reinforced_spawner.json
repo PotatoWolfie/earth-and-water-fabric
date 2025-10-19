@@ -1,7 +1,16 @@
 {
   "variants": {
-    "": {
+    "active=false,keyhole=false": {
       "model": "earth-and-water:block/reinforced_spawner_off"
+    },
+    "active=false,keyhole=true": {
+      "model": "earth-and-water:block/reinforced_spawner_keyhole_inactive"
+    },
+    "active=true,keyhole=false": {
+      "model": "earth-and-water:block/reinforced_spawner_on"
+    },
+    "active=true,keyhole=true": {
+      "model": "earth-and-water:block/reinforced_spawner_keyhole_active"
     }
   }
 }

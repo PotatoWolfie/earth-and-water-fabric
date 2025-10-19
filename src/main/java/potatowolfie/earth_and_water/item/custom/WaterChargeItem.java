@@ -15,7 +15,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import potatowolfie.earth_and_water.entity.custom.WaterChargeProjectileEntity;
+import potatowolfie.earth_and_water.entity.water_charge.WaterChargeProjectileEntity;
 
 public class WaterChargeItem extends Item implements ProjectileItem {
     private static final int COOLDOWN = 100;

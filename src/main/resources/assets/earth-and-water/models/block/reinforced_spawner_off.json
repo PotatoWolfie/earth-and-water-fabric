@@ -1,12 +1,68 @@
 {
-  "parent": "minecraft:block/cube",
-  "textures": {
-    "down": "earth-and-water:block/reinforced_spawner_bottom",
-    "east": "earth-and-water:block/reinforced_spawner_side_off",
-    "north": "earth-and-water:block/reinforced_spawner_side_off",
-    "particle": "earth-and-water:block/reinforced_spawner_side_off",
-    "south": "earth-and-water:block/reinforced_spawner_side_off",
-    "up": "earth-and-water:block/reinforced_spawner_top",
-    "west": "earth-and-water:block/reinforced_spawner_side_off"
-  }
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"down": "earth-and-water:block/reinforced_spawner_bottom",
+		"up": "earth-and-water:block/reinforced_spawner_top",
+		"particle": "earth-and-water:block/reinforced_spawner_side_off",
+		"west": "earth-and-water:block/reinforced_spawner_side_off"
+	},
+	"elements": [
+		{
+			"from": [15.998, 0.002, 0.002],
+			"to": [0.002, 15.998, 15.998],
+			"faces": {
+				"north": {"uv": [16, 0, 0, 16], "texture": "#west", "cullface": "south"},
+				"east": {"uv": [16, 0, 0, 16], "texture": "#west", "cullface": "west"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#west", "cullface": "north"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#west", "cullface": "east"},
+				"up": {"uv": [16, 0, 0, 16], "texture": "#up", "cullface": "up"},
+				"down": {"uv": [16, 0, 0, 16], "texture": "#down", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#west", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#west", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#west", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#west", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#up", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#down", "cullface": "down"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, -135, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, -135, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
 }

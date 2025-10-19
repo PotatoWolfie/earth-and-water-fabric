@@ -3,7 +3,7 @@
 	"id": "earth-and-water",
 	"version": "1.0.0",
 	"name": "Earth & Water",
-	"description": "Why stop at just the Blaze and Breeze? Why not finish the elements: Earth, Water, Air, and Fire?",
+	"description": "Why stop at just the Blaze and Breeze when you could finish the elements: Earth, Water, Air, and Fire?",
 	"authors": [
 		"Demidiant",
 		"PotatoWolfie"
@@ -25,9 +25,6 @@
 		],
 		"client": [
 			"potatowolfie.earth_and_water.EarthWaterClient"
-		],
-		"terrablender": [
-			"potatowolfie.earth_and_water.EarthWater"
 		]
 	},
 	"mixins": [
@@ -35,17 +32,17 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.5",
-		"minecraft": ">=1.21.6 <=1.21.8",
+		"minecraft": "1.21.10",
 		"java": ">=21",
-		"fabric-api": "*",
-		"terrablender": ">=3.3.0.6"
+		"fabric-api": "*"
 	},
 	"custom": {
 		"modmenu": {
 			"links": {
 				"modmenu.modrinth": "https://modrinth.com/mod/earth-and-water",
 				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/earth-and-water",
-				"Planet Minecraft": "https://www.planetminecraft.com/mod/earth-and-water"
+				"modmenu.wiki": "https://earth-and-water.github.io",
+				"modmenu.planet_minecraft": "https://www.planetminecraft.com/mod/earth-and-water"
 			},
 			"badges": ["fabric", "environment:both"],
 			"update_checker": true

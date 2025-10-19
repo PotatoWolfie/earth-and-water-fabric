@@ -1,6 +1,7 @@
 package potatowolfie.earth_and_water.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
@@ -41,7 +42,8 @@ public class ModTags {
     }
 
     public static class Entities {
-
+        public static final TagKey<EntityType<?>> CONDUIT_IMMUNE = TagKey.of(
+                RegistryKeys.ENTITY_TYPE, Identifier.of("earth-and-water", "conduit_immune"));
         private static TagKey<EntityType<?>> createTag(String name) {
             return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(EarthWater.MOD_ID, name));
         }

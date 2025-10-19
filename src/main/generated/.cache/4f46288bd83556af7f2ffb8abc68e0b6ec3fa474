@@ -1,15 +1,12 @@
-// 1.21.8	-999999999-01-01T00:00:00	Earth & Water/
+// 1.21.9	-999999999-01-01T00:00:00	Earth & Water/
 5e7c4fe670fcad5a2229203de597ef12ef007016 data/earth-and-water/trim_material/steel.json
 d3f61640cb1c3a9450b5d7153caab6471186783f data/earth-and-water/trim_pattern/block.json
 8ed80e9a7d661990bc6e8b5ae5a421cf59bef1ce data/earth-and-water/trim_pattern/guard.json
-b39357c9a2f9b4f2b07cb2ae8ccaf450551313b6 data/earth-and-water/worldgen/biome/dark_dripstone_cave.json
 1a5182fc6e744fcfb9b5c6d5d3a7ddf418a57c88 data/earth-and-water/worldgen/configured_feature/dark_dripstone_cluster.json
-c07a052cb73cc42b00a8634da8f205f74ee0d652 data/earth-and-water/worldgen/configured_feature/large_dark_dripstone.json
+1082fa99ebb1723b669b0c38f167273288c31c70 data/earth-and-water/worldgen/configured_feature/large_dark_dripstone.json
 a6560d82a4072d71a66eb6b875f3eb4268858b8c data/earth-and-water/worldgen/configured_feature/oxygen_cross.json
-0b354e23da123881a950b93f134be898e53a15f7 data/earth-and-water/worldgen/configured_feature/pointed_dark_dripstone.json
-220cc3d2930ab85e9958eb22bbce052c1eee2cc6 data/earth-and-water/worldgen/configured_feature/small_dark_dripstone.json
-0816c309cc28b489dc5b9c6a88c1fed1955382b5 data/earth-and-water/worldgen/placed_feature/dark_dripstone_cluster.json
-8b431caca1fd6bc5aee6312a213feb42f4ae3cd6 data/earth-and-water/worldgen/placed_feature/large_dark_dripstone.json
+7fbd611645cef6395819d14f762c7fb80ada5c74 data/earth-and-water/worldgen/configured_feature/pointed_dark_dripstone.json
+1fa7c5b069e9f59259780298e6d081f2744ffd43 data/earth-and-water/worldgen/placed_feature/dark_dripstone_cluster.json
+a5b6ff17e25d5275528c9667d4268bd9ea195e9a data/earth-and-water/worldgen/placed_feature/large_dark_dripstone.json
 59e6cb23716a1dff1eeeda4af163b1c9dc5e16d5 data/earth-and-water/worldgen/placed_feature/oxygen_cross.json
-15d891c1f914cd36091ebd41829722b90603ff6b data/earth-and-water/worldgen/placed_feature/pointed_dark_dripstone.json
-8ace3cab9e8b48b01294641e9b1575d6e63babb8 data/earth-and-water/worldgen/placed_feature/small_dark_dripstone.json
+bc4ad6708de67f1c56ae6d415d446a07affd7ec3 data/earth-and-water/worldgen/placed_feature/pointed_dark_dripstone.json

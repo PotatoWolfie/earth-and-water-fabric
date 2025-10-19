@@ -78,7 +78,7 @@ public class OxygenBlock extends Block {
 
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if (!world.isClient && entity instanceof LivingEntity living) {
+        if (!world.isClient() && entity instanceof LivingEntity living) {
             replenishAir(living);
         }
         super.onSteppedOn(world, pos, state, entity);

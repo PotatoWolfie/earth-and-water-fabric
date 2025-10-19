@@ -84,7 +84,7 @@ public class BattleAxeItem extends AxeItem {
             return ActionResult.PASS;
         }
 
-        if (!world.isClient) {
+        if (!world.isClient()) {
             Vec3d lookVec = player.getRotationVector();
             boolean isInAir = !player.isOnGround();
 
@@ -117,7 +117,7 @@ public class BattleAxeItem extends AxeItem {
             player.setVelocity(dashVec);
             player.velocityModified = true;
 
-            Vec3d playerPos = player.getPos();
+            Vec3d playerPos = player.getEntityPos();
             Vec3d dashEnd = playerPos.add(dashVec.multiply(DASH_DISTANCE));
             Box collisionBox = new Box(
                     Math.min(playerPos.x, dashEnd.x) - 1,

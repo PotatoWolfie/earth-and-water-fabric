@@ -121,7 +121,7 @@ public class PointedDarkDripstoneBlock extends Block implements Falling, Waterlo
 
     @Override
     protected void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             BlockPos blockPos = hit.getBlockPos();
             if (world instanceof ServerWorld) {
                 ServerWorld serverWorld = (ServerWorld)world;

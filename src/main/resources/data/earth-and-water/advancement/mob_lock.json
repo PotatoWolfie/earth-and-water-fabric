@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "earth-and-water:reinforced_key"
+    },
+    "title": {
+      "translate": "advancement.earth-and-water.mob_lock.title"
+    },
+    "description": {
+      "translate": "advancement.earth-and-water.mob_lock.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "mob_lock": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "mob_lock"
+    ]
+  ]
+}

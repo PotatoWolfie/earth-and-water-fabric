@@ -3,17 +3,23 @@ package potatowolfie.earth_and_water.mixin;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ConduitBlockEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.Monster;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import potatowolfie.earth_and_water.util.ModTags;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @Mixin(ConduitBlockEntity.class)
 public class ConduitBlockEntityMixin {
@@ -77,5 +83,30 @@ public class ConduitBlockEntityMixin {
 
         boolean hasEnoughBlocks = activatingBlocks.size() >= 16;
         cir.setReturnValue(hasEnoughBlocks);
+    }
+
+    @Redirect(
+            method = "findAttackTarget",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/world/ServerWorld;getEntitiesByClass(Ljava/lang/Class;Lnet/minecraft/util/math/Box;Ljava/util/function/Predicate;)Ljava/util/List;"
+            )
+    )
+    private static List<LivingEntity> filterConduitImmuneEntities(
+            ServerWorld world,
+            Class<LivingEntity> entityClass,
+            Box box,
+            Predicate<? super LivingEntity> predicate) {
+
+        Predicate<LivingEntity> combinedPredicate = entity -> {
+            if (!predicate.test(entity)) {
+                return false;
+            }
+
+            boolean isImmune = entity.getType().isIn(ModTags.Entities.CONDUIT_IMMUNE);
+            return !isImmune;
+        };
+
+        return world.getEntitiesByClass(entityClass, box, combinedPredicate);
     }
 }

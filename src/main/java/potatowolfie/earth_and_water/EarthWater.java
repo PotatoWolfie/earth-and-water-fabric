@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ProjectileItem;
@@ -22,26 +21,24 @@ import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import potatowolfie.earth_and_water.block.ModBlocks;
+import potatowolfie.earth_and_water.block.entity.ModBlockEntities;
 import potatowolfie.earth_and_water.datagen.ModLootTableModifier;
 import potatowolfie.earth_and_water.effect.ModEffects;
 import potatowolfie.earth_and_water.entity.ModEntities;
-import potatowolfie.earth_and_water.entity.custom.BrineEntity;
-import potatowolfie.earth_and_water.entity.custom.BoreEntity;
+import potatowolfie.earth_and_water.entity.brine.BrineEntity;
+import potatowolfie.earth_and_water.entity.bore.BoreEntity;
 import potatowolfie.earth_and_water.item.ModItems;
 import potatowolfie.earth_and_water.sound.ModSounds;
-import potatowolfie.earth_and_water.world.biome.ModBiomes;
-import potatowolfie.earth_and_water.world.biome.ModMaterialRules;
 import potatowolfie.earth_and_water.world.feature.ModFeatures;
 import potatowolfie.earth_and_water.world.gen.ModWorldGeneration;
-import terrablender.api.SurfaceRuleManager;
-import terrablender.api.TerraBlenderApi;
 
-import static net.minecraft.component.DataComponentTypes.PROVIDES_TRIM_MATERIAL;
-
-public class EarthWater implements ModInitializer, TerraBlenderApi {
+public class EarthWater implements ModInitializer {
 	public static final String MOD_ID = "earth-and-water";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final SimpleParticleType LIGHT_UP = FabricParticleTypes.simple();
+	public static final SimpleParticleType REINFORCED_SPAWNER_DETECTION = FabricParticleTypes.simple();
+	public static final SimpleParticleType REINFORCED_SPAWNER_DETECTION_OUTWARD = FabricParticleTypes.simple();
+	public static final SimpleParticleType REINFORCED_SPAWNER_DETECTION_INNER = FabricParticleTypes.simple();
 
 	@Override
 	public void onInitialize() {
@@ -49,12 +46,16 @@ public class EarthWater implements ModInitializer, TerraBlenderApi {
 		ModBlocks.registerModBlocks();
 		ModEffects.registerEffects();
 		ModEntities.registerModEntities();
+		ModBlockEntities.registerBlockEntities();
 		ModSounds.registerSounds();
 		ModFeatures.registerModFeatures();
 		ModWorldGeneration.init();
 		ModLootTableModifier.modifyLootTables();
 
 		Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "light_up"), LIGHT_UP);
+		Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "reinforced_spawner_detection"), REINFORCED_SPAWNER_DETECTION);
+		Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "reinforced_spawner_detection_outward"), REINFORCED_SPAWNER_DETECTION_OUTWARD);
+		Registry.register(Registries.PARTICLE_TYPE, Identifier.of(MOD_ID, "reinforced_spawner_detection_inner"), REINFORCED_SPAWNER_DETECTION_INNER);
 
 		registerDispenserBehaviors();
 
@@ -100,11 +101,5 @@ public class EarthWater implements ModInitializer, TerraBlenderApi {
 					return stack;
 				}
 		);
-	}
-
-	@Override
-	public void onTerraBlenderInitialized() {
-		ModBiomes.registerBiomes();
-		SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, ModMaterialRules.makeDarkDripstoneCavesRules());
 	}
 }

@@ -1,6 +1,6 @@
 package potatowolfie.earth_and_water.util;
 
-import net.minecraft.entity.TntEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -9,8 +9,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Box;
@@ -50,7 +48,7 @@ public class ExplosionUtil {
         DamageSource damageSource = world.getDamageSources().explosion(sourceEntity, getCausingEntity(sourceEntity));
 
         for (Entity entity : entities) {
-            if (entity == directHit || entity.isImmuneToExplosion(null)) {
+            if (entity == directHit || shouldSkipEntity(entity)) {
                 continue;
             }
 
@@ -107,6 +105,17 @@ public class ExplosionUtil {
         }
     }
 
+    private static boolean shouldSkipEntity(Entity entity) {
+        if (entity instanceof ItemEntity) {
+            return true;
+        }
+        if (entity instanceof ExperienceOrbEntity) {
+            return true;
+        }
+
+        return false;
+    }
+
     private static Vec3d getEntityCenter(Entity entity) {
         Box box = entity.getBoundingBox();
         return new Vec3d(
@@ -149,7 +158,7 @@ public class ExplosionUtil {
                     double pointZ = MathHelper.lerp(z, box.minZ, box.maxZ);
                     Vec3d point = new Vec3d(pointX + offsetX, pointY, pointZ + offsetZ);
 
-                    if (entity.getWorld().raycast(new RaycastContext(
+                    if (entity.getEntityWorld().raycast(new RaycastContext(
                             point, source,
                             RaycastContext.ShapeType.COLLIDER,
                             RaycastContext.FluidHandling.NONE,

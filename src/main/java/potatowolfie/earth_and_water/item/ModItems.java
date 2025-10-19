@@ -9,6 +9,7 @@ import net.minecraft.component.ComponentsAccess;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BannerPatternsComponent;
 import net.minecraft.component.type.BlocksAttacksComponent;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipAppender;
@@ -21,7 +22,6 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -40,16 +40,16 @@ public class ModItems {
             new Item(new Item.Settings()
                     .registryKey(createItemRegistryKey("bore_rod"))));
     public static final Item BORE_SPAWN_EGG = registerItem("bore_spawn_egg",
-            new SpawnEggItem(ModEntities.BORE,
-                    new Item.Settings()
+            new SpawnEggItem(
+                    new Item.Settings().spawnEgg(ModEntities.BORE)
                             .registryKey(createItemRegistryKey("bore_spawn_egg"))));
 
     public static final Item BRINE_ROD = registerItem("brine_rod",
             new Item(new Item.Settings()
                     .registryKey(createItemRegistryKey("brine_rod"))));
     public static final Item BRINE_SPAWN_EGG = registerItem("brine_spawn_egg",
-            new SpawnEggItem(ModEntities.BRINE,
-                    new Item.Settings()
+            new SpawnEggItem(
+                    new Item.Settings().spawnEgg(ModEntities.BRINE)
                             .registryKey(createItemRegistryKey("brine_spawn_egg"))));
 
     public static final Item STEEL_INGOT = registerItem("steel_ingot",
@@ -67,12 +67,8 @@ public class ModItems {
             new WaterChargeItem(new Item.Settings()
                     .registryKey(createItemRegistryKey("water_charge"))));
     public static final Item REINFORCED_KEY = registerItem("reinforced_key",
-            new Item(new Item.Settings()
+            new ReinforcedKeyItem(new Item.Settings()
                     .registryKey(createItemRegistryKey("reinforced_key"))));
-
-    public static final Item SPIKED_SHIELD_UPGRADE_SMITHING_TEMPLATE = registerItem("spiked_shield_upgrade_smithing_template",
-            new Item(new Item.Settings()
-                    .registryKey(createItemRegistryKey("spiked_shield_upgrade_smithing_template"))));
 
     public static final ComponentType<SpikedShieldTooltipComponent> SPIKED_SHIELD_TOOLTIP = Registry.register(
             Registries.DATA_COMPONENT_TYPE,
@@ -108,7 +104,7 @@ public class ModItems {
         @Override
         public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
             textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip1"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltipempty"));
+            textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
             textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip1"));
             textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip2"));
             textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip3"));
@@ -134,18 +130,25 @@ public class ModItems {
 
         @Override
         public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.reinforced_spawner.tooltipempty"));
+            textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
             textConsumer.accept(Text.translatable("tooltip.earth-and-water.whip.tooltip1"));
             textConsumer.accept(Text.translatable("tooltip.earth-and-water.whip.tooltip2"));
+            textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
+            textConsumer.accept(Text.translatable("tooltip.earth-and-water.whip.tooltip3"));
+            textConsumer.accept(Text.translatable("tooltip.earth-and-water.whip.tooltip4"));
         }
     }
 
+    public static final Item STEEL_UPGRADE_SMITHING_TEMPLATE = registerItem("steel_upgrade_smithing_template",
+            SmithingTemplateItem.of(new Item.Settings().rarity(Rarity.UNCOMMON)
+                    .registryKey(createItemRegistryKey("steel_upgrade_smithing_template"))));
+
     public static final Item BLOCK_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("block_armor_trim_smithing_template",
-            SmithingTemplateItem.of(new Item.Settings()
+            SmithingTemplateItem.of(new Item.Settings().rarity(Rarity.UNCOMMON)
                     .registryKey(createItemRegistryKey("block_armor_trim_smithing_template"))));
 
     public static final Item GUARD_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("guard_armor_trim_smithing_template",
-            SmithingTemplateItem.of(new Item.Settings()
+            SmithingTemplateItem.of(new Item.Settings().rarity(Rarity.UNCOMMON)
                     .registryKey(createItemRegistryKey("guard_armor_trim_smithing_template"))));
 
     public static final Item WHIP = registerItem("whip",
@@ -190,7 +193,7 @@ public class ModItems {
         entries.addAfter(Items.BLAZE_ROD, BRINE_ROD);
         entries.addAfter(Items.IRON_INGOT, STEEL_INGOT);
         entries.addAfter(Items.IRON_NUGGET, STEEL_NUGGET);
-        entries.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, SPIKED_SHIELD_UPGRADE_SMITHING_TEMPLATE);
+        entries.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE, STEEL_UPGRADE_SMITHING_TEMPLATE);
         entries.addAfter(Items.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE, BLOCK_ARMOR_TRIM_SMITHING_TEMPLATE);
         entries.addAfter(BLOCK_ARMOR_TRIM_SMITHING_TEMPLATE, GUARD_ARMOR_TRIM_SMITHING_TEMPLATE);
         entries.addAfter(Items.OMINOUS_TRIAL_KEY, REINFORCED_KEY);
@@ -212,7 +215,6 @@ public class ModItems {
     public static void registerModItems() {
         EarthWater.LOGGER.info("Registering Mod Items for " + EarthWater.MOD_ID);
 
-        // Register tooltip components for newer Fabric versions (1.21.6+)
         ComponentTooltipAppenderRegistry.addFirst(SPIKED_SHIELD_TOOLTIP);
         ComponentTooltipAppenderRegistry.addFirst(BATTLE_AXE_TOOLTIP);
         ComponentTooltipAppenderRegistry.addFirst(WHIP_TOOLTIP);

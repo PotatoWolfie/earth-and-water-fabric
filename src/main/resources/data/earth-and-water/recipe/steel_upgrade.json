@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": [
+    "earth-and-water:steel_ingot"
+  ],
+  "base": [
+    "minecraft:shield"
+  ],
+  "result": {
+    "count": 1,
+    "id": "earth-and-water:spiked_shield"
+  },
+  "template": [
+    "earth-and-water:steel_upgrade_smithing_template"
+  ]
+}

@@ -32,8 +32,7 @@ public class ModBlocks {
             ));
 
     public static final Block DRIPSTONE_PILLAR = registerBlock("dripstone_pillar",
-            new PillarBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.DRIPSTONE_BLOCK)
-                    .strength(4f).requiresTool()
+            new PillarBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
                     .registryKey(createBlockRegistryKey("dripstone_pillar"))));
     public static final Block DARK_DRIPSTONE_PILLAR = registerBlock("dark_dripstone_pillar",
             new PillarBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.DRIPSTONE_BLOCK)
@@ -264,13 +263,14 @@ public class ModBlocks {
                     .registryKey(createBlockRegistryKey("oxygen_bubble"))));
 
     public static final Block REINFORCED_SPAWNER = registerBlock("reinforced_spawner",
-            new Block(AbstractBlock.Settings.create()
+            new ReinforcedSpawnerBlock(AbstractBlock.Settings.create()
                     .mapColor(MapColor.STONE_GRAY)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .strength(50.0F)
                     .sounds(BlockSoundGroup.TRIAL_SPAWNER)
                     .blockVision(Blocks::never)
                     .nonOpaque()
+                    .luminance(state -> state.get(ReinforcedSpawnerBlock.ACTIVE) ? 4 : 0)
                     .registryKey(createBlockRegistryKey("reinforced_spawner"))
             )
     );
@@ -285,7 +285,7 @@ public class ModBlocks {
     }
 
     private static void customBuildingBlocks(FabricItemGroupEntries entries) {
-        entries.addBefore(CHAIN, STEEL_BLOCK);
+        entries.addBefore(IRON_CHAIN, STEEL_BLOCK);
         entries.addAfter(CHISELED_TUFF_BRICKS, DRIPSTONE_BLOCK);
         entries.addAfter(DRIPSTONE_BLOCK, DRIPSTONE_STAIRS);
         entries.addAfter(DRIPSTONE_STAIRS, DRIPSTONE_SLAB);

@@ -33,14 +33,14 @@ public class ChiseledDarkDripstoneBricksBlock extends Block {
 
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        if (!world.isClient && !state.isOf(oldState.getBlock())) {
+        if (!world.isClient() && !state.isOf(oldState.getBlock())) {
             world.scheduleBlockTick(pos, this, 2);
         }
     }
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, net.minecraft.util.math.random.Random random) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             double x = pos.getX();
             double y = pos.getY();
             double z = pos.getZ();
@@ -104,7 +104,7 @@ public class ChiseledDarkDripstoneBricksBlock extends Block {
     }
 
     @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
         return state.get(POWERED) ? 15 : 0;
     }
 }
