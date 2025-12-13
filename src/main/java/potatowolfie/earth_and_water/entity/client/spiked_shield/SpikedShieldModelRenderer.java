@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.block.entity.BannerBlockEntityRenderer;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.item.model.special.SpecialModelRenderer;
@@ -53,10 +54,11 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
                 EarthWaterClient.SPIKED_SHIELD_BASE :
                 EarthWaterClient.SPIKED_SHIELD_BASE_NO_PATTERN;
 
+        // Render handle
         orderedRenderCommandQueue.submitModelPart(
                 this.model.getHandle(),
                 matrixStack,
-                RenderLayer.getEntitySolid(spriteIdentifier.getAtlasId()),
+                RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
                 i,
                 j,
                 this.spriteHolder.getSprite(spriteIdentifier),
@@ -67,43 +69,84 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
                 k
         );
 
+        // Render plate
+        orderedRenderCommandQueue.submitModelPart(
+                this.model.getPlate(),
+                matrixStack,
+                RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
+                i,
+                j,
+                this.spriteHolder.getSprite(spriteIdentifier),
+                false,
+                bl,
+                -1,
+                null,
+                k
+        );
+
+        // Render banner patterns if present
         if (bl2) {
-            BannerBlockEntityRenderer.renderCanvas(
-                    this.spriteHolder,
-                    matrixStack,
-                    orderedRenderCommandQueue,
-                    i,
-                    j,
-                    this.model,
-                    Unit.INSTANCE,
-                    spriteIdentifier,
-                    false,
-                    (DyeColor) Objects.requireNonNullElse(dyeColor, DyeColor.WHITE),
-                    bannerPatternsComponent,
-                    bl,
-                    null,
-                    k
-            );
-        } else {
+            // Render base color layer on the plate only
+            SpriteIdentifier baseLayerSprite = TexturedRenderLayers.SHIELD_BASE;
+            DyeColor baseColor = Objects.requireNonNullElse(dyeColor, DyeColor.WHITE);
+
             orderedRenderCommandQueue.submitModelPart(
                     this.model.getPlate(),
                     matrixStack,
-                    this.model.getLayer(spriteIdentifier.getAtlasId()),
+                    RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
                     i,
                     j,
-                    this.spriteHolder.getSprite(spriteIdentifier),
+                    this.spriteHolder.getSprite(baseLayerSprite),
                     false,
-                    bl,
-                    -1,
+                    false,
+                    baseColor.getEntityColor(),
                     null,
-                    k
+                    0
             );
+
+            // Render each pattern layer on the plate only
+            for (int layerIndex = 0; layerIndex < 16 && layerIndex < bannerPatternsComponent.layers().size(); ++layerIndex) {
+                BannerPatternsComponent.Layer layer = bannerPatternsComponent.layers().get(layerIndex);
+                SpriteIdentifier patternSprite = TexturedRenderLayers.getShieldPatternTextureId(layer.pattern());
+
+                orderedRenderCommandQueue.submitModelPart(
+                        this.model.getPlate(),
+                        matrixStack,
+                        RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
+                        i,
+                        j,
+                        this.spriteHolder.getSprite(patternSprite),
+                        false,
+                        false,
+                        layer.color().getEntityColor(),
+                        null,
+                        0
+                );
+            }
+
+            // Render glint if needed
+            if (bl) {
+                orderedRenderCommandQueue.submitModelPart(
+                        this.model.getPlate(),
+                        matrixStack,
+                        RenderLayer.getEntityGlint(),
+                        i,
+                        j,
+                        this.spriteHolder.getSprite(spriteIdentifier),
+                        false,
+                        false,
+                        -1,
+                        null,
+                        0
+                );
+            }
         }
 
+        // Render spikes
         orderedRenderCommandQueue.submitModelPart(
                 this.model.getSpikes(),
                 matrixStack,
-                this.model.getLayer(spriteIdentifier.getAtlasId()),
+                RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
                 i,
                 j,
                 this.spriteHolder.getSprite(spriteIdentifier),

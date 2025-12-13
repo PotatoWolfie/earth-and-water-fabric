@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import potatowolfie.earth_and_water.util.ModTags;
 
-// Code used from "More Shield Variants" by hypothetiKal and pnku under an MIT License
+// Code used from "More Shield Variants" by hypothetiKal and pnku under a MIT License
 
 @Mixin(ShieldDecorationRecipe.class)
 public abstract class ShieldDecorationRecipeMixin extends SpecialCraftingRecipe {

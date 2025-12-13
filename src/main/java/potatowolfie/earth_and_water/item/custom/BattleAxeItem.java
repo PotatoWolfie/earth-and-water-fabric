@@ -5,6 +5,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -84,7 +85,7 @@ public class BattleAxeItem extends AxeItem {
             return ActionResult.PASS;
         }
 
-        if (!world.isClient()) {
+        if (!world.isClient() && world instanceof ServerWorld serverWorld) {
             Vec3d lookVec = player.getRotationVector();
             boolean isInAir = !player.isOnGround();
 
@@ -140,9 +141,10 @@ public class BattleAxeItem extends AxeItem {
                 DamageSource battleAxeDamage = new DamageSource(
                         world.getRegistryManager()
                                 .getOrThrow(RegistryKeys.DAMAGE_TYPE)
-                                .getEntry(ModDamageTypes.BATTLE_AXE.getValue()).get()
+                                .getEntry(ModDamageTypes.BATTLE_AXE.getValue()).get(),
+                        player
                 );
-                entity.damage(null, battleAxeDamage, DASH_DAMAGE);
+                entity.damage(serverWorld, battleAxeDamage, DASH_DAMAGE);
                 entity.takeKnockback(0.5, -lookVec.x, -lookVec.z);
                 hitAnyMob = true;
             }

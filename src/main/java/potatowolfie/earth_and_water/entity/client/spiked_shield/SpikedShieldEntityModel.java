@@ -6,6 +6,7 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.model.ShieldEntityModel;
 import net.minecraft.client.texture.SpriteHolder;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
@@ -14,7 +15,7 @@ import net.minecraft.item.ItemStack;
 // Made with Blockbench 4.12.4
 
 @Environment(EnvType.CLIENT)
-public class SpikedShieldEntityModel extends net.minecraft.client.render.entity.model.ShieldEntityModel {
+public class SpikedShieldEntityModel extends ShieldEntityModel {
 	private final ModelPart plate;
 	private final ModelPart handle;
 	private final ModelPart spikes;

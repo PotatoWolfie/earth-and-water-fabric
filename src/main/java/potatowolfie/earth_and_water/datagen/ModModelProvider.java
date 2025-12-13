@@ -7,15 +7,8 @@ import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.ItemModelGenerator;
 import net.minecraft.client.data.Models;
 import net.minecraft.client.data.TexturedModel;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.equipment.trim.ArmorTrimMaterial;
-import net.minecraft.item.equipment.trim.ArmorTrimPattern;
-import net.minecraft.registry.Registry;
 import potatowolfie.earth_and_water.block.ModBlocks;
 import potatowolfie.earth_and_water.item.ModItems;
-
-import java.util.List;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -105,7 +98,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.REINFORCED_KEY, Models.GENERATED);
         itemModelGenerator.register(ModItems.WHIP, Models.HANDHELD_ROD);
         itemModelGenerator.register(ModItems.BATTLE_AXE, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.BORE_SPAWN_EGG, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.BRINE_SPAWN_EGG, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.BORE_SPAWN_EGG, Models.GENERATED);
+        itemModelGenerator.register(ModItems.BRINE_SPAWN_EGG, Models.GENERATED);
     }
 }
