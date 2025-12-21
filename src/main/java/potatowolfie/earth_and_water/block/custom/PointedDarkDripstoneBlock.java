@@ -37,6 +37,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 import potatowolfie.earth_and_water.block.ModBlocks;
@@ -532,7 +533,7 @@ public class PointedDarkDripstoneBlock extends Block implements Falling, Waterlo
             BlockPos blockPos = posx.up();
             BlockState blockState = world.getBlockState(blockPos);
             Fluid fluid;
-            if (blockState.isOf(Blocks.MUD) && !world.getDimension().ultrawarm()) {
+            if (blockState.isOf(Blocks.MUD) && !(Boolean)world.getEnvironmentAttributes().getAttributeValue(EnvironmentAttributes.WATER_EVAPORATES_GAMEPLAY, blockPos)) {
                 fluid = Fluids.WATER;
             } else {
                 fluid = world.getFluidState(blockPos).getFluid();
@@ -552,7 +553,8 @@ public class PointedDarkDripstoneBlock extends Block implements Falling, Waterlo
 
     private static Fluid getDripFluid(World world, Fluid fluid) {
         if (fluid.matchesType(Fluids.EMPTY)) {
-            return world.getDimension().ultrawarm() ? Fluids.LAVA : Fluids.WATER;
+            return world.getEnvironmentAttributes().getAttributeValue(EnvironmentAttributes.WATER_EVAPORATES_GAMEPLAY)
+                    ? Fluids.LAVA : Fluids.WATER;
         } else {
             return fluid;
         }

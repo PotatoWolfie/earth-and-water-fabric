@@ -18,5 +18,6 @@ public class ModWorldGeneration {
     public static void init() {
         ModOxygenCrossGeneration.addFeatureToBiomes();
         ModDarkDripstoneGeneration.addFeaturesToBiomes();
+        ModLimestoneRockGeneration.addFeaturesToBiomes();
     }
 }

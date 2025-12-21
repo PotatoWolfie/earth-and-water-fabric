@@ -22,9 +22,9 @@ public class ModPlacedFeatures {
 
     public static final RegistryKey<PlacedFeature> DARK_DRIPSTONE_CLUSTER_PLACED = registerKey("dark_dripstone_cluster");
     public static final RegistryKey<PlacedFeature> LARGE_DARK_DRIPSTONE_PLACED = registerKey("large_dark_dripstone");
-    public static final RegistryKey<PlacedFeature> SMALL_DARK_DRIPSTONE_PLACED = registerKey("small_dark_dripstone");
     public static final RegistryKey<PlacedFeature> POINTED_DARK_DRIPSTONE_PLACED = registerKey("pointed_dark_dripstone");
     public static final RegistryKey<PlacedFeature> OXYGEN_CROSS_PLACED = registerKey("oxygen_cross");
+    public static final RegistryKey<PlacedFeature> LIMESTONE_ROCK_PLACED = registerKey("limestone_rock");
 
     public static void bootstrap(Registerable<PlacedFeature> context) {
         RegistryEntryLookup<ConfiguredFeature<?, ?>> configuredFeatureRegistryEntryLookup =
@@ -66,7 +66,18 @@ public class ModPlacedFeatures {
                 List.of(
                         CountPlacementModifier.of(1),
                         SquarePlacementModifier.of(),
-                        RarityFilterPlacementModifier.of(12),
+                        RarityFilterPlacementModifier.of(80),
+                        HeightmapPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG),
+                        BiomePlacementModifier.of()
+                )
+        );
+
+        register(context, LIMESTONE_ROCK_PLACED,
+                configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LIMESTONE_ROCK),
+                List.of(
+                        CountPlacementModifier.of(1),
+                        SquarePlacementModifier.of(),
+                        RarityFilterPlacementModifier.of(30),
                         HeightmapPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG),
                         BiomePlacementModifier.of()
                 )

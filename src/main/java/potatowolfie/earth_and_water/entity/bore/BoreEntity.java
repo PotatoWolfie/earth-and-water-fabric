@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
@@ -30,6 +31,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import potatowolfie.earth_and_water.entity.earth_charge.EarthChargeProjectileEntity;
+import potatowolfie.earth_and_water.sound.ModSounds;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -208,6 +210,21 @@ public class BoreEntity extends HostileEntity {
             }
         } catch (Exception ignored) {
         }
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.BORE_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return ModSounds.BORE_HURT;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.BORE_AMBIENT;
     }
 
     @Override

@@ -13,6 +13,7 @@ import potatowolfie.earth_and_water.world.feature.custom.DarkDripstoneClusterFea
 import potatowolfie.earth_and_water.world.feature.custom.LargeDarkDripstoneFeatureConfig;
 import potatowolfie.earth_and_water.world.feature.custom.OxygenFeatureConfig;
 import potatowolfie.earth_and_water.world.feature.custom.SmallDarkDripstoneFeatureConfig;
+import potatowolfie.earth_and_water.world.feature.custom.limestone_rock.LimestoneRockFeatureConfig;
 
 public class ModConfiguredFeatures {
 
@@ -21,6 +22,7 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> SMALL_DARK_DRIPSTONE = registerKey("small_dark_dripstone");
     public static final RegistryKey<ConfiguredFeature<?, ?>> POINTED_DARK_DRIPSTONE = registerKey("pointed_dark_dripstone");
     public static final RegistryKey<ConfiguredFeature<?, ?>> OXYGEN_CROSS = registerKey("oxygen_cross");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> LIMESTONE_ROCK = registerKey("limestone_rock");
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
         register(context, DARK_DRIPSTONE_CLUSTER, ModFeatures.DARK_DRIPSTONE_CLUSTER,
@@ -58,6 +60,9 @@ public class ModConfiguredFeatures {
 
         register(context, OXYGEN_CROSS, ModFeatures.OXYGEN_CROSS,
                 new OxygenFeatureConfig());
+
+        register(context, LIMESTONE_ROCK, ModFeatures.LIMESTONE_ROCK,
+                new LimestoneRockFeatureConfig());
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

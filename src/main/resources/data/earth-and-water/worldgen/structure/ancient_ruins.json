@@ -1,0 +1,12 @@
+{
+  "type": "earth-and-water:ancient_ruins",
+  "biomes": "#earth-and-water:has_structure/ancient_ruins",
+  "step": "underground_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "beard_box",
+  "small_probability": 0.5,
+  "medium_probability": 0.3,
+  "large_probability": 0.2,
+  "min_ruins": 16,
+  "max_ruins": 18
+}

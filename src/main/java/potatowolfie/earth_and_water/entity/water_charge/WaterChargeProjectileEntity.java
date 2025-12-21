@@ -258,7 +258,7 @@ public class WaterChargeProjectileEntity extends PersistentProjectileEntity {
                             knockbackDir.y * knockbackStrength + upwardForce,
                             knockbackDir.z * knockbackStrength
                     );
-                    entity.velocityModified = true;
+                    entity.velocityDirty = true;
 
                     if (entity instanceof LivingEntity livingEntity) {
                         float damage = distanceFactor * EXPLOSION_DAMAGE_FACTOR * MAX_EXPLOSION_DAMAGE;

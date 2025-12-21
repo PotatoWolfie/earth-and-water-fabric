@@ -1,4 +1,4 @@
-// 1.21.9	-999999999-01-01T00:00:00	Earth & Water/Model Definitions
+// 1.21.11	-999999999-01-01T00:00:00	Earth & Water/Model Definitions
 55d044b16771bc328a059d08d98c13f78cc6e2fc assets/earth-and-water/blockstates/chiseled_limestone_bricks.json
 15583ebc7e55860bdc17dfc6e9e38bf952116fa1 assets/earth-and-water/blockstates/dark_dripstone_block.json
 2bd3b47a53b60c15d263d41147fbd7f92fbc8cd5 assets/earth-and-water/blockstates/dark_dripstone_brick_slab.json
@@ -232,9 +232,9 @@ ada8b452893b7ca8a0413440a481afb4481af401 assets/earth-and-water/models/block/ste
 d5a3f60b3e91accc09f03e78fdbdf6ce4829eca5 assets/earth-and-water/models/item/battle_axe.json
 72ad379fce49ea205810e480b8e64bcfe848ecf8 assets/earth-and-water/models/item/block_armor_trim_smithing_template.json
 94cd8121bdce38e2a982443af7cbf04b2f6f57cf assets/earth-and-water/models/item/bore_rod.json
-1244923eba8ccaeafc828169b6c3d555ffec8600 assets/earth-and-water/models/item/bore_spawn_egg.json
+c81a41ace4732c358a711bab39609b8c0ea6bfbe assets/earth-and-water/models/item/bore_spawn_egg.json
 2505901645410846af3808820b2fe14f6da01de0 assets/earth-and-water/models/item/brine_rod.json
-5177176eaf0799461efc2766141ecc0f965333c3 assets/earth-and-water/models/item/brine_spawn_egg.json
+a9ed92252a8a228a79f151d841a142f427a7571b assets/earth-and-water/models/item/brine_spawn_egg.json
 f5a26ec6e70b20197ba030905df64f1313ed9504 assets/earth-and-water/models/item/guard_armor_trim_smithing_template.json
 1494f394a8c69bee3bbd8085986a6c8ebd177933 assets/earth-and-water/models/item/reinforced_key.json
 39475009c5a2c238d7c979f1726f80c2e742cdbd assets/earth-and-water/models/item/steel_ingot.json

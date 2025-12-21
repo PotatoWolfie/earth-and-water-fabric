@@ -44,9 +44,6 @@
   "block.earth-and-water.oxygen_block": "Oxygen Block",
   "block.earth-and-water.oxygen_bubble": "Oxygen Bubble",
 
-  "painting.earth-and-water.spawner.title": "Spawner",
-  "painting.earth-and-water.spawner.author": "Demidiant",
-
   "block.earth-and-water.dark_prismarine_pillar": "Dark Prismarine Pillar",
   "block.earth-and-water.prismarine_pillar": "Prismarine Pillar",
   "block.earth-and-water.chiseled_prismarine_bricks": "Chiseled Prismarine Bricks",
@@ -159,13 +156,43 @@
   "entity.earth-and-water.brine": "Brine",
 
   "sounds.earth-and-water.battle_axe_dash": "Battle Axe Dashing",
+  "sounds.earth-and-water.bore_ambient": "Bore rumbles",
+  "sounds.earth-and-water.bore_hurts": "Bore hurts",
+  "sounds.earth-and-water.bore_death": "Bore dies",
+  "sounds.earth-and-water.brine_ambient": "Brine burbles",
+  "sounds.earth-and-water.brine_death": "Brine hurts",
+  "sounds.earth-and-water.brine_underwater_ambient": "Brine burbles",
+  "sounds.earth-and-water.brine_underwater_death": "Brine hurts",
 
   "death.attack.battle_axe": "%1$s was cleaved by %2$s",
   "death.attack.battle_axe.item": "%1$s was cleaved by %2$s using %3$s",
 
   "advancement.earth-and-water.mob_lock.title": "Mob Lock",
   "advancement.earth-and-water.mob_lock.description": "Turn a Reinforced Spawner off using a Reinforced Key",
+  "advancement.earth-and-water.boreing.title": "Boreing",
+  "advancement.earth-and-water.boreing.description": "Kill a Bore",
+  "advancement.earth-and-water.atlantean_eye.title": "Atlantean Eye",
+  "advancement.earth-and-water.atlantean_eye.description": "Find a Conduit Monument",
+  "advancement.earth-and-water.stalactite_sanctum.title": "Stalactite Sanctum",
+  "advancement.earth-and-water.stalactite_sanctum.description": "Find an old, ancient, Ruin",
+  "advancement.earth-and-water.long_ago.title": "Long Ago...",
+  "advancement.earth-and-water.long_ago.description": "Gather the elemental rods: Bore, Brine, Breeze, and Blaze",
 
   "modmenu.descriptionTranslation.earth-and-water": "Why stop at just the Blaze and Breeze when you could finish the elements: Earth, Water, Air, and Fire?",
-  "modmenu.planet_minecraft": "Planet Minecraft"
+  "modmenu.nameTranslation.earth-and-water": "Earth & Water",
+  "modmenu.planet_minecraft": "Planet Minecraft",
+
+  "splash.earth-and-water.sticks_stone": "Sticks and stones may break my bones, but more stones will shatter them probably.",
+  "splash.earth-and-water.herobrine": "You were supposed to be a hero, Brine!",
+  "splash.earth-and-water.september": "Earth, Wind & Fire!",
+  "splash.earth-and-water.w_e_f_a": "Water. Earth. Fire. Air.",
+  "splash.earth-and-water.b_o_r_e": "Does he know about the B-O-R-E?",
+  "splash.earth-and-water.drowning": "Drowning in delight!",
+  "splash.earth-and-water.splash": "Putting the “splash” in splash text!",
+  "splash.earth-and-water.hardlyknower": "Underwater? I hardly even know ‘er!",
+  "splash.earth-and-water.removed_the_brine": "Removed the ‘Brine.'",
+  "splash.earth-and-water.bore_you": "I don’t mean to Bore you.",
+  "splash.earth-and-water.sweet_carobrine": "SWEEEEET CARO-BRINE!",
+  "splash.earth-and-water.sun_tzu": "Bore-dom is meant to be weaponized. -Sun Tzu, the Art of Bore",
+  "splash.earth-and-water.bore_d": "I was Bore-d."
 }

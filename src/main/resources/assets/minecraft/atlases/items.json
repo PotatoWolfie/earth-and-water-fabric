@@ -1,36 +1,13 @@
 {
-  "replace": false,
   "sources": [
-    {
-      "type": "minecraft:directory",
-      "prefix": "block/",
-      "source": "block"
-    },
     {
       "type": "minecraft:directory",
       "prefix": "item/",
       "source": "item"
     },
     {
-      "type": "minecraft:directory",
-      "prefix": "entity/conduit/",
-      "source": "entity/conduit"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "minecraft:entity/bell/bell_body"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "minecraft:entity/decorated_pot/decorated_pot_side"
-    },
-    {
-      "type": "minecraft:single",
-      "resource": "minecraft:entity/enchanting_table_book"
-    },
-    {
       "type": "minecraft:paletted_permutations",
-      "palette_key": "trims/color_palettes/trim_palette",
+      "palette_key": "minecraft:trims/color_palettes/trim_palette",
       "permutations": {
         "amethyst": "minecraft:trims/color_palettes/amethyst",
         "copper": "minecraft:trims/color_palettes/copper",

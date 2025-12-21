@@ -70,75 +70,6 @@ public class ModItems {
             new ReinforcedKeyItem(new Item.Settings()
                     .registryKey(createItemRegistryKey("reinforced_key"))));
 
-    public static final ComponentType<SpikedShieldTooltipComponent> SPIKED_SHIELD_TOOLTIP = Registry.register(
-            Registries.DATA_COMPONENT_TYPE,
-            Identifier.of(EarthWater.MOD_ID, "spiked_shield_tooltip"),
-            ComponentType.<SpikedShieldTooltipComponent>builder()
-                    .codec(SpikedShieldTooltipComponent.CODEC)
-                    .packetCodec(SpikedShieldTooltipComponent.PACKET_CODEC)
-                    .build()
-    );
-
-    public static final ComponentType<BattleAxeTooltipComponent> BATTLE_AXE_TOOLTIP = Registry.register(
-            Registries.DATA_COMPONENT_TYPE,
-            Identifier.of(EarthWater.MOD_ID, "battle_axe_tooltip"),
-            ComponentType.<BattleAxeTooltipComponent>builder()
-                    .codec(BattleAxeTooltipComponent.CODEC)
-                    .packetCodec(BattleAxeTooltipComponent.PACKET_CODEC)
-                    .build()
-    );
-
-    public static final ComponentType<WhipTooltipComponent> WHIP_TOOLTIP = Registry.register(
-            Registries.DATA_COMPONENT_TYPE,
-            Identifier.of(EarthWater.MOD_ID, "whip_tooltip"),
-            ComponentType.<WhipTooltipComponent>builder()
-                    .codec(WhipTooltipComponent.CODEC)
-                    .packetCodec(WhipTooltipComponent.PACKET_CODEC)
-                    .build()
-    );
-
-    public record SpikedShieldTooltipComponent() implements TooltipAppender {
-        public static final Codec<SpikedShieldTooltipComponent> CODEC = Codec.unit(SpikedShieldTooltipComponent::new);
-        public static final PacketCodec<RegistryByteBuf, SpikedShieldTooltipComponent> PACKET_CODEC = PacketCodec.unit(new SpikedShieldTooltipComponent());
-
-        @Override
-        public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip1"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip1"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip2"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip3"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip3"));
-        }
-    }
-
-    public record BattleAxeTooltipComponent() implements TooltipAppender {
-        public static final Codec<BattleAxeTooltipComponent> CODEC = Codec.unit(BattleAxeTooltipComponent::new);
-        public static final PacketCodec<RegistryByteBuf, BattleAxeTooltipComponent> PACKET_CODEC = PacketCodec.unit(new BattleAxeTooltipComponent());
-
-        @Override
-        public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.reinforced_spawner.tooltipempty"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.battle_axe.tooltip1"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.battle_axe.tooltip2"));
-        }
-    }
-
-    public record WhipTooltipComponent() implements TooltipAppender {
-        public static final Codec<WhipTooltipComponent> CODEC = Codec.unit(WhipTooltipComponent::new);
-        public static final PacketCodec<RegistryByteBuf, WhipTooltipComponent> PACKET_CODEC = PacketCodec.unit(new WhipTooltipComponent());
-
-        @Override
-        public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.whip.tooltip1"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.whip.tooltip2"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.whip.tooltip3"));
-            textConsumer.accept(Text.translatable("tooltip.earth-and-water.whip.tooltip4"));
-        }
-    }
-
     public static final Item STEEL_UPGRADE_SMITHING_TEMPLATE = registerItem("steel_upgrade_smithing_template",
             SmithingTemplateItem.of(new Item.Settings().rarity(Rarity.UNCOMMON)
                     .registryKey(createItemRegistryKey("steel_upgrade_smithing_template"))));
@@ -156,14 +87,13 @@ public class ModItems {
                     new Item.Settings().sword(ModToolMaterials.PRISMARINE, 4, -2.8F)
                             .rarity(Rarity.UNCOMMON)
                             .registryKey(createItemRegistryKey("whip"))
-                            .component(WHIP_TOOLTIP, new WhipTooltipComponent())));
+            ));
     public static final Item BATTLE_AXE = registerItem("battle_axe",
             new BattleAxeItem(ModToolMaterials.STEEL, 5.0F, -3.2F,
                     new Item.Settings()
                             .rarity(Rarity.UNCOMMON)
                             .registryKey(createItemRegistryKey("battle_axe"))
-                            .component(BATTLE_AXE_TOOLTIP, new BattleAxeTooltipComponent()))
-    );
+    ));
 
     public static final Item SPIKED_SHIELD = Registry.register(Registries.ITEM,
             createItemRegistryKey("spiked_shield"),
@@ -208,16 +138,12 @@ public class ModItems {
     }
 
     private static void customSpawnEggs(FabricItemGroupEntries entries) {
-        entries.addAfter(Items.BOGGED_SPAWN_EGG, BORE_SPAWN_EGG);
-        entries.addAfter(Items.BREEZE_SPAWN_EGG, BRINE_SPAWN_EGG);
+        entries.addAfter(Items.BREEZE_SPAWN_EGG, BORE_SPAWN_EGG);
+        entries.addAfter(BORE_SPAWN_EGG, BRINE_SPAWN_EGG);
     }
 
     public static void registerModItems() {
         EarthWater.LOGGER.info("Registering Mod Items for " + EarthWater.MOD_ID);
-
-        ComponentTooltipAppenderRegistry.addFirst(SPIKED_SHIELD_TOOLTIP);
-        ComponentTooltipAppenderRegistry.addFirst(BATTLE_AXE_TOOLTIP);
-        ComponentTooltipAppenderRegistry.addFirst(WHIP_TOOLTIP);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::customIngredients);
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(ModItems::customCombat);

@@ -117,6 +117,9 @@ public class DarkDripstoneClusterFeature extends Feature<DarkDripstoneClusterFea
                     t = j;
                 }
 
+                m = Math.min(m, random.nextBoolean() ? 2 : 3);
+                t = Math.min(t, random.nextBoolean() ? 2 : 3);
+
                 boolean bl4 = random.nextBoolean() && m > 0 && t > 0 && caveSurface.getOptionalHeight().isPresent() && m + t == caveSurface.getOptionalHeight().getAsInt();
                 if (optionalInt.isPresent()) {
                     DarkDripstoneHelper.generatePointedDarkDripstone(world, pos.withY(optionalInt.getAsInt() - 1), Direction.DOWN, m, bl4);

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_steel_upgrade": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "earth-and-water:steel_upgrade_smithing_template"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "earth-and-water:steel_upgrade_dupli"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_steel_upgrade"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "earth-and-water:steel_upgrade_dupli"
+    ]
+  }
+}

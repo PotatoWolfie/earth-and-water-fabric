@@ -3,6 +3,7 @@ package potatowolfie.earth_and_water.block.custom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -35,6 +36,14 @@ public class ChiseledDripstoneBricksBlock extends Block {
         if (!world.isClient() && !state.isOf(oldState.getBlock())) {
             world.scheduleBlockTick(pos, this, 2);
         }
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        if (!ctx.getWorld().isClient()) {
+            ctx.getWorld().scheduleBlockTick(ctx.getBlockPos(), this, 2);
+        }
+        return this.getDefaultState().with(POWERED, false);
     }
 
     @Override

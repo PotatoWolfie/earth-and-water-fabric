@@ -87,7 +87,7 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
                     knockbackDir.y * directKnockback + 0.2,
                     knockbackDir.z * directKnockback
             );
-            hitEntity.velocityModified = true;
+            hitEntity.velocityDirty = true;
         }
     }
 

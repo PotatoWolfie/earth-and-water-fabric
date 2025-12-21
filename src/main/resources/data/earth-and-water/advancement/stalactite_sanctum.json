@@ -9,7 +9,7 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "structures": "minecraft:mineshaft"
+                "structures": "earth-and-water:ancient_ruins"
               }
             }
           }
@@ -20,14 +20,14 @@
   },
   "display": {
     "description": {
-      "translate": "Find an old, ancient, Ruin"
+      "translate": "advancement.earth-and-water.stalactite_sanctum.description"
     },
     "icon": {
       "count": 1,
       "id": "earth-and-water:chiseled_dripstone_bricks"
     },
     "title": {
-      "translate": "Stalactite Sanctum"
+      "translate": "advancement.earth-and-water.stalactite_sanctum.title"
     },
     "hidden": false
   },

@@ -37,12 +37,16 @@ public class SmallDarkDripstoneFeature extends Feature<SmallDarkDripstoneFeature
     private static Optional<Direction> getDirection(WorldAccess world, BlockPos pos, Random random) {
         boolean bl = DarkDripstoneHelper.canReplace(world.getBlockState(pos.up()));
         boolean bl2 = DarkDripstoneHelper.canReplace(world.getBlockState(pos.down()));
-        if (bl && bl2) {
+
+        boolean hasFloorAbove = bl && DarkDripstoneHelper.canGenerate(world.getBlockState(pos.up(2)));
+        boolean hasCeilingBelow = bl2 && DarkDripstoneHelper.canGenerate(world.getBlockState(pos.down(2)));
+
+        if (hasFloorAbove && hasCeilingBelow) {
             return Optional.of(random.nextBoolean() ? Direction.DOWN : Direction.UP);
-        } else if (bl) {
+        } else if (hasFloorAbove) {
             return Optional.of(Direction.DOWN);
         } else {
-            return bl2 ? Optional.of(Direction.UP) : Optional.empty();
+            return hasCeilingBelow ? Optional.of(Direction.UP) : Optional.empty();
         }
     }
 

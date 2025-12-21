@@ -1,0 +1,10 @@
+{
+  "type": "earth-and-water:conduit_monument",
+  "biomes": "#earth-and-water:has_structure/conduit_monument",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none",
+  "medium_probability": 0.6,
+  "min_ruins": 2,
+  "max_ruins": 5
+}

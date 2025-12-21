@@ -2,6 +2,7 @@ package potatowolfie.earth_and_water.block.custom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
@@ -30,6 +31,12 @@ public class ChiseledDarkPrismarineBlock extends Block {
                 world.setBlockState(pos, state.with(Y_LEVEL_STATE, newState), Block.NOTIFY_ALL);
             }
         }
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        int newState = getStateForYLevel(ctx.getBlockPos().getY());
+        return this.getDefaultState().with(Y_LEVEL_STATE, newState);
     }
 
     @Override

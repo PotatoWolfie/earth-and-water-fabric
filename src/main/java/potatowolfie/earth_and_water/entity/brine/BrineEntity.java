@@ -1,30 +1,32 @@
 package potatowolfie.earth_and_water.entity.brine;
 
-import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.LookControl;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.registry.tag.FluidTags;
 import potatowolfie.earth_and_water.entity.ModEntities;
 import potatowolfie.earth_and_water.entity.custom.HostileWaterCreatureEntity;
 import potatowolfie.earth_and_water.entity.water_charge.WaterChargeProjectileEntity;
+import potatowolfie.earth_and_water.sound.ModSounds;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -47,6 +49,9 @@ public class BrineEntity extends HostileWaterCreatureEntity {
     private int shootCooldown = 0;
     private Vec3d lastShootPosition = null;
     private boolean hasMovedEnoughToShoot = true;
+
+    private BlockPos homePos = null;
+    private static final int MAX_DISTANCE_FROM_HOME = 30;
 
     public enum BrineState {
         IDLE,
@@ -90,8 +95,51 @@ public class BrineEntity extends HostileWaterCreatureEntity {
     }
 
     @Override
+    protected SoundEvent getDeathSound() {
+        return this.touchingWater ? ModSounds.BRINE_UNDERWATER_DEATH : ModSounds.BRINE_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return this.touchingWater ? ModSounds.BRINE_UNDERWATER_DEATH : ModSounds.BRINE_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return this.touchingWater ? ModSounds.BRINE_UNDERWATER_AMBIENT : ModSounds.BRINE_AMBIENT;
+    }
+
+    public void setHomePosition(BlockPos pos) {
+        this.homePos = pos;
+    }
+
+    private boolean isWithinHomeBounds(BlockPos pos) {
+        if (this.homePos == null) {
+            return true;
+        }
+        return this.homePos.isWithinDistance(pos, MAX_DISTANCE_FROM_HOME);
+    }
+
+    private boolean isWithinHomeBounds(Vec3d pos) {
+        if (this.homePos == null) {
+            return true;
+        }
+        return this.homePos.isWithinDistance(pos, MAX_DISTANCE_FROM_HOME);
+    }
+
+    @Override
     protected EntityNavigation createNavigation(World world) {
         return new BrineNavigation(this, world);
+    }
+
+    public static boolean canSpawn(
+            EntityType<BrineEntity> type,
+            ServerWorldAccess world,
+            SpawnReason spawnReason,
+            BlockPos pos,
+            Random random
+    ) {
+        return world.getFluidState(pos).isIn(FluidTags.WATER);
     }
 
     public static class BrineSwimInWaterGoal extends Goal {
@@ -176,6 +224,10 @@ public class BrineEntity extends HostileWaterCreatureEntity {
                 }
 
                 BlockPos checkPos = new BlockPos((int)potentialX, (int)potentialY, (int)potentialZ);
+
+                if (!this.brine.isWithinHomeBounds(checkPos)) {
+                    continue;
+                }
 
                 if (this.brine.getEntityWorld().getFluidState(checkPos).isIn(FluidTags.WATER)) {
                     this.targetX = potentialX;
@@ -771,6 +823,9 @@ public class BrineEntity extends HostileWaterCreatureEntity {
                 if (ox * ox + oy * oy + oz * oz < 49) continue;
 
                 BlockPos testPos = new BlockPos((int)px, (int)py, (int)pz);
+
+                if (!this.brine.isWithinHomeBounds(testPos)) continue;
+
                 if (this.brine.getEntityWorld().getFluidState(testPos).isIn(FluidTags.WATER)) {
                     this.targetX = px;
                     this.targetY = py;
@@ -1049,6 +1104,12 @@ public class BrineEntity extends HostileWaterCreatureEntity {
             nbt.putDouble("LastShootY", lastShootPosition.y);
             nbt.putDouble("LastShootZ", lastShootPosition.z);
         }
+
+        if (homePos != null) {
+            nbt.putInt("HomeX", homePos.getX());
+            nbt.putInt("HomeY", homePos.getY());
+            nbt.putInt("HomeZ", homePos.getZ());
+        }
     }
 
     @Override
@@ -1077,6 +1138,14 @@ public class BrineEntity extends HostileWaterCreatureEntity {
                     lastShootX,
                     nbt.getDouble("LastShootY", 0.0),
                     nbt.getDouble("LastShootZ", 0.0)
+            );
+        }
+
+        if (nbt.contains("HomeX")) {
+            this.homePos = new BlockPos(
+                    nbt.getInt("HomeX", 0),
+                    nbt.getInt("HomeY", 0),
+                    nbt.getInt("HomeZ", 0)
             );
         }
     }

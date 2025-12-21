@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "earth-and-water:conduit_monument",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 18,
+    "separation": 6,
+    "salt": 165765296
+  }
+}

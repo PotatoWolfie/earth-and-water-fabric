@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.model.ShieldEntityModel;
@@ -67,7 +68,7 @@ public class SpikedShieldEntityModel extends ShieldEntityModel {
 		SpriteIdentifier spriteToUse = (noPatternSprite != null) ? noPatternSprite : baseSprite;
 
 		VertexConsumer vertexConsumer = spriteHolder.getSprite(spriteToUse).getTextureSpecificVertexConsumer(
-				vertexConsumers.getBuffer(RenderLayer.getEntityCutout(spriteToUse.getAtlasId()))
+				vertexConsumers.getBuffer(RenderLayers.entityCutoutNoCull(spriteToUse.getAtlasId()))
 		);
 
 		this.plate.render(matrices, vertexConsumer, light, overlay);

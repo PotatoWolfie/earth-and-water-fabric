@@ -270,6 +270,7 @@ public class ModBlocks {
                     .sounds(BlockSoundGroup.TRIAL_SPAWNER)
                     .blockVision(Blocks::never)
                     .nonOpaque()
+                    .pistonBehavior(PistonBehavior.BLOCK)
                     .luminance(state -> state.get(ReinforcedSpawnerBlock.ACTIVE) ? 4 : 0)
                     .registryKey(createBlockRegistryKey("reinforced_spawner"))
             )

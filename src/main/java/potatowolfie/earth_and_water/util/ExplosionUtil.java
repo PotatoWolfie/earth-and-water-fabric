@@ -101,7 +101,7 @@ public class ExplosionUtil {
 
         for (Map.Entry<PlayerEntity, Vec3d> entry : affectedPlayers.entrySet()) {
             PlayerEntity player = entry.getKey();
-            player.velocityModified = true;
+            player.velocityDirty = true;
         }
     }
 

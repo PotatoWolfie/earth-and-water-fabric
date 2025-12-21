@@ -37,7 +37,7 @@ public abstract class WhipAttackMixin {
         livingTarget.damage((ServerWorld) player.getEntityWorld(), damageSource, damage);
         stack.damage(1, player, player.getPreferredEquipmentSlot(stack));
         stack.getItem().postHit(stack, livingTarget, player);
-        player.resetLastAttackedTicks();
+        player.getLastAttackedTime();
         player.getEntityWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP,
                 player.getSoundCategory(), 1.0F, 1.0F);

@@ -26,7 +26,7 @@ public class ModLootTableModifier {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(UniformLootNumberProvider.create(0.0f, 1.0f))
                         .with(ItemEntry.builder(ModItems.STEEL_NUGGET)
-                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 8.0f))));
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f))));
                 tableBuilder.pool(poolBuilder);
             }
         });

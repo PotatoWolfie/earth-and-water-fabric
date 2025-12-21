@@ -5,10 +5,10 @@
       "id": "earth-and-water:brine_rod"
     },
     "title": {
-      "text": "Long Ago..."
+      "translate": "advancement.earth-and-water.long_ago.title"
     },
     "description": {
-      "text": "Gather the elemental rods: Bore, Brine, Breeze, and Blaze."
+      "translate": "advancement.earth-and-water.long_ago.description"
     },
     "frame": "challenge",
     "show_toast": true,

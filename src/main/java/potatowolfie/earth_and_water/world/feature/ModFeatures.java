@@ -6,6 +6,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.Feature;
 import potatowolfie.earth_and_water.EarthWater;
 import potatowolfie.earth_and_water.world.feature.custom.*;
+import potatowolfie.earth_and_water.world.feature.custom.limestone_rock.LimestoneRockFeature;
+import potatowolfie.earth_and_water.world.feature.custom.limestone_rock.LimestoneRockFeatureConfig;
 
 public class ModFeatures {
     public static final Feature<DarkDripstoneClusterFeatureConfig> DARK_DRIPSTONE_CLUSTER =
@@ -27,6 +29,11 @@ public class ModFeatures {
             Registry.register(Registries.FEATURE,
                     Identifier.of(EarthWater.MOD_ID, "oxygen_cross"),
                     new OxygenFeature(OxygenFeatureConfig.CODEC));
+
+    public static final Feature<LimestoneRockFeatureConfig> LIMESTONE_ROCK =
+            Registry.register(Registries.FEATURE,
+                    Identifier.of(EarthWater.MOD_ID, "limestone_rock"),
+                    new LimestoneRockFeature(LimestoneRockFeatureConfig.CODEC));
 
     public static void registerModFeatures() {
         EarthWater.LOGGER.info("Registering Mod Features for " + EarthWater.MOD_ID);

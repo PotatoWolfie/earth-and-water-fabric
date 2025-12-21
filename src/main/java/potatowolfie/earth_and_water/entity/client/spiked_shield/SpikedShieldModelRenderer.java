@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.block.entity.BannerBlockEntityRenderer;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
@@ -20,10 +21,12 @@ import net.minecraft.util.DyeColor;
 import net.minecraft.util.Unit;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 import potatowolfie.earth_and_water.EarthWaterClient;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
 public class SpikedShieldModelRenderer implements SpecialModelRenderer<ComponentMap> {
@@ -54,11 +57,10 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
                 EarthWaterClient.SPIKED_SHIELD_BASE :
                 EarthWaterClient.SPIKED_SHIELD_BASE_NO_PATTERN;
 
-        // Render handle
         orderedRenderCommandQueue.submitModelPart(
                 this.model.getHandle(),
                 matrixStack,
-                RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
+                RenderLayers.entityCutoutNoCull(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
                 i,
                 j,
                 this.spriteHolder.getSprite(spriteIdentifier),
@@ -69,11 +71,10 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
                 k
         );
 
-        // Render plate
         orderedRenderCommandQueue.submitModelPart(
                 this.model.getPlate(),
                 matrixStack,
-                RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
+                RenderLayers.entityCutoutNoCull(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
                 i,
                 j,
                 this.spriteHolder.getSprite(spriteIdentifier),
@@ -84,16 +85,14 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
                 k
         );
 
-        // Render banner patterns if present
         if (bl2) {
-            // Render base color layer on the plate only
             SpriteIdentifier baseLayerSprite = TexturedRenderLayers.SHIELD_BASE;
             DyeColor baseColor = Objects.requireNonNullElse(dyeColor, DyeColor.WHITE);
 
             orderedRenderCommandQueue.submitModelPart(
                     this.model.getPlate(),
                     matrixStack,
-                    RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
+                    RenderLayers.entityCutoutNoCull(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
                     i,
                     j,
                     this.spriteHolder.getSprite(baseLayerSprite),
@@ -104,7 +103,6 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
                     0
             );
 
-            // Render each pattern layer on the plate only
             for (int layerIndex = 0; layerIndex < 16 && layerIndex < bannerPatternsComponent.layers().size(); ++layerIndex) {
                 BannerPatternsComponent.Layer layer = bannerPatternsComponent.layers().get(layerIndex);
                 SpriteIdentifier patternSprite = TexturedRenderLayers.getShieldPatternTextureId(layer.pattern());
@@ -112,7 +110,7 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
                 orderedRenderCommandQueue.submitModelPart(
                         this.model.getPlate(),
                         matrixStack,
-                        RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
+                        RenderLayers.entityCutoutNoCull(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
                         i,
                         j,
                         this.spriteHolder.getSprite(patternSprite),
@@ -124,12 +122,11 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
                 );
             }
 
-            // Render glint if needed
             if (bl) {
                 orderedRenderCommandQueue.submitModelPart(
                         this.model.getPlate(),
                         matrixStack,
-                        RenderLayer.getEntityGlint(),
+                        RenderLayers.entityGlint(),
                         i,
                         j,
                         this.spriteHolder.getSprite(spriteIdentifier),
@@ -142,11 +139,10 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
             }
         }
 
-        // Render spikes
         orderedRenderCommandQueue.submitModelPart(
                 this.model.getSpikes(),
                 matrixStack,
-                RenderLayer.getEntityCutout(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
+                RenderLayers.entityCutoutNoCull(TexturedRenderLayers.SHIELD_PATTERNS_ATLAS_TEXTURE),
                 i,
                 j,
                 this.spriteHolder.getSprite(spriteIdentifier),
@@ -160,10 +156,11 @@ public class SpikedShieldModelRenderer implements SpecialModelRenderer<Component
         matrixStack.pop();
     }
 
-    public void collectVertices(Set<Vector3f> vertices) {
+    @Override
+    public void collectVertices(Consumer<Vector3fc> consumer) {
         MatrixStack matrixStack = new MatrixStack();
         matrixStack.scale(1.0F, -1.0F, -1.0F);
-        this.model.getRootPart().collectVertices(matrixStack, vertices);
+        this.model.getRootPart().collectVertices(matrixStack, consumer);
     }
 
     @Environment(EnvType.CLIENT)

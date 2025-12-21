@@ -5,5 +5,50 @@
       "earth-and-water:battle_axe_dash_1",
       "earth-and-water:battle_axe_dash_2"
     ]
+  },
+  "bore_ambient": {
+    "subtitle": "sounds.earth-and-water.bore_ambient",
+    "sounds": [
+      "earth-and-water:bore_ambient_1",
+      "earth-and-water:bore_ambient_2",
+      "earth-and-water:bore_ambient_3"
+    ]
+  },
+  "bore_hurt": {
+    "subtitle": "sounds.earth-and-water.bore_hurt",
+    "sounds": [
+      "earth-and-water:bore_hurt_1",
+      "earth-and-water:bore_hurt_2"
+    ]
+  },
+  "bore_death": {
+    "subtitle": "sounds.earth-and-water.bore_death",
+    "sounds": [
+      "earth-and-water:bore_death"
+    ]
+  },
+  "brine_ambient": {
+    "subtitle": "sounds.earth-and-water.brine_ambient",
+    "sounds": [
+      "earth-and-water:brine_ambient"
+    ]
+  },
+  "brine_death": {
+    "subtitle": "sounds.earth-and-water.brine_death",
+    "sounds": [
+      "earth-and-water:brine_hurt"
+    ]
+  },
+  "brine_underwater_ambient": {
+    "subtitle": "sounds.earth-and-water.brine_underwater_ambient",
+    "sounds": [
+      "earth-and-water:brine_underwater_ambient"
+    ]
+  },
+  "brine_underwater_death": {
+    "subtitle": "sounds.earth-and-water.brine_underwater_death",
+    "sounds": [
+      "earth-and-water:brine_underwater_hurt"
+    ]
   }
 }

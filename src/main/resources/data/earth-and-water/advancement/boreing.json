@@ -15,10 +15,10 @@
       "id": "earth-and-water:bore_rod"
     },
     "title": {
-      "text": "Boreing"
+      "translate": "advancement.earth-and-water.boreing.title"
     },
     "description": {
-      "text": "Kill a Bore"
+      "translate": "advancement.earth-and-water.boreing.description"
     },
     "frame": "task",
     "show_toast": true,

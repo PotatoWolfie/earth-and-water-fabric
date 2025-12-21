@@ -3,6 +3,7 @@ package potatowolfie.earth_and_water.block.custom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
@@ -37,6 +38,12 @@ public class ChiseledPrismarineBricksBlock extends Block {
 
             world.scheduleBlockTick(pos, this, 2);
         }
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        boolean shouldBeActive = checkForWater(ctx.getWorld(), ctx.getBlockPos());
+        return this.getDefaultState().with(ACTIVE, shouldBeActive);
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,

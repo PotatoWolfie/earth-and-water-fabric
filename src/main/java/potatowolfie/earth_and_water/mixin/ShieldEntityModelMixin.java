@@ -1,6 +1,7 @@
 package potatowolfie.earth_and_water.mixin;
 
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.entity.model.ShieldEntityModel;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,6 +22,6 @@ public class ShieldEntityModelMixin {
             index = 1
     )
     private static Function<Identifier, RenderLayer> useEntityCutoutForSpikedShield(Function<Identifier, RenderLayer> layerFactory) {
-        return RenderLayer::getEntityCutout;
+        return RenderLayers::entityCutoutNoCull;
     }
 }

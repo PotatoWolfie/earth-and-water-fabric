@@ -1,17 +1,33 @@
 package potatowolfie.earth_and_water.item.custom;
 
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.*;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 public class SpikedShieldItem extends ShieldItem {
 
     public SpikedShieldItem(Item.Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+        textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip1"));
+        textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
+        textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip1"));
+        textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip2"));
+        textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip3"));
+        textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip3"));
+        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
     }
 
     public Text getName(ItemStack stack) {
