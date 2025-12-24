@@ -6,10 +6,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -22,6 +24,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+import potatowolfie.earth_and_water.damage.ModDamageTypes;
 import potatowolfie.earth_and_water.effect.ModEffects;
 import potatowolfie.earth_and_water.entity.ModEntities;
 import potatowolfie.earth_and_water.item.ModItems;
@@ -159,12 +162,21 @@ public class WaterChargeProjectileEntity extends PersistentProjectileEntity {
                 SoundCategory.BLOCKS, 1.0F, 0.8F);
 
         if (!world.isClient() && world instanceof ServerWorld serverWorld) {
+            DamageSource waterChargeDamage = new DamageSource(
+                    serverWorld.getRegistryManager()
+                            .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                            .getEntry(ModDamageTypes.WATER_CHARGE.getValue()).get(),
+                    this,
+                    this.getOwner()
+            );
+
             ExplosionUtil.createSilentExplosion(
                     serverWorld,
                     this.getEntityPos(),
                     3.0f,
                     this,
                     null,
+                    waterChargeDamage,
                     13.0f,
                     2.0f
             );
@@ -263,7 +275,14 @@ public class WaterChargeProjectileEntity extends PersistentProjectileEntity {
                     if (entity instanceof LivingEntity livingEntity) {
                         float damage = distanceFactor * EXPLOSION_DAMAGE_FACTOR * MAX_EXPLOSION_DAMAGE;
                         if (damage > 0.5f && world instanceof ServerWorld) {
-                            livingEntity.damage(serverWorld, world.getDamageSources().explosion(this, this.getOwner()), damage);
+                            new DamageSource(
+                                    serverWorld.getRegistryManager()
+                                            .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                                            .getEntry(ModDamageTypes.WATER_CHARGE.getValue()).get(),
+                                    this,
+                                    this.getOwner()
+                            );
+                            livingEntity.damage(serverWorld, waterChargeDamage, damage);
                             restoreOxygen(livingEntity);
                         }
                     }
@@ -293,7 +312,14 @@ public class WaterChargeProjectileEntity extends PersistentProjectileEntity {
         if (hitEntity instanceof LivingEntity livingEntity) {
             float damage = DIRECT_DAMAGE;
             if (world instanceof ServerWorld serverWorld) {
-                livingEntity.damage(serverWorld, world.getDamageSources().explosion(this, this.getOwner()), damage);
+                DamageSource waterChargeDamage = new DamageSource(
+                        serverWorld.getRegistryManager()
+                                .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                                .getEntry(ModDamageTypes.WATER_CHARGE.getValue()).get(),
+                        this,
+                        this.getOwner()
+                );
+                livingEntity.damage(serverWorld, waterChargeDamage, damage);
             }
 
             int durationTicks = (int)(WATER_BREATHING_DURATION * 20);
@@ -494,7 +520,14 @@ public class WaterChargeProjectileEntity extends PersistentProjectileEntity {
 
         if (entity instanceof LivingEntity livingEntity) {
             if (getEntityWorld() instanceof ServerWorld serverWorld) {
-                livingEntity.damage(serverWorld, getEntityWorld().getDamageSources().explosion(this, this.getOwner()), DIRECT_DAMAGE);
+                DamageSource waterChargeDamage = new DamageSource(
+                        serverWorld.getRegistryManager()
+                                .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                                .getEntry(ModDamageTypes.WATER_CHARGE.getValue()).get(),
+                        this,
+                        this.getOwner()
+                );
+                livingEntity.damage(serverWorld, waterChargeDamage, DIRECT_DAMAGE);
             }
 
             int durationTicks = (int)(WATER_BREATHING_DURATION * 20);

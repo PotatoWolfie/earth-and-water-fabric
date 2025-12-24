@@ -508,7 +508,7 @@ public class ReinforcedSpawnerBlockEntity extends BlockEntity {
         this.spawnDelay = readView.getInt("SpawnDelay", 0);
         this.rotation = readView.getDouble("Rotation", 0.0);
         this.lastRotation = readView.getDouble("LastRotation", 0.0);
-        this.lastKeyUsageTime = readView.getLong("LastKeyUsageTime", 0);
+        this.lastKeyUsageTime = 0;
         this.wasInCooldown = readView.getBoolean("WasInCooldown", false);
 
         this.isWaveActive = readView.getBoolean("IsWaveActive", false);

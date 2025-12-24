@@ -6,9 +6,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
+import potatowolfie.earth_and_water.damage.ModDamageTypes;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -50,8 +52,13 @@ public class SpikedShieldItem extends ShieldItem {
 
             if (attacker != null && attacker != user) {
                 if (user.getEntityWorld() instanceof ServerWorld serverWorld) {
-                    DamageSource reflectedSource = user.getDamageSources().thorns(user);
-                    attacker.damage(serverWorld, reflectedSource, amount);
+                    DamageSource spikedShieldDamage = new DamageSource(
+                            serverWorld.getRegistryManager()
+                                    .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                                    .getEntry(ModDamageTypes.SPIKED_SHIELD.getValue()).get(),
+                            user
+                    );
+                    attacker.damage(serverWorld, spikedShieldDamage, amount);
                 }
 
                 return true;

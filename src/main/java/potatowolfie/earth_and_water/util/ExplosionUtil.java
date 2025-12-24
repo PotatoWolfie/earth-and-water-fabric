@@ -21,14 +21,18 @@ import java.util.Map;
 public class ExplosionUtil {
 
     public static void createSilentExplosion(ServerWorld world, Vec3d pos, float power, @Nullable Entity sourceEntity) {
-        createSilentExplosion(world, pos, power, sourceEntity, null);
+        createSilentExplosion(world, pos, power, sourceEntity, null, null, -1, -1);
     }
 
     public static void createSilentExplosion(ServerWorld world, Vec3d pos, float power, @Nullable Entity sourceEntity, @Nullable Entity directHit) {
-        createSilentExplosion(world, pos, power, sourceEntity, directHit, -1, -1);
+        createSilentExplosion(world, pos, power, sourceEntity, directHit, null, -1, -1);
     }
 
     public static void createSilentExplosion(ServerWorld world, Vec3d pos, float power, @Nullable Entity sourceEntity, @Nullable Entity directHit, float customDamage, float knockbackMultiplier) {
+        createSilentExplosion(world, pos, power, sourceEntity, directHit, null, customDamage, knockbackMultiplier);
+    }
+
+    public static void createSilentExplosion(ServerWorld world, Vec3d pos, float power, @Nullable Entity sourceEntity, @Nullable Entity directHit, @Nullable DamageSource customDamageSource, float customDamage, float knockbackMultiplier) {
         world.emitGameEvent(sourceEntity, GameEvent.EXPLODE, pos);
 
         float radius = power * 2.0F;
@@ -45,7 +49,7 @@ public class ExplosionUtil {
         );
 
         Map<PlayerEntity, Vec3d> affectedPlayers = new HashMap<>();
-        DamageSource damageSource = world.getDamageSources().explosion(sourceEntity, getCausingEntity(sourceEntity));
+        DamageSource damageSource = customDamageSource != null ? customDamageSource : world.getDamageSources().explosion(sourceEntity, getCausingEntity(sourceEntity));
 
         for (Entity entity : entities) {
             if (entity == directHit || shouldSkipEntity(entity)) {
@@ -192,6 +196,6 @@ public class ExplosionUtil {
     }
 
     public static void createSilentExplosion(ServerWorld world, Vec3d pos, float radius, float damage, double areaKnockback, double directHitKnockback, @Nullable Entity directHit) {
-        createSilentExplosion(world, pos, radius, null, directHit, damage, (float)areaKnockback);
+        createSilentExplosion(world, pos, radius, null, directHit, null, damage, (float)areaKnockback);
     }
 }

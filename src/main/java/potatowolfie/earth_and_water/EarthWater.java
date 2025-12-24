@@ -117,7 +117,8 @@ public class EarthWater implements ModInitializer {
 					if (block == ModBlocks.CHISELED_DARK_PRISMARINE ||
 							block == ModBlocks.CHISELED_PRISMARINE_BRICKS ||
 							block == ModBlocks.CHISELED_DARK_DRIPSTONE_BRICKS ||
-							block == ModBlocks.CHISELED_DRIPSTONE_BRICKS) {
+							block == ModBlocks.CHISELED_DRIPSTONE_BRICKS ||
+							block == ModBlocks.REINFORCED_SPAWNER) {
 
 						world.scheduleBlockTick(pos.toImmutable(), block, 2);
 					}

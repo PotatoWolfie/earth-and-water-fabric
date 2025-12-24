@@ -41,7 +41,7 @@
   "block.earth-and-water.chiseled_dark_prismarine": "Chiseled Dark Prismarine",
   "block.earth-and-water.dark_prismarine_wall": "Dark Prismarine Wall",
   "block.earth-and-water.reinforced_spawner": "Reinforced Spawner",
-  "block.earth-and-water.oxygen_block": "Oxygen Block",
+  "block.earth-and-water.oxygen_block": "Liquid Oxygen Block",
   "block.earth-and-water.oxygen_bubble": "Oxygen Bubble",
 
   "block.earth-and-water.dark_prismarine_pillar": "Dark Prismarine Pillar",
@@ -157,7 +157,7 @@
 
   "sounds.earth-and-water.battle_axe_dash": "Battle Axe Dashing",
   "sounds.earth-and-water.bore_ambient": "Bore rumbles",
-  "sounds.earth-and-water.bore_hurts": "Bore hurts",
+  "sounds.earth-and-water.bore_hurt": "Bore hurts",
   "sounds.earth-and-water.bore_death": "Bore dies",
   "sounds.earth-and-water.brine_ambient": "Brine burbles",
   "sounds.earth-and-water.brine_death": "Brine hurts",
@@ -166,6 +166,12 @@
 
   "death.attack.battle_axe": "%1$s was cleaved by %2$s",
   "death.attack.battle_axe.item": "%1$s was cleaved by %2$s using %3$s",
+  "death.attack.whip": "%1$s was whipped by %2$s",
+  "death.attack.whip.item": "%1$s was whipped by %2$s using %3$s",
+  "death.attack.earth_charge": "%1$s was spiked by an earth charge",
+  "death.attack.water_charge": "%1$s was made stuck by %2$s",
+  "death.attack.spiked_shield": "%1$s was impaled by %2$s's spiked shield",
+  "death.attack.spiked_shield.item": "%1$s was impaled trying to attack %2$s's %3$s",
 
   "advancement.earth-and-water.mob_lock.title": "Mob Lock",
   "advancement.earth-and-water.mob_lock.description": "Turn a Reinforced Spawner off using a Reinforced Key",

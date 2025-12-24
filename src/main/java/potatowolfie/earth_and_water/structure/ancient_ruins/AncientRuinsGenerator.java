@@ -5,11 +5,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
 import net.minecraft.util.BlockMirror;
@@ -25,6 +28,9 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import potatowolfie.earth_and_water.block.custom.ReinforcedSpawnerBlock;
+import potatowolfie.earth_and_water.block.entity.custom.ReinforcedSpawnerBlockEntity;
+import potatowolfie.earth_and_water.entity.ModEntities;
 import potatowolfie.earth_and_water.structure.ModStructurePieceTypes;
 
 import java.util.Collections;
@@ -554,6 +560,57 @@ public class AncientRuinsGenerator {
             } else if (metadata.equals("large_chest")) {
                 this.placeChestWithLoot(world, boundingBox, random, pos,
                         Identifier.of("earth-and-water", "chests/ancient_ruins_large"));
+            }
+        }
+
+        private void setupSpawner(
+                ServerWorldAccess world,
+                BlockBox boundingBox,
+                BlockPos structureBlockPos,
+                String entityName
+        ) {
+            for (Direction direction : Direction.values()) {
+                BlockPos spawnerPos = structureBlockPos.offset(direction);
+
+                if (!boundingBox.contains(spawnerPos)) {
+                    continue;
+                }
+
+                BlockState state = world.getBlockState(spawnerPos);
+
+                if (state.getBlock() instanceof ReinforcedSpawnerBlock) {
+                    BlockEntity blockEntity = world.getBlockEntity(spawnerPos);
+                    if (blockEntity instanceof ReinforcedSpawnerBlockEntity spawnerEntity) {
+                        EntityType<?> entityType;
+
+                        if (entityName.equals("bore")) {
+                            entityType = ModEntities.BORE;
+                        } else if (entityName.equals("brine")) {
+                            entityType = ModEntities.BRINE;
+                        } else {
+                            Identifier entityId = Identifier.of("earth-and-water", entityName);
+                            entityType = Registries.ENTITY_TYPE.get(entityId);
+
+                            if (entityType == null || !Registries.ENTITY_TYPE.containsId(entityId)) {
+                                entityId = Identifier.of("minecraft", entityName);
+                                entityType = Registries.ENTITY_TYPE.get(entityId);
+                            }
+                        }
+
+                        if (entityType != null) {
+                            spawnerEntity.setEntityType(entityType);
+                            spawnerEntity.activate();
+
+                            BlockState newState = state
+                                    .with(ReinforcedSpawnerBlock.ACTIVE, true)
+                                    .with(ReinforcedSpawnerBlock.KEYHOLE, false);
+                            world.setBlockState(spawnerPos, newState, 3);
+
+                            spawnerEntity.markDirty();
+                        }
+                        return;
+                    }
+                }
             }
         }
 

@@ -12,6 +12,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
 import net.minecraft.util.BlockMirror;
@@ -275,10 +276,13 @@ public class ConduitMonumentGenerator {
                         if (entityType != null) {
                             spawnerEntity.setEntityType(entityType);
                             spawnerEntity.activate();
-
-                            world.setBlockState(spawnerPos, state
+                            spawnerEntity.markDirty();
+                            ServerWorld serverWorld = world.toServerWorld();
+                            BlockState newState = state
                                     .with(ReinforcedSpawnerBlock.ACTIVE, true)
-                                    .with(ReinforcedSpawnerBlock.KEYHOLE, false), 3);
+                                    .with(ReinforcedSpawnerBlock.KEYHOLE, false);
+                            serverWorld.setBlockState(spawnerPos, newState, 3);
+                            serverWorld.updateListeners(spawnerPos, state, newState, 3);
                         }
                         return;
                     }

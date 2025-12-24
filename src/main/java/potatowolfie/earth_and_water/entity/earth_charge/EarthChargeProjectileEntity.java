@@ -4,10 +4,12 @@ import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -15,6 +17,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import potatowolfie.earth_and_water.damage.ModDamageTypes;
 import potatowolfie.earth_and_water.entity.ModEntities;
 import potatowolfie.earth_and_water.item.ModItems;
 import potatowolfie.earth_and_water.util.ExplosionUtil;
@@ -74,7 +77,14 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
     private void applyDirectHitDamage(Entity hitEntity) {
         if (hitEntity instanceof LivingEntity livingEntity && !this.getEntityWorld().isClient()) {
             if (this.getEntityWorld() instanceof ServerWorld serverWorld) {
-                livingEntity.damage(serverWorld, this.getEntityWorld().getDamageSources().generic(), 12.0f);
+                DamageSource earthChargeDamage = new DamageSource(
+                        serverWorld.getRegistryManager()
+                                .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                                .getEntry(ModDamageTypes.EARTH_CHARGE.getValue()).get(),
+                        this,
+                        this.getOwner()
+                );
+                livingEntity.damage(serverWorld, earthChargeDamage, 12.0f);
             }
 
             Vec3d knockbackDir = hitEntity.getEntityPos().subtract(this.getEntityPos()).normalize();
@@ -97,12 +107,21 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
 
         if (!world.isClient()) {
             if (world instanceof ServerWorld serverWorld) {
+                DamageSource earthChargeDamage = new DamageSource(
+                        serverWorld.getRegistryManager()
+                                .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                                .getEntry(ModDamageTypes.EARTH_CHARGE.getValue()).get(),
+                        this,
+                        this.getOwner()
+                );
+
                 ExplosionUtil.createSilentExplosion(
                         serverWorld,
                         pos,
                         1.5f,
                         this,
                         excludedEntity,
+                        earthChargeDamage,
                         26.0f,
                         0.4f
                 );
@@ -119,12 +138,23 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
                 SoundCategory.BLOCKS, 1.0F, 0.8F);
 
         if (!world.isClient() && world instanceof ServerWorld serverWorld) {
-            serverWorld.spawnParticles(
-                    ParticleTypes.DUST_PLUME,
-                    pos.x, pos.y + 0.05, pos.z,
-                    15,
-                    0.2, 0.05, 0.2,
-                    0.1
+            DamageSource waterChargeDamage = new DamageSource(
+                    serverWorld.getRegistryManager()
+                            .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                            .getEntry(ModDamageTypes.WATER_CHARGE.getValue()).get(),
+                    this,
+                    this.getOwner()
+            );
+
+            ExplosionUtil.createSilentExplosion(
+                    serverWorld,
+                    this.getEntityPos(),
+                    3.0f,
+                    this,
+                    null,
+                    waterChargeDamage,
+                    13.0f,
+                    2.0f
             );
 
             for (int i = 0; i < 6; i++) {
