@@ -120,12 +120,19 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_STAIRS, ModBlocks.DARK_DRIPSTONE_BLOCK);
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_SLAB, ModBlocks.DARK_DRIPSTONE_BLOCK, 2);
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_WALL, ModBlocks.DARK_DRIPSTONE_BLOCK);
+
+                createChiseledBlockRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_PILLAR, Ingredient.ofItem(ModBlocks.DARK_DRIPSTONE_SLAB));
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_PILLAR, ModBlocks.DARK_DRIPSTONE_BLOCK);
 
                 offer2x2CompactingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE, ModBlocks.DARK_DRIPSTONE_BLOCK);
                 createStairsRecipe(ModBlocks.POLISHED_DARK_DRIPSTONE_STAIRS, Ingredient.ofItems(ModBlocks.POLISHED_DARK_DRIPSTONE));
                 createSlabRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE_SLAB, Ingredient.ofItem(ModBlocks.POLISHED_DARK_DRIPSTONE));
                 offerWallRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE_WALL, ModBlocks.POLISHED_DARK_DRIPSTONE);
+
+                createChiseledBlockRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_DARK_DRIPSTONE_BRICKS, Ingredient.ofItem(ModBlocks.DARK_DRIPSTONE_BRICK_SLAB));
+                createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_DARK_DRIPSTONE_BRICKS, ModBlocks.DARK_DRIPSTONE_BRICKS);
+                createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_DARK_DRIPSTONE_BRICKS, ModBlocks.POLISHED_DARK_DRIPSTONE);
+                createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_DARK_DRIPSTONE_BRICKS, ModBlocks.DARK_DRIPSTONE_BLOCK);
 
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE, ModBlocks.DARK_DRIPSTONE_BLOCK);
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE_STAIRS, ModBlocks.POLISHED_DARK_DRIPSTONE);
@@ -186,6 +193,8 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
 
                 createChiseledBlockRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_DARK_PRISMARINE, Ingredient.ofItems(Blocks.DARK_PRISMARINE_SLAB));
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_DARK_PRISMARINE, Blocks.DARK_PRISMARINE);
+
+                offerWallRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_PRISMARINE_WALL, Blocks.DARK_PRISMARINE);
             }
 
             private void generateLimestoneRecipes() {
