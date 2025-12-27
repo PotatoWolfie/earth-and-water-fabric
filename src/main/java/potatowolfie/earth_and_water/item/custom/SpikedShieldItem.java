@@ -21,17 +21,6 @@ public class SpikedShieldItem extends ShieldItem {
         super(settings);
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip1"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip1"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip2"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip3"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip3"));
-        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
-    }
-
     public Text getName(ItemStack stack) {
         DyeColor dyeColor = (DyeColor)stack.get(DataComponentTypes.BASE_COLOR);
         if (dyeColor != null) {
