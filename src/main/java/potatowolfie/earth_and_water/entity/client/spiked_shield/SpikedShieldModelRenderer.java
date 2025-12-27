@@ -3,10 +3,8 @@ package potatowolfie.earth_and_water.entity.client.spiked_shield;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.render.block.entity.BannerBlockEntityRenderer;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.item.model.special.SpecialModelRenderer;
 import net.minecraft.client.texture.SpriteHolder;
@@ -18,14 +16,11 @@ import net.minecraft.component.type.BannerPatternsComponent;
 import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Unit;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 import org.joml.Vector3fc;
 import potatowolfie.earth_and_water.EarthWaterClient;
 
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
