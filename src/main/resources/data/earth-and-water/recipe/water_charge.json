@@ -8,10 +8,14 @@
   ],
   "key": {
     "K": [
-      "minecraft:kelp"
+      {
+        "item": "minecraft:kelp"
+      }
     ],
     "B": [
-      "earth-and-water:oxygen_block"
+      {
+        "item": "earth-and-water:oxygen_block"
+      }
     ]
   },
   "result": {

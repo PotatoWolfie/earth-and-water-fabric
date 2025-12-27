@@ -14,7 +14,6 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
 import potatowolfie.earth_and_water.block.ModBlocks;
 
 public class OxygenBlock extends Block {
@@ -50,13 +49,13 @@ public class OxygenBlock extends Block {
                 for (int i = 0; i < 2; i++) {
                     double offsetX = random.nextDouble() * 0.6 - 0.3;
                     double offsetZ = random.nextDouble() * 0.6 - 0.3;
-                    world.addParticleClient(ParticleTypes.BUBBLE_COLUMN_UP,
+                    world.addParticle(ParticleTypes.BUBBLE_COLUMN_UP,
                         xPos + offsetX, yPos, zPos + offsetZ, 
                         0.0, upwardSpeed, 0.0);
                 }
 
                 if (y == PARTICLE_HEIGHT && random.nextInt(5) == 0) {
-                    world.addParticleClient(ParticleTypes.BUBBLE_POP,
+                    world.addParticle(ParticleTypes.BUBBLE_POP,
                         xPos + (random.nextDouble() - 0.5) * 0.6,
                         yPos + 0.5,
                         zPos + (random.nextDouble() - 0.5) * 0.6,
@@ -104,12 +103,12 @@ public class OxygenBlock extends Block {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView,
-                                                BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+                                                WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (direction == Direction.UP) {
-            tickView.scheduleBlockTick(pos, this, SCHEDULED_TICK_DELAY);
+            world.scheduleBlockTick(pos, this, SCHEDULED_TICK_DELAY);
         }
-        return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override

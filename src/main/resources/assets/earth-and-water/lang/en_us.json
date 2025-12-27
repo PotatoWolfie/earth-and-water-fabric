@@ -7,9 +7,9 @@
   "item.earth-and-water.steel_nugget": "Steel Nugget",
   "item.earth-and-water.reinforced_key": "Reinforced Key",
   "tooltip.earth-and-water.reinforced_key": "Used to activate or deactivate Reinforced Spawners. Has 2 uses.",
-  "item.earth-and-water.steel_upgrade_smithing_template": "Steel Upgrade",
-  "item.earth-and-water.block_armor_trim_smithing_template": "Block Armor Trim",
-  "item.earth-and-water.guard_armor_trim_smithing_template": "Guard Armor Trim",
+  "item.earth-and-water.steel_upgrade_smithing_template": "Smithing Template",
+  "item.earth-and-water.block_armor_trim_smithing_template": "Smithing Template",
+  "item.earth-and-water.guard_armor_trim_smithing_template": "Smithing Template",
   "item.earth-and-water.spiked_shield": "Spiked Shield",
   "item.earth-and-water.whip": "Whip",
   "item.earth-and-water.battle_axe": "Battle Axe",
@@ -35,6 +35,7 @@
 
   "item.earth-and-water.smithing_template.steel_upgrade.applies_to": "Shields",
   "item.earth-and-water.smithing_template.steel_upgrade.ingredients": "Steel Ingot",
+  "item.earth-and-water.smithing_template.steel_upgrade.text": "Steel Upgrade",
 
   "block.earth-and-water.steel_block": "Steel Block",
   "block.earth-and-water.mixed_prismarine_tiles": "Mixed Prismarine Tiles",

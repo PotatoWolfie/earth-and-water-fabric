@@ -16,12 +16,11 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -138,11 +137,11 @@ public class BoreEntity extends HostileEntity {
 
     public static DefaultAttributeContainer.Builder createBoreAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 30.0)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.23)
-                .add(EntityAttributes.ATTACK_DAMAGE, 8.0)
-                .add(EntityAttributes.FOLLOW_RANGE, 32.0)
-                .add(EntityAttributes.JUMP_STRENGTH, 0.42);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 30.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0)
+                .add(EntityAttributes.GENERIC_JUMP_STRENGTH, 0.42);
     }
 
     @Override
@@ -242,7 +241,7 @@ public class BoreEntity extends HostileEntity {
             isInCombat = true;
             combatStartTime = this.age;
             lastTarget = target;
-            circlingCenter = target.getEntityPos();
+            circlingCenter = target.getPos();
             circlingAngle = this.random.nextDouble() * Math.PI * 2;
             circlingDirection = this.random.nextBoolean() ? 1 : -1;
 
@@ -256,7 +255,7 @@ public class BoreEntity extends HostileEntity {
         }
 
         if (isInCombat && target != null && target.isAlive() && !target.isRemoved()) {
-            circlingCenter = target.getEntityPos();
+            circlingCenter = target.getPos();
 
             handleCombatBurrowing();
         }
@@ -269,7 +268,7 @@ public class BoreEntity extends HostileEntity {
             return false;
         }
 
-        Vec3d currentPos = this.getEntityPos();
+        Vec3d currentPos = this.getPos();
 
         if (stuckCheckPosition == null) {
             stuckCheckPosition = currentPos;
@@ -317,8 +316,8 @@ public class BoreEntity extends HostileEntity {
                 burrowCooldown = 200 + this.random.nextInt(100);
 
                 for (BoreEntity bore : nearbyBurrowers) {
-                    Vec3d away = bore.getEntityPos().subtract(target.getEntityPos()).normalize();
-                    Vec3d retreatPos = bore.getEntityPos().add(away.multiply(6.0));
+                    Vec3d away = bore.getPos().subtract(target.getPos()).normalize();
+                    Vec3d retreatPos = bore.getPos().add(away.multiply(6.0));
                     bore.getNavigation().startMovingTo(retreatPos.x, retreatPos.y, retreatPos.z, 1.3);
                 }
             }
@@ -346,7 +345,7 @@ public class BoreEntity extends HostileEntity {
 
     private void updateMovementTracking() {
         if (lastShootPosition != null) {
-            Vec3d currentPos = this.getEntityPos();
+            Vec3d currentPos = this.getPos();
             if (currentPos != null) {
                 double distanceMoved = currentPos.distanceTo(lastShootPosition);
 
@@ -374,19 +373,19 @@ public class BoreEntity extends HostileEntity {
             case BURROWING:
                 if (isWalkingWhileBurrowed) {
                     if (isInCombat && this.getTarget() != null) {
-                        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED)).setBaseValue(0.35);
+                        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)).setBaseValue(0.35);
                     } else {
-                        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED)).setBaseValue(0.6);
+                        Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)).setBaseValue(0.6);
                     }
                 } else {
-                    Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED)).setBaseValue(baseSpeed * 0.1);
+                    Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)).setBaseValue(baseSpeed * 0.1);
                 }
                 break;
             case UNBURROWING:
-                Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED)).setBaseValue(baseSpeed * 0.1);
+                Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)).setBaseValue(baseSpeed * 0.1);
                 break;
             default:
-                Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED)).setBaseValue(baseSpeed);
+                Objects.requireNonNull(this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED)).setBaseValue(baseSpeed);
                 break;
         }
     }
@@ -396,7 +395,7 @@ public class BoreEntity extends HostileEntity {
     }
 
     @Override
-    public boolean damage(ServerWorld world, DamageSource damageSource, float amount) {
+    public boolean damage(DamageSource damageSource, float amount) {
         if (damageSource.isOf(DamageTypes.FALL) && boreState == BoreState.BURROWING) {
             return false;
         }
@@ -404,7 +403,7 @@ public class BoreEntity extends HostileEntity {
         if (this.getBoreState() == BoreState.BURROWING) {
             if (damageSource.isOf(DamageTypes.OUT_OF_WORLD) ||
                     damageSource.isOf(DamageTypes.GENERIC_KILL)) {
-                return super.damage(world, damageSource, amount);
+                return super.damage(damageSource, amount);
             }
 
             Entity attacker = damageSource.getAttacker();
@@ -413,12 +412,12 @@ public class BoreEntity extends HostileEntity {
                 if (weapon.getItem().toString().contains("pickaxe")) {
                     this.forceUnburrow();
                     this.burrowCooldownTimer = 80;
-                    return super.damage(world, damageSource, amount);
+                    return super.damage(damageSource, amount);
                 }
             }
             return false;
         }
-        return super.damage(world, damageSource, amount);
+        return super.damage(damageSource, amount);
     }
 
 
@@ -501,8 +500,8 @@ public class BoreEntity extends HostileEntity {
         }
 
         double currentY = this.getY();
-        Vec3d targetPos = target.getEntityPos();
-        Vec3d currentPos = this.getEntityPos();
+        Vec3d targetPos = target.getPos();
+        Vec3d currentPos = this.getPos();
 
         Vec3d awayDirection = currentPos.subtract(targetPos).normalize();
 
@@ -688,7 +687,7 @@ public class BoreEntity extends HostileEntity {
         public void start() {
             stuckCounter = 0;
             forceMovementTimer = 0;
-            lastPosition = bore.getEntityPos();
+            lastPosition = bore.getPos();
         }
 
         @Override
@@ -697,7 +696,7 @@ public class BoreEntity extends HostileEntity {
                 double currentY = bore.getY();
                 double moveSpeed = (bore.isInCombat() && bore.getTarget() != null) ? 1.2 : 1.4;
 
-                Vec3d currentPos = bore.getEntityPos();
+                Vec3d currentPos = bore.getPos();
 
                 if (lastPosition != null && currentPos.distanceTo(lastPosition) < 0.1) {
                     stuckCounter++;
@@ -834,7 +833,7 @@ public class BoreEntity extends HostileEntity {
     @Override
     public void travel(Vec3d movementInput) {
         if (getBoreState() == BoreState.BURROWING && isWalkingWhileBurrowed) {
-            Vec3d currentPos = this.getEntityPos();
+            Vec3d currentPos = this.getPos();
             Vec3d targetPos = currentPos.add(movementInput);
 
             BlockPos currentBlock = BlockPos.ofFloored(currentPos);
@@ -971,8 +970,8 @@ public class BoreEntity extends HostileEntity {
 
             Vec3d avoidanceDirection = Vec3d.ZERO;
             for (EarthChargeProjectileEntity projectile : projectiles) {
-                if (projectile != null && projectile.getEntityPos() != null) {
-                    Vec3d directionAway = this.getEntityPos().subtract(projectile.getEntityPos()).normalize();
+                if (projectile != null && projectile.getPos() != null) {
+                    Vec3d directionAway = this.getPos().subtract(projectile.getPos()).normalize();
                     double weight = (projectile.getOwner() instanceof BoreEntity) ? 1.5 : 1.0;
                     avoidanceDirection = avoidanceDirection.add(directionAway.multiply(weight));
                 }
@@ -1132,7 +1131,7 @@ public class BoreEntity extends HostileEntity {
     private boolean isPathBlocked(Vec3d targetPos) {
         if (this.getEntityWorld() == null || targetPos == null) return true;
 
-        Vec3d currentPos = this.getEntityPos();
+        Vec3d currentPos = this.getPos();
         Vec3d direction = targetPos.subtract(currentPos).normalize();
 
         for (double step = 1.0; step <= 3.0; step += 0.5) {
@@ -1220,7 +1219,7 @@ public class BoreEntity extends HostileEntity {
                 this.getBoundingBox().expand(8.0),
                 bore -> bore != this && bore.isInCombat()
         ).forEach(ally -> {
-            Vec3d away = ally.getEntityPos().subtract(this.getEntityPos()).normalize();
+            Vec3d away = ally.getPos().subtract(this.getPos()).normalize();
             ally.getNavigation().startMovingTo(
                     ally.getX() + away.x * 6,
                     ally.getY(),
@@ -1231,7 +1230,7 @@ public class BoreEntity extends HostileEntity {
 
         shootCooldown = 40 + this.random.nextInt(20);
         this.setBoreState(BoreState.SHOOTING);
-        lastShootPosition = this.getEntityPos();
+        lastShootPosition = this.getPos();
         hasMovedEnoughToShoot = false;
         shootingDelay = 5 + this.random.nextInt(10);
     }
@@ -1274,7 +1273,7 @@ public class BoreEntity extends HostileEntity {
         Vec3d targetPos = predictTargetPosition(target);
         if (targetPos == null) return;
 
-        Vec3d direction = targetPos.subtract(this.getEntityPos()).normalize();
+        Vec3d direction = targetPos.subtract(this.getPos()).normalize();
 
         try {
             EarthChargeProjectileEntity charge = new EarthChargeProjectileEntity(this.getEntityWorld(), this);
@@ -1287,7 +1286,7 @@ public class BoreEntity extends HostileEntity {
 
     private Vec3d predictTargetPosition(LivingEntity target) {
         if (target == null || !target.isAlive() || target.isRemoved()) {
-            return this.getEntityPos();
+            return this.getPos();
         }
 
         try {
@@ -1300,10 +1299,10 @@ public class BoreEntity extends HostileEntity {
             double distance = this.distanceTo(target);
             double timeToHit = distance / projectileSpeed;
 
-            Vec3d predictedPos = target.getEntityPos().add(targetVelocity.multiply(timeToHit));
+            Vec3d predictedPos = target.getPos().add(targetVelocity.multiply(timeToHit));
             return predictedPos.add(0, target.getStandingEyeHeight() - 1.0, 0);
         } catch (Exception e) {
-            return target.getEntityPos();
+            return target.getPos();
         }
     }
 
@@ -1352,8 +1351,8 @@ public class BoreEntity extends HostileEntity {
     }
 
     @Override
-    public void writeCustomData(WriteView nbt) {
-        super.writeCustomData(nbt);
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
         nbt.putString("BoreState", boreState.name());
         nbt.putInt("StateTimer", stateTimer);
         nbt.putInt("Variant", this.getTypeVariant());
@@ -1387,14 +1386,15 @@ public class BoreEntity extends HostileEntity {
         }
     }
 
-    public void readCustomData(ReadView nbt) {
-        super.readCustomData(nbt);
-        String stateString = nbt.getString("BoreState", "IDLE");
-        if (!stateString.equals("IDLE")) {
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        String stateString = nbt.getString("BoreState");
+        if (!stateString.isEmpty() && !stateString.equals("IDLE")) {
             try {
                 BoreState loadedState = BoreState.valueOf(stateString);
                 this.boreState = loadedState;
-                if (!this.getEntityWorld().isClient()) {
+                if (!this.getWorld().isClient()) {
                     this.dataTracker.set(DATA_ID_STATE, loadedState.ordinal());
                 }
             } catch (IllegalArgumentException e) {
@@ -1402,46 +1402,44 @@ public class BoreEntity extends HostileEntity {
             }
         }
 
-        this.stateTimer = nbt.getInt("StateTimer", 0);
-        this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant", 0));
-        this.hasMovedEnoughToShoot = nbt.getBoolean("HasMovedEnoughToShoot", false);
-        this.isInCombat = nbt.getBoolean("IsInCombat", false);
-        this.combatStartTime = nbt.getInt("CombatStartTime", 0);
-        this.circlingAngle = nbt.getDouble("CirclingAngle", 0.0);
-        this.circlingDirection = nbt.getInt("CirclingDirection", 1);
-        this.shootingDelay = nbt.getInt("ShootingDelay", 0);
-        this.stuckTimer = nbt.getInt("StuckTimer", 0);
-        this.burrowCooldownTimer = nbt.getInt("BurrowCooldownTimer", 0);
+        this.stateTimer = nbt.getInt("StateTimer");
+        if (nbt.contains("Variant")) {
+            this.dataTracker.set(DATA_ID_TYPE_VARIANT, nbt.getInt("Variant"));
+        }
+        this.hasMovedEnoughToShoot = nbt.getBoolean("HasMovedEnoughToShoot");
+        this.isInCombat = nbt.getBoolean("IsInCombat");
+        this.combatStartTime = nbt.getInt("CombatStartTime");
+        this.circlingAngle = nbt.getDouble("CirclingAngle");
+        this.circlingDirection = nbt.getInt("CirclingDirection");
+        this.shootingDelay = nbt.getInt("ShootingDelay");
+        this.stuckTimer = nbt.getInt("StuckTimer");
+        this.burrowCooldownTimer = nbt.getInt("BurrowCooldownTimer");
 
-        double stuckCheckX = nbt.getDouble("StuckCheckX", Double.NaN);
-        if (!Double.isNaN(stuckCheckX)) {
+        if (nbt.contains("StuckCheckX")) {
             this.stuckCheckPosition = new Vec3d(
-                    stuckCheckX,
-                    nbt.getDouble("StuckCheckY", 0.0),
-                    nbt.getDouble("StuckCheckZ", 0.0)
+                    nbt.getDouble("StuckCheckX"),
+                    nbt.getDouble("StuckCheckY"),
+                    nbt.getDouble("StuckCheckZ")
             );
         }
 
-        long relocateTargetLong = nbt.getLong("RelocateTarget", Long.MIN_VALUE);
-        if (relocateTargetLong != Long.MIN_VALUE) {
-            this.relocateTarget = BlockPos.fromLong(relocateTargetLong);
+        if (nbt.contains("RelocateTarget")) {
+            this.relocateTarget = BlockPos.fromLong(nbt.getLong("RelocateTarget"));
         }
 
-        double lastShootX = nbt.getDouble("LastShootX", Double.NaN);
-        if (!Double.isNaN(lastShootX)) {
+        if (nbt.contains("LastShootX")) {
             this.lastShootPosition = new Vec3d(
-                    lastShootX,
-                    nbt.getDouble("LastShootY", 0.0),
-                    nbt.getDouble("LastShootZ", 0.0)
+                    nbt.getDouble("LastShootX"),
+                    nbt.getDouble("LastShootY"),
+                    nbt.getDouble("LastShootZ")
             );
         }
 
-        double circlingCenterX = nbt.getDouble("CirclingCenterX", Double.NaN);
-        if (!Double.isNaN(circlingCenterX)) {
+        if (nbt.contains("CirclingCenterX")) {
             this.circlingCenter = new Vec3d(
-                    circlingCenterX,
-                    nbt.getDouble("CirclingCenterY", 0.0),
-                    nbt.getDouble("CirclingCenterZ", 0.0)
+                    nbt.getDouble("CirclingCenterX"),
+                    nbt.getDouble("CirclingCenterY"),
+                    nbt.getDouble("CirclingCenterZ")
             );
         }
     }
@@ -1530,7 +1528,7 @@ public class BoreEntity extends HostileEntity {
         @Override
         public void tick() {
             if (avoidanceDirection != null) {
-                Vec3d targetPos = bore.getEntityPos().add(avoidanceDirection.multiply(6.0));
+                Vec3d targetPos = bore.getPos().add(avoidanceDirection.multiply(6.0));
                 bore.getNavigation().startMovingTo(targetPos.x, targetPos.y, targetPos.z, 1.5);
             }
         }
@@ -1574,7 +1572,7 @@ public class BoreEntity extends HostileEntity {
             if (target == null || target.isRemoved() || !target.isAlive()) return null;
 
             try {
-                Vec3d targetPos = target.getEntityPos();
+                Vec3d targetPos = target.getPos();
                 if (targetPos == null) return null;
 
                 double optimalDistance = 8.0;
@@ -1764,7 +1762,7 @@ public class BoreEntity extends HostileEntity {
                     double d = this.getX() + (double)MathHelper.nextBetween(random, -0.3F, 0.3F);
                     double e = this.getY();
                     double f = this.getZ() + (double)MathHelper.nextBetween(random, -0.3F, 0.3F);
-                    this.getEntityWorld().addParticleClient(new BlockStateParticleEffect(ParticleTypes.BLOCK, blockState), d, e, f, 0.0, 0.0, 0.0);
+                    this.getEntityWorld().addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, blockState), d, e, f, 0.0, 0.0, 0.0);
                 }
             }
         }

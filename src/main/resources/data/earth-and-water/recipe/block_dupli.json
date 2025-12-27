@@ -3,13 +3,19 @@
   "category": "misc",
   "key": {
     "#": [
-      "minecraft:diamond"
+      {
+        "item": "minecraft:diamond"
+      }
     ],
     "C": [
-      "minecraft:dripstone_block"
+      {
+        "item": "minecraft:dripstone_block"
+      }
     ],
     "S": [
-      "earth-and-water:block_armor_trim_smithing_template"
+      {
+        "item": "earth-and-water:block_armor_trim_smithing_template"
+      }
     ]
   },
   "pattern": [

@@ -4,25 +4,21 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.model.ShieldEntityModel;
-import net.minecraft.client.texture.SpriteHolder;
-import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
 
 // Made with Blockbench 4.12.4
 
 @Environment(EnvType.CLIENT)
-public class SpikedShieldEntityModel extends ShieldEntityModel {
+public class SpikedShieldEntityModel extends Model {
 	private final ModelPart plate;
 	private final ModelPart handle;
 	private final ModelPart spikes;
+	private final ModelPart root;
 
 	public SpikedShieldEntityModel(ModelPart root) {
-		super(root);
+		super(RenderLayer::getEntityCutoutNoCull);
+		this.root = root;
 		this.plate = root.getChild("plate");
 		this.handle = root.getChild("handle");
 		this.spikes = root.getChild("spikes");
@@ -62,31 +58,26 @@ public class SpikedShieldEntityModel extends ShieldEntityModel {
 		return TexturedModelData.of(modelData, 64, 64);
 	}
 
-	public void render(ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers,
-					   int light, int overlay, SpriteIdentifier baseSprite, SpriteIdentifier noPatternSprite,
-					   SpriteHolder spriteHolder) {
-		SpriteIdentifier spriteToUse = (noPatternSprite != null) ? noPatternSprite : baseSprite;
-
-		VertexConsumer vertexConsumer = spriteHolder.getSprite(spriteToUse).getTextureSpecificVertexConsumer(
-				vertexConsumers.getBuffer(RenderLayers.entityCutoutNoCull(spriteToUse.getAtlasId()))
-		);
-
-		this.plate.render(matrices, vertexConsumer, light, overlay);
-		this.handle.render(matrices, vertexConsumer, light, overlay);
-		this.spikes.render(matrices, vertexConsumer, light, overlay);
+	@Override
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+		this.plate.render(matrices, vertices, light, overlay, color);
+		this.handle.render(matrices, vertices, light, overlay, color);
+		this.spikes.render(matrices, vertices, light, overlay, color);
 	}
 
-	@Override
 	public ModelPart getPlate() {
 		return this.plate;
 	}
 
-	@Override
 	public ModelPart getHandle() {
 		return this.handle;
 	}
 
 	public ModelPart getSpikes() {
 		return this.spikes;
+	}
+
+	public ModelPart getRoot() {
+		return this.root;
 	}
 }

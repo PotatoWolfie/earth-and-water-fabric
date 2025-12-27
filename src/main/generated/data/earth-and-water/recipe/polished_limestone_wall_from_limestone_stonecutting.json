@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "earth-and-water:limestone",
+  "ingredient": {
+    "item": "earth-and-water:limestone"
+  },
   "result": {
     "count": 1,
     "id": "earth-and-water:polished_limestone_wall"

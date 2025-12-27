@@ -3,7 +3,9 @@
   "category": "building",
   "key": {
     "#": [
-      "earth-and-water:pointed_dark_dripstone"
+      {
+        "item": "earth-and-water:pointed_dark_dripstone"
+      }
     ]
   },
   "pattern": [

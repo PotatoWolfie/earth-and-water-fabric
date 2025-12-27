@@ -8,7 +8,6 @@ import net.minecraft.client.particle.ParticleFactory;
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
-import net.minecraft.util.math.random.Random;
 
 @Environment(EnvType.CLIENT)
 public class ReinforcedSpawnerOutwardParticle extends AnimatedParticle {
@@ -22,7 +21,7 @@ public class ReinforcedSpawnerOutwardParticle extends AnimatedParticle {
         this.scale *= 0.75F;
         this.maxAge = 19;
         this.setTargetColor(15916745);
-        this.updateSprite(spriteProvider);
+        this.setSpriteForAge(spriteProvider);
     }
 
     public void move(double dx, double dy, double dz) {
@@ -41,9 +40,9 @@ public class ReinforcedSpawnerOutwardParticle extends AnimatedParticle {
             this.spriteProvider = spriteProvider;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, Random random) {
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
             if (particleIndex == 0) {
-                totalParticles = 12 + random.nextInt(6);
+                totalParticles = 12 + clientWorld.random.nextInt(6);
             }
 
             double angle = (2 * Math.PI * particleIndex) / totalParticles;

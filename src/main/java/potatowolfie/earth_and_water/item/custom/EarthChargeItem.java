@@ -9,8 +9,8 @@ import net.minecraft.item.ProjectileItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.util.math.Vec3d;
@@ -25,7 +25,7 @@ public class EarthChargeItem extends Item implements ProjectileItem {
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity user, Hand hand) {
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient()) {
             EarthChargeProjectileEntity earthChargeProjectileEntity = new EarthChargeProjectileEntity(world, user);
 
@@ -54,10 +54,10 @@ public class EarthChargeItem extends Item implements ProjectileItem {
                 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F)
         );
         ItemStack itemStack = user.getStackInHand(hand);
-        user.getItemCooldownManager().set(itemStack, COOLDOWN);
+        user.getItemCooldownManager().set(this, COOLDOWN);
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         itemStack.decrementUnlessCreative(1, user);
-        return ActionResult.SUCCESS;
+        return TypedActionResult.success(itemStack, world.isClient());
     }
 
     @Override

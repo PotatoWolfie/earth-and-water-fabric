@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:prismarine_bricks",
+  "ingredient": {
+    "item": "minecraft:prismarine_bricks"
+  },
   "result": {
     "count": 1,
     "id": "earth-and-water:chiseled_prismarine_bricks"

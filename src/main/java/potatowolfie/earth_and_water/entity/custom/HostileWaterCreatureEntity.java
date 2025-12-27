@@ -6,14 +6,10 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Difficulty;
@@ -186,7 +182,7 @@ public abstract class HostileWaterCreatureEntity extends HostileEntity {
         }
 
         private void chooseWaterTarget() {
-            Vec3d currentPos = this.entity.getEntityPos();
+            Vec3d currentPos = this.entity.getPos();
             int range = 15;
             int minDistance = 8;
 
@@ -261,23 +257,13 @@ public abstract class HostileWaterCreatureEntity extends HostileEntity {
 
     public boolean isFullySubmerged() {
         double entityHeight = this.getHeight();
-        Vec3d pos = this.getEntityPos();
+        Vec3d pos = this.getPos();
 
         boolean bottomSubmerged = this.getEntityWorld().getFluidState(new BlockPos((int)pos.x, (int)pos.y, (int)pos.z)).isIn(FluidTags.WATER);
         boolean middleSubmerged = this.getEntityWorld().getFluidState(new BlockPos((int)pos.x, (int)(pos.y + entityHeight * 0.5), (int)pos.z)).isIn(FluidTags.WATER);
         boolean topSubmerged = this.getEntityWorld().getFluidState(new BlockPos((int)pos.x, (int)(pos.y + entityHeight), (int)pos.z)).isIn(FluidTags.WATER);
 
         return bottomSubmerged && middleSubmerged && topSubmerged;
-    }
-
-    @Override
-    public void writeCustomData(WriteView nbt) {
-        super.writeCustomData(nbt);
-    }
-
-    @Override
-    public void readCustomData(ReadView nbt) {
-        super.readCustomData(nbt);
     }
 
     public static class BrineSwimGoal extends Goal {

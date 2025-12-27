@@ -3,10 +3,14 @@
   "category": "equipment",
   "key": {
     "#": [
-      "earth-and-water:steel_ingot"
+      {
+        "item": "earth-and-water:steel_ingot"
+      }
     ],
     "X": [
-      "earth-and-water:bore_rod"
+      {
+        "item": "earth-and-water:bore_rod"
+      }
     ]
   },
   "pattern": [

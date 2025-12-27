@@ -13,7 +13,7 @@ import potatowolfie.earth_and_water.EarthWater;
 public class ModEffects {
     public static final RegistryEntry<StatusEffect> STUN = registerStatusEffect("stun",
             new UnderwaterStunEffect(StatusEffectCategory.HARMFUL, 0xedc466)
-                    .addAttributeModifier(EntityAttributes.MOVEMENT_SPEED,
+                    .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,
                             Identifier.of(EarthWater.MOD_ID, "underwater_stun"), -0.25f,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static final RegistryEntry<StatusEffect> BREATH_GIVING = registerStatusEffect("breath_giving",

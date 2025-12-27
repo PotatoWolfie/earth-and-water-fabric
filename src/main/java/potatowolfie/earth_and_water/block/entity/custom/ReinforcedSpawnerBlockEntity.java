@@ -15,8 +15,6 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -132,7 +130,7 @@ public class ReinforcedSpawnerBlockEntity extends BlockEntity {
         if (entityType == null) return null;
 
         if (cachedDisplayEntity == null || cachedDisplayEntity.getType() != entityType) {
-            cachedDisplayEntity = entityType.create(world, SpawnReason.SPAWNER);
+            cachedDisplayEntity = entityType.create(world);
         }
         return cachedDisplayEntity;
     }
@@ -203,12 +201,13 @@ public class ReinforcedSpawnerBlockEntity extends BlockEntity {
             double d = (double)pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.6;
             double e = (double)pos.getY() + 0.5 + (random.nextDouble() - 0.5) * 0.6;
             double f = (double)pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.6;
-            world.addParticleClient(ParticleTypes.FLAME, d, e, f, 0.0, 0.0, 0.0);
+            world.addParticle(ParticleTypes.FLAME, d, e, f, 0.0, 0.0, 0.0);
         }
 
         if (random.nextFloat() <= 0.02F) {
-            world.playSound(null, pos, SoundEvents.BLOCK_TRIAL_SPAWNER_AMBIENT,
-                    SoundCategory.BLOCKS, 1.0f, 1.0f);
+            world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                    SoundEvents.BLOCK_TRIAL_SPAWNER_AMBIENT, SoundCategory.BLOCKS,
+                    1.0f, 1.0f, false);
         }
     }
 
@@ -217,7 +216,7 @@ public class ReinforcedSpawnerBlockEntity extends BlockEntity {
             double d = (double)pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.5;
             double e = (double)pos.getY() + 0.5 + (random.nextDouble() - 0.5) * 0.5;
             double f = (double)pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.5;
-            world.addParticleClient(ParticleTypes.SMALL_FLAME, d, e, f, 0.0, 0.0, 0.0);
+            world.addParticle(ParticleTypes.SMALL_FLAME, d, e, f, 0.0, 0.0, 0.0);
         }
     }
 
@@ -394,7 +393,7 @@ public class ReinforcedSpawnerBlockEntity extends BlockEntity {
             BlockPos spawnPos = BlockPos.ofFloored(x, y, z);
 
             if (world.isSpaceEmpty(new Box(spawnPos).expand(0.5))) {
-                Entity entity = entityType.create(world, SpawnReason.SPAWNER);
+                Entity entity = entityType.create(world);
                 if (entity instanceof MobEntity mob) {
                     mob.refreshPositionAndAngles(x, y, z, random.nextFloat() * 360, 0);
                     mob.initialize(world, world.getLocalDifficulty(spawnPos),
@@ -493,89 +492,91 @@ public class ReinforcedSpawnerBlockEntity extends BlockEntity {
 
     @Override
     public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registries) {
-        return createComponentlessNbt(registries);
+        return createNbt(registries);
     }
 
     @Override
-    public void readData(ReadView readView) {
-        super.readData(readView);
+    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
+        super.readNbt(nbt, registries);
 
-        readView.getOptionalString("EntityType").ifPresent(entityTypeId -> {
-            this.entityType = Registries.ENTITY_TYPE.get(Identifier.of(entityTypeId));
-        });
+        if (nbt.contains("EntityType")) {
+            String entityTypeId = nbt.getString("EntityType");
+            this.entityType = Registries.ENTITY_TYPE.get(Identifier.tryParse(entityTypeId));
+        }
 
-        this.isActive = readView.getBoolean("Active", false);
-        this.spawnDelay = readView.getInt("SpawnDelay", 0);
-        this.rotation = readView.getDouble("Rotation", 0.0);
-        this.lastRotation = readView.getDouble("LastRotation", 0.0);
-        this.lastKeyUsageTime = 0;
-        this.wasInCooldown = readView.getBoolean("WasInCooldown", false);
+        this.isActive = nbt.getBoolean("Active");
+        this.spawnDelay = nbt.getInt("SpawnDelay");
+        this.rotation = nbt.getDouble("Rotation");
+        this.lastRotation = nbt.getDouble("LastRotation");
+        this.lastKeyUsageTime = nbt.getLong("LastKeyUsageTime");
+        this.wasInCooldown = nbt.getBoolean("WasInCooldown");
 
-        this.isWaveActive = readView.getBoolean("IsWaveActive", false);
-        this.currentWaveSize = readView.getInt("CurrentWaveSize", 0);
-        this.waveDelayCounter = readView.getInt("WaveDelayCounter", 0);
-        this.currentWaveNumber = readView.getInt("CurrentWaveNumber", 1);
+        this.isWaveActive = nbt.getBoolean("IsWaveActive");
+        this.currentWaveSize = nbt.getInt("CurrentWaveSize");
+        this.waveDelayCounter = nbt.getInt("WaveDelayCounter");
+        this.currentWaveNumber = nbt.getInt("CurrentWaveNumber");
 
-        this.pendingSpawns = readView.getInt("PendingSpawns", 0);
-        this.nextSpawnDelay = readView.getInt("NextSpawnDelay", 0);
+        this.pendingSpawns = nbt.getInt("PendingSpawns");
+        this.nextSpawnDelay = nbt.getInt("NextSpawnDelay");
 
-        this.activationParticleTimer = readView.getInt("ActivationParticleTimer", 0);
-        this.isActivating = readView.getBoolean("IsActivating", false);
-        this.waveParticleTimer = readView.getInt("WaveParticleTimer", 0);
-        this.isSpawningWave = readView.getBoolean("IsSpawningWave", false);
-        this.deactivationParticleTimer = readView.getInt("DeactivationParticleTimer", 0);
-        this.isDeactivating = readView.getBoolean("IsDeactivating", false);
+        this.activationParticleTimer = nbt.getInt("ActivationParticleTimer");
+        this.isActivating = nbt.getBoolean("IsActivating");
+        this.waveParticleTimer = nbt.getInt("WaveParticleTimer");
+        this.isSpawningWave = nbt.getBoolean("IsSpawningWave");
+        this.deactivationParticleTimer = nbt.getInt("DeactivationParticleTimer");
+        this.isDeactivating = nbt.getBoolean("IsDeactivating");
 
         this.currentWaveMobs.clear();
-        int mobCount = readView.getInt("CurrentWaveMobsCount", 0);
+        int mobCount = nbt.getInt("CurrentWaveMobsCount");
         for (int i = 0; i < mobCount; i++) {
-            readView.getOptionalString("CurrentWaveMob_" + i).ifPresent(uuidString -> {
+            String key = "CurrentWaveMob_" + i;
+            if (nbt.contains(key)) {
                 try {
-                    UUID uuid = UUID.fromString(uuidString);
+                    UUID uuid = UUID.fromString(nbt.getString(key));
                     this.currentWaveMobs.add(uuid);
                 } catch (IllegalArgumentException e) {
                 }
-            });
+            }
         }
 
         this.cachedDisplayEntity = null;
     }
 
     @Override
-    public void writeData(WriteView writeView) {
-        super.writeData(writeView);
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
+        super.writeNbt(nbt, registries);
 
         if (this.entityType != null) {
             Identifier entityTypeId = Registries.ENTITY_TYPE.getId(this.entityType);
-            writeView.putString("EntityType", entityTypeId.toString());
+            nbt.putString("EntityType", entityTypeId.toString());
         }
 
-        writeView.putBoolean("Active", this.isActive);
-        writeView.putInt("SpawnDelay", this.spawnDelay);
-        writeView.putDouble("Rotation", this.rotation);
-        writeView.putDouble("LastRotation", this.lastRotation);
-        writeView.putLong("LastKeyUsageTime", this.lastKeyUsageTime);
-        writeView.putBoolean("WasInCooldown", this.wasInCooldown);
+        nbt.putBoolean("Active", this.isActive);
+        nbt.putInt("SpawnDelay", this.spawnDelay);
+        nbt.putDouble("Rotation", this.rotation);
+        nbt.putDouble("LastRotation", this.lastRotation);
+        nbt.putLong("LastKeyUsageTime", this.lastKeyUsageTime);
+        nbt.putBoolean("WasInCooldown", this.wasInCooldown);
 
-        writeView.putBoolean("IsWaveActive", this.isWaveActive);
-        writeView.putInt("CurrentWaveSize", this.currentWaveSize);
-        writeView.putInt("WaveDelayCounter", this.waveDelayCounter);
-        writeView.putInt("CurrentWaveNumber", this.currentWaveNumber);
+        nbt.putBoolean("IsWaveActive", this.isWaveActive);
+        nbt.putInt("CurrentWaveSize", this.currentWaveSize);
+        nbt.putInt("WaveDelayCounter", this.waveDelayCounter);
+        nbt.putInt("CurrentWaveNumber", this.currentWaveNumber);
 
-        writeView.putInt("PendingSpawns", this.pendingSpawns);
-        writeView.putInt("NextSpawnDelay", this.nextSpawnDelay);
+        nbt.putInt("PendingSpawns", this.pendingSpawns);
+        nbt.putInt("NextSpawnDelay", this.nextSpawnDelay);
 
-        writeView.putInt("ActivationParticleTimer", this.activationParticleTimer);
-        writeView.putBoolean("IsActivating", this.isActivating);
-        writeView.putInt("WaveParticleTimer", this.waveParticleTimer);
-        writeView.putBoolean("IsSpawningWave", this.isSpawningWave);
-        writeView.putInt("DeactivationParticleTimer", this.deactivationParticleTimer);
-        writeView.putBoolean("IsDeactivating", this.isDeactivating);
+        nbt.putInt("ActivationParticleTimer", this.activationParticleTimer);
+        nbt.putBoolean("IsActivating", this.isActivating);
+        nbt.putInt("WaveParticleTimer", this.waveParticleTimer);
+        nbt.putBoolean("IsSpawningWave", this.isSpawningWave);
+        nbt.putInt("DeactivationParticleTimer", this.deactivationParticleTimer);
+        nbt.putBoolean("IsDeactivating", this.isDeactivating);
 
-        writeView.putInt("CurrentWaveMobsCount", this.currentWaveMobs.size());
+        nbt.putInt("CurrentWaveMobsCount", this.currentWaveMobs.size());
         int index = 0;
         for (UUID uuid : this.currentWaveMobs) {
-            writeView.putString("CurrentWaveMob_" + index, uuid.toString());
+            nbt.putString("CurrentWaveMob_" + index, uuid.toString());
             index++;
         }
     }

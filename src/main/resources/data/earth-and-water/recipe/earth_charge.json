@@ -3,7 +3,9 @@
   "category": "equipment",
   "ingredients": [
     [
-      "earth-and-water:earth_charge"
+      {
+        "item": "earth-and-water:earth_charge"
+      }
     ]
   ],
   "result": {

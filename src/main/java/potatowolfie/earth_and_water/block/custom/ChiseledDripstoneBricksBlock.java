@@ -13,7 +13,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.block.WireOrientation;
 import potatowolfie.earth_and_water.EarthWater;
 
 import java.util.List;
@@ -62,7 +61,7 @@ public class ChiseledDripstoneBricksBlock extends Block {
 
             if (entityNearby != wasPowered) {
                 world.setBlockState(pos, state.with(POWERED, entityNearby));
-                world.updateNeighborsAlways(pos, this, WireOrientation.fromOrdinal(0));
+                world.updateNeighborsAlways(pos, this);
 
                 if (entityNearby && !wasPowered) {
                     spawnParticleBurst(world, pos);
@@ -113,7 +112,7 @@ public class ChiseledDripstoneBricksBlock extends Block {
     }
 
     @Override
-    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return state.get(POWERED) ? 15 : 0;
     }
 }

@@ -4,9 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 
 public class BrineSpectatorCameraEntity extends Entity {
@@ -45,18 +43,18 @@ public class BrineSpectatorCameraEntity extends Entity {
     }
 
     @Override
-    public boolean damage(ServerWorld world, DamageSource source, float amount) {
+    protected void readCustomDataFromNbt(NbtCompound nbt) {
+
+    }
+
+    @Override
+    protected void writeCustomDataToNbt(NbtCompound nbt) {
+
+    }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
         return false;
-    }
-
-    @Override
-    protected void readCustomData(ReadView view) {
-
-    }
-
-    @Override
-    protected void writeCustomData(WriteView view) {
-
     }
 
     public void setActiveQuarter(int quarter) {

@@ -85,14 +85,14 @@ public class ConduitBlockEntityMixin {
     }
 
     @Redirect(
-            method = "findAttackTarget",
+            method = "attackHostileEntity",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/server/world/ServerWorld;getEntitiesByClass(Ljava/lang/Class;Lnet/minecraft/util/math/Box;Ljava/util/function/Predicate;)Ljava/util/List;"
+                    target = "Lnet/minecraft/world/World;getEntitiesByClass(Ljava/lang/Class;Lnet/minecraft/util/math/Box;Ljava/util/function/Predicate;)Ljava/util/List;"
             )
     )
     private static List<LivingEntity> filterConduitImmuneEntities(
-            ServerWorld world,
+            World world,
             Class<LivingEntity> entityClass,
             Box box,
             Predicate<? super LivingEntity> predicate) {

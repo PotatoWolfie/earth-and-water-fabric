@@ -8,10 +8,14 @@
   ],
   "key": {
     "D": [
-      "minecraft:pointed_dripstone"
+      {
+        "item": "minecraft:pointed_dripstone"
+      }
     ],
     "B": [
-      "minecraft:dripstone_block"
+      {
+        "item": "minecraft:dripstone_block"
+      }
     ]
   },
   "result": {

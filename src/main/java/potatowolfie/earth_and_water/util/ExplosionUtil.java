@@ -75,7 +75,7 @@ public class ExplosionUtil {
                     }
 
                     if (damage > 0.1f) {
-                        entity.damage(world, damageSource, damage);
+                        entity.damage(damageSource, damage);
                     }
 
                     double exposure = getExposure(pos, entity);
@@ -86,7 +86,7 @@ public class ExplosionUtil {
                     }
 
                     if (entity instanceof LivingEntity livingEntity) {
-                        knockbackStrength *= (1.0 - livingEntity.getAttributeValue(EntityAttributes.EXPLOSION_KNOCKBACK_RESISTANCE));
+                        knockbackStrength *= (1.0 - livingEntity.getAttributeValue(EntityAttributes.GENERIC_EXPLOSION_KNOCKBACK_RESISTANCE));
                     }
 
                     Vec3d knockback = direction.multiply(knockbackStrength);

@@ -1,6 +1,5 @@
 package potatowolfie.earth_and_water.item.custom;
 
-import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,9 +10,10 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -21,7 +21,6 @@ import potatowolfie.earth_and_water.damage.ModDamageTypes;
 import potatowolfie.earth_and_water.sound.ModSounds;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class BattleAxeItem extends AxeItem {
     private static final int DASH_COOLDOWN = 45;
@@ -30,17 +29,56 @@ public class BattleAxeItem extends AxeItem {
     private static final float MIDAIR_DASH_STRENGTH = 0.6f;
     private static final int DASH_DISTANCE = 4;
     private static final float DASH_DAMAGE = 5.0f;
+    private static final int SHIELD_DISABLE_DURATION = 100;
 
     private static final float MAX_HORIZONTAL_MULTIPLIER = 1.414f;
     private static final float MAX_VERTICAL_MULTIPLIER = 0.5f;
 
-    public BattleAxeItem(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings);
+    public BattleAxeItem(ToolMaterial toolMaterial, Settings settings) {
+        super(toolMaterial, settings);
     }
 
     @Override
-    public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        super.postHit(stack, target, attacker);
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        tooltip.add(Text.translatable("tooltip.earth-and-water.tooltipempty"));
+        tooltip.add(Text.translatable("tooltip.earth-and-water.battle_axe.tooltip1"));
+        tooltip.add(Text.translatable("tooltip.earth-and-water.battle_axe.tooltip2"));
+        super.appendTooltip(stack, context, tooltip, type);
+    }
+
+    @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (target.isBlocking()) {
+            boolean isCriticalHit = false;
+
+            if (attacker instanceof PlayerEntity playerAttacker) {
+                isCriticalHit = playerAttacker.getVelocity().y < 0
+                        && !playerAttacker.isOnGround()
+                        && !playerAttacker.hasStatusEffect(net.minecraft.entity.effect.StatusEffects.BLINDNESS)
+                        && !playerAttacker.isTouchingWater()
+                        && !playerAttacker.getAbilities().flying;
+            }
+
+            if (isCriticalHit) {
+                target.getWorld().playSound(null,
+                        target.getX(), target.getY(), target.getZ(),
+                        SoundEvents.ITEM_SHIELD_BREAK,
+                        SoundCategory.PLAYERS,
+                        0.8F,
+                        0.8F + target.getWorld().getRandom().nextFloat() * 0.4F);
+
+                if (target instanceof PlayerEntity playerTarget) {
+                    ItemStack shieldStack = playerTarget.getActiveItem();
+                    if (shieldStack.getItem() instanceof ShieldItem || shieldStack.getItem() instanceof SpikedShieldItem) {
+                        playerTarget.getItemCooldownManager().set(shieldStack.getItem(), SHIELD_DISABLE_DURATION);
+                        playerTarget.clearActiveItem();
+                        playerTarget.getWorld().sendEntityStatus(playerTarget, (byte)30);
+                    }
+                }
+            }
+        }
+
+        return super.postHit(stack, target, attacker);
     }
 
     private float calculateHorizontalAngleMultiplier(Vec3d lookVec) {
@@ -84,14 +122,14 @@ public class BattleAxeItem extends AxeItem {
     }
 
     @Override
-    public ActionResult use(World world, PlayerEntity player, Hand hand) {
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
 
-        if (player.getItemCooldownManager().isCoolingDown(itemStack)) {
-            return ActionResult.PASS;
+        if (player.getItemCooldownManager().isCoolingDown(this)) {
+            return TypedActionResult.pass(itemStack);
         }
 
-        if (!world.isClient() && world instanceof ServerWorld serverWorld) {
+        if (!world.isClient && world instanceof ServerWorld serverWorld) {
             Vec3d lookVec = player.getRotationVector();
             boolean isInAir = !player.isOnGround();
 
@@ -122,12 +160,12 @@ public class BattleAxeItem extends AxeItem {
             );
 
             player.setVelocity(dashVec);
-            player.velocityDirty = true;
+            player.velocityModified = true;
             if (player instanceof ServerPlayerEntity serverPlayer) {
                 serverPlayer.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(player));
             }
 
-            Vec3d playerPos = player.getEntityPos();
+            Vec3d playerPos = player.getPos();
             Vec3d dashEnd = playerPos.add(dashVec.multiply(DASH_DISTANCE));
             Box collisionBox = new Box(
                     Math.min(playerPos.x, dashEnd.x) - 1,
@@ -149,11 +187,11 @@ public class BattleAxeItem extends AxeItem {
             for (LivingEntity entity : entities) {
                 DamageSource battleAxeDamage = new DamageSource(
                         world.getRegistryManager()
-                                .getOrThrow(RegistryKeys.DAMAGE_TYPE)
-                                .getEntry(ModDamageTypes.BATTLE_AXE.getValue()).get(),
+                                .get(RegistryKeys.DAMAGE_TYPE)
+                                .entryOf(ModDamageTypes.BATTLE_AXE),
                         player
                 );
-                entity.damage(serverWorld, battleAxeDamage, DASH_DAMAGE);
+                entity.damage(battleAxeDamage, DASH_DAMAGE);
                 entity.takeKnockback(0.5, -lookVec.x, -lookVec.z);
                 hitAnyMob = true;
             }
@@ -168,17 +206,9 @@ public class BattleAxeItem extends AxeItem {
             );
 
             int cooldown = player.getAbilities().creativeMode ? CREATIVE_DASH_COOLDOWN : DASH_COOLDOWN;
-            player.getItemCooldownManager().set(itemStack, cooldown);
+            player.getItemCooldownManager().set(this, cooldown);
         }
 
-        return ActionResult.SUCCESS;
-    }
-
-    @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.battle_axe.tooltip1"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.battle_axe.tooltip2"));
-        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+        return TypedActionResult.success(itemStack);
     }
 }

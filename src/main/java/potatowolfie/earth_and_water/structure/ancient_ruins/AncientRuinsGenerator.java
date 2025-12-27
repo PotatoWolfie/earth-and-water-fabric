@@ -7,6 +7,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -512,12 +513,12 @@ public class AncientRuinsGenerator {
                     nbt,
                     manager,
                     (identifier) -> createPlacementData(
-                            nbt.get("Rot", BlockRotation.CODEC).orElse(BlockRotation.NONE)
+                            BlockRotation.CODEC.parse(NbtOps.INSTANCE, nbt.get("Rot")).result().orElse(BlockRotation.NONE)
                     )
             );
-            this.centerIndex = nbt.getInt("CenterIndex").orElse(-1);
-            this.statueIndex = nbt.getInt("StatueIndex").orElse(-1);
-            this.pieceType = PieceType.valueOf(nbt.getString("PieceType", "RUIN"));
+            this.centerIndex = nbt.getInt("CenterIndex");
+            this.statueIndex = nbt.getInt("StatueIndex");
+            this.pieceType = PieceType.valueOf(nbt.getString("PieceType"));
         }
 
         private static StructurePlacementData createPlacementData(BlockRotation rotation) {
@@ -529,7 +530,9 @@ public class AncientRuinsGenerator {
 
         protected void writeNbt(StructureContext context, NbtCompound nbt) {
             super.writeNbt(context, nbt);
-            nbt.put("Rot", BlockRotation.CODEC, this.placementData.getRotation());
+            BlockRotation.CODEC.encodeStart(NbtOps.INSTANCE, this.placementData.getRotation())
+                    .result()
+                    .ifPresent(encoded -> nbt.put("Rot", encoded));
             nbt.putInt("CenterIndex", this.centerIndex);
             nbt.putInt("StatueIndex", this.statueIndex);
             nbt.putString("PieceType", this.pieceType.name());
@@ -654,10 +657,10 @@ public class AncientRuinsGenerator {
         ) {
             super.generate(world, structureAccessor, chunkGenerator, random, chunkBox, chunkPos, pivot);
 
-            this.template.getInfosForBlock(this.pos, this.placementData, Blocks.STRUCTURE_BLOCK, false)
+            this.template.getInfosForBlock(this.pos, this.placementData, Blocks.STRUCTURE_BLOCK)
                     .forEach(structureBlockInfo -> {
                         if (structureBlockInfo.nbt() != null) {
-                            String metadata = structureBlockInfo.nbt().getString("metadata", "");
+                            String metadata = structureBlockInfo.nbt().getString("metadata");
                             if (!metadata.isEmpty()) {
                                 this.handleMetadata(
                                         metadata,

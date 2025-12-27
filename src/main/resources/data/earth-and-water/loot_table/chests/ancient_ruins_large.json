@@ -27,8 +27,9 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:copper_pickaxe",
-          "weight": 1
+          "name": "minecraft:golden_pickaxe",
+          "weight": 1,
+          "conditions": []
         }
       ],
       "conditions": [

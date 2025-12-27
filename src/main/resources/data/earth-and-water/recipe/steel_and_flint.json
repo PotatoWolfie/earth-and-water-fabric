@@ -3,10 +3,14 @@
   "category": "equipment",
   "ingredients": [
     [
-      "earth-and-water:steel_ingot"
+      {
+        "item": "earth-and-water:steel_ingot"
+      }
     ],
     [
-      "minecraft:flint"
+      {
+        "item": "minecraft:flint"
+      }
     ]
   ],
   "result": {

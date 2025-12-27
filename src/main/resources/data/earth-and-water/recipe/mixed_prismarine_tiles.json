@@ -4,10 +4,14 @@
   "group": "mixed_prismarine_tiles",
   "key": {
     "#": [
-      "earth-and-water:prismarine_tiles"
+      {
+        "item": "earth-and-water:prismarine_tiles"
+      }
     ],
     "X": [
-      "minecraft:dark_prismarine"
+      {
+        "item": "minecraft:dark_prismarine"
+      }
     ]
   },
   "pattern": [

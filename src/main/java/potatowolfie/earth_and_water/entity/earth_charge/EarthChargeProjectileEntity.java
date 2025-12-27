@@ -36,13 +36,14 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
     }
 
     public EarthChargeProjectileEntity(World world, PlayerEntity player) {
-        super(ModEntities.EARTH_CHARGE, player, world, new ItemStack(ModItems.EARTH_CHARGE), null);
+        super(ModEntities.EARTH_CHARGE, world);
+        this.setOwner(player);
         this.setPosition(player.getX(), player.getEyeY() - 0.3, player.getZ());
         this.setPitch(0);
         this.setYaw(player.getYaw());
 
         Vec3d velocity = player.getRotationVector().multiply(1.0);
-        this.setVelocityClient(velocity);
+        this.setVelocity(velocity);
 
         this.setNoGravity(false);
     }
@@ -71,7 +72,7 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
     }
 
     public boolean isGrounded() {
-        return this.isInGround();
+        return this.inGround;
     }
 
     private void applyDirectHitDamage(Entity hitEntity) {
@@ -79,15 +80,15 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
             if (this.getEntityWorld() instanceof ServerWorld serverWorld) {
                 DamageSource earthChargeDamage = new DamageSource(
                         serverWorld.getRegistryManager()
-                                .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                                .get(RegistryKeys.DAMAGE_TYPE)
                                 .getEntry(ModDamageTypes.EARTH_CHARGE.getValue()).get(),
                         this,
                         this.getOwner()
                 );
-                livingEntity.damage(serverWorld, earthChargeDamage, 12.0f);
+                livingEntity.damage(earthChargeDamage, 12.0f);
             }
 
-            Vec3d knockbackDir = hitEntity.getEntityPos().subtract(this.getEntityPos()).normalize();
+            Vec3d knockbackDir = hitEntity.getPos().subtract(this.getPos()).normalize();
             if (knockbackDir.lengthSquared() < 0.001) {
                 knockbackDir = new Vec3d(0, 1, 0);
             }
@@ -103,13 +104,13 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
 
     private void applyAreaDamageExcluding(Entity excludedEntity) {
         World world = this.getEntityWorld();
-        Vec3d pos = this.getEntityPos();
+        Vec3d pos = this.getPos();
 
         if (!world.isClient()) {
             if (world instanceof ServerWorld serverWorld) {
                 DamageSource earthChargeDamage = new DamageSource(
                         serverWorld.getRegistryManager()
-                                .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                                .get(RegistryKeys.DAMAGE_TYPE)
                                 .getEntry(ModDamageTypes.EARTH_CHARGE.getValue()).get(),
                         this,
                         this.getOwner()
@@ -131,7 +132,7 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
 
     private void createExplosionEffects() {
         World world = this.getEntityWorld();
-        Vec3d pos = this.getEntityPos();
+        Vec3d pos = this.getPos();
 
         world.playSound(null, pos.x, pos.y, pos.z,
                 SoundEvents.BLOCK_POINTED_DRIPSTONE_LAND,
@@ -140,7 +141,7 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
         if (!world.isClient() && world instanceof ServerWorld serverWorld) {
             DamageSource waterChargeDamage = new DamageSource(
                     serverWorld.getRegistryManager()
-                            .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                            .get(RegistryKeys.DAMAGE_TYPE)
                             .getEntry(ModDamageTypes.WATER_CHARGE.getValue()).get(),
                     this,
                     this.getOwner()
@@ -148,7 +149,7 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
 
             ExplosionUtil.createSilentExplosion(
                     serverWorld,
-                    this.getEntityPos(),
+                    this.getPos(),
                     3.0f,
                     this,
                     null,
@@ -231,7 +232,7 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
 
         super.tick();
 
-        if (!this.isInGround()) {
+        if (!this.inGround) {
             Vec3d velocity = this.getVelocity();
             double length = velocity.length();
             if (length < 0.5 && (Math.abs(velocity.x) > 0.01 || Math.abs(velocity.z) > 0.01)) {
@@ -247,8 +248,8 @@ public class EarthChargeProjectileEntity extends PersistentProjectileEntity {
             }
         }
 
-        if (this.getEntityWorld().isClient() && !this.isInGround()) {
-            this.getEntityWorld().addParticleClient(
+        if (this.getEntityWorld().isClient() && !this.inGround) {
+            this.getEntityWorld().addParticle(
                     ParticleTypes.SMOKE,
                     this.getX(), this.getY(), this.getZ(),
                     0, 0, 0);

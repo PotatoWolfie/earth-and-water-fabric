@@ -3,13 +3,19 @@
   "category": "misc",
   "key": {
     "#": [
-      "minecraft:diamond"
+      {
+        "item": "minecraft:diamond"
+      }
     ],
     "C": [
-      "minecraft:prismarine"
+      {
+        "item": "minecraft:prismarine"
+      }
     ],
     "S": [
-      "earth-and-water:guard_armor_trim_smithing_template"
+      {
+        "item": "earth-and-water:guard_armor_trim_smithing_template"
+      }
     ]
   },
   "pattern": [

@@ -28,61 +28,45 @@ public class ModBlocks {
                             .requiresTool()
                             .strength(5.0F, 6.0F)
                             .sounds(BlockSoundGroup.METAL)
-                            .registryKey(createBlockRegistryKey("steel_block"))
             ));
 
     public static final Block DRIPSTONE_PILLAR = registerBlock("dripstone_pillar",
-            new PillarBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("dripstone_pillar"))));
+            new PillarBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block DARK_DRIPSTONE_PILLAR = registerBlock("dark_dripstone_pillar",
             new PillarBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.DRIPSTONE_BLOCK)
-                    .strength(4f).requiresTool()
-                    .registryKey(createBlockRegistryKey("dark_dripstone_pillar"))));
+                    .strength(4f).requiresTool()));
     public static final Block DARK_PRISMARINE_PILLAR = registerBlock("dark_prismarine_pillar",
-            new PillarBlock(AbstractBlock.Settings.copy(DARK_PRISMARINE)
-                    .registryKey(createBlockRegistryKey("dark_prismarine_pillar"))));
+            new PillarBlock(AbstractBlock.Settings.copy(DARK_PRISMARINE)));
     public static final Block PRISMARINE_PILLAR = registerBlock("prismarine_pillar",
-            new PillarBlock(AbstractBlock.Settings.copy(PRISMARINE)
-                    .registryKey(createBlockRegistryKey("prismarine_pillar"))));
+            new PillarBlock(AbstractBlock.Settings.copy(PRISMARINE)));
 
     public static final Block DRIPSTONE_BRICKS = registerBlock("dripstone_bricks",
-            new Block(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("dripstone_bricks"))));
+            new Block(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block DRIPSTONE_BRICK_STAIRS = registerBlock("dripstone_brick_stairs",
             new StairsBlock(ModBlocks.DRIPSTONE_BRICKS.getDefaultState(),
-                    AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                            .registryKey(createBlockRegistryKey("dripstone_brick_stairs"))));
+                    AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block DRIPSTONE_BRICK_SLAB = registerBlock("dripstone_brick_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("dripstone_brick_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block DRIPSTONE_BRICK_WALL = registerBlock("dripstone_brick_wall",
-            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("dripstone_brick_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
 
     public static final Block POLISHED_DRIPSTONE = registerBlock("polished_dripstone",
-            new Block(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("polished_dripstone"))));
+            new Block(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block POLISHED_DRIPSTONE_STAIRS = registerBlock("polished_dripstone_stairs",
             new StairsBlock(ModBlocks.POLISHED_DRIPSTONE.getDefaultState(),
-                    AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                            .registryKey(createBlockRegistryKey("polished_dripstone_stairs"))));
+                    AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block POLISHED_DRIPSTONE_SLAB = registerBlock("polished_dripstone_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("polished_dripstone_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block POLISHED_DRIPSTONE_WALL = registerBlock("polished_dripstone_wall",
-            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("polished_dripstone_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
 
     public static final Block DRIPSTONE_STAIRS = registerBlock("dripstone_stairs",
             new StairsBlock(Blocks.DRIPSTONE_BLOCK.getDefaultState(),
-                    AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                            .registryKey(createBlockRegistryKey("dripstone_stairs"))));
+                    AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block DRIPSTONE_SLAB = registerBlock("dripstone_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("dripstone_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block DRIPSTONE_WALL = registerBlock("dripstone_wall",
-            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("dripstone_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
 
     public static final Block CHISELED_DRIPSTONE_BRICKS = registerBlock("chiseled_dripstone_bricks",
             new ChiseledDripstoneBricksBlock(AbstractBlock.Settings.create()
@@ -91,58 +75,44 @@ public class ModBlocks {
                     .sounds(BlockSoundGroup.DRIPSTONE_BLOCK)
                     .requiresTool()
                     .strength(1.5F, 1.0F)
-                    .luminance(state -> state.get(ChiseledDripstoneBricksBlock.POWERED) ? 12 : 0)
-                    .registryKey(createBlockRegistryKey("chiseled_dripstone_bricks"))));
+                    .luminance(state -> state.get(ChiseledDripstoneBricksBlock.POWERED) ? 12 : 0)));
     public static final Block CHISELED_DARK_DRIPSTONE_BRICKS = registerBlock("chiseled_dark_dripstone_bricks",
             new ChiseledDarkDripstoneBricksBlock(AbstractBlock.Settings.create()
                     .mapColor(MapColor.DIAMOND_BLUE)
                     .instrument(NoteBlockInstrument.BASEDRUM)
                     .requiresTool()
                     .strength(1.5F, 6.0F)
-                    .luminance(state -> state.get(ChiseledDarkDripstoneBricksBlock.POWERED) ? 12 : 0)
-                    .registryKey(createBlockRegistryKey("chiseled_dark_dripstone_bricks"))));
+                    .luminance(state -> state.get(ChiseledDarkDripstoneBricksBlock.POWERED) ? 12 : 0)));
 
     public static final Block DARK_DRIPSTONE_BLOCK = registerBlock("dark_dripstone_block",
-            new Block(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("dark_dripstone_block"))));
+            new Block(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block DARK_DRIPSTONE_STAIRS = registerBlock("dark_dripstone_stairs",
             new StairsBlock(ModBlocks.DARK_DRIPSTONE_BLOCK.getDefaultState(),
-                    AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                            .registryKey(createBlockRegistryKey("dark_dripstone_stairs"))));
+                    AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block DARK_DRIPSTONE_SLAB = registerBlock("dark_dripstone_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("dark_dripstone_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
     public static final Block DARK_DRIPSTONE_WALL = registerBlock("dark_dripstone_wall",
-            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)
-                    .registryKey(createBlockRegistryKey("dark_dripstone_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BLOCK)));
 
     public static final Block POLISHED_DARK_DRIPSTONE = registerBlock("polished_dark_dripstone",
-            new Block(AbstractBlock.Settings.copy(POLISHED_DRIPSTONE)
-                    .registryKey(createBlockRegistryKey("polished_dark_dripstone"))));
+            new Block(AbstractBlock.Settings.copy(POLISHED_DRIPSTONE)));
     public static final Block POLISHED_DARK_DRIPSTONE_STAIRS = registerBlock("polished_dark_dripstone_stairs",
             new StairsBlock(ModBlocks.POLISHED_DARK_DRIPSTONE.getDefaultState(),
-                    AbstractBlock.Settings.copy(POLISHED_DRIPSTONE)
-                            .registryKey(createBlockRegistryKey("polished_dark_dripstone_stairs"))));
+                    AbstractBlock.Settings.copy(POLISHED_DRIPSTONE)));
     public static final Block POLISHED_DARK_DRIPSTONE_SLAB = registerBlock("polished_dark_dripstone_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(POLISHED_DRIPSTONE)
-                    .registryKey(createBlockRegistryKey("polished_dark_dripstone_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(POLISHED_DRIPSTONE)));
     public static final Block POLISHED_DARK_DRIPSTONE_WALL = registerBlock("polished_dark_dripstone_wall",
-            new WallBlock(AbstractBlock.Settings.copy(POLISHED_DRIPSTONE)
-                    .registryKey(createBlockRegistryKey("polished_dark_dripstone_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(POLISHED_DRIPSTONE)));
 
     public static final Block DARK_DRIPSTONE_BRICKS = registerBlock("dark_dripstone_bricks",
-            new Block(AbstractBlock.Settings.copy(DRIPSTONE_BRICKS)
-                    .registryKey(createBlockRegistryKey("dark_dripstone_bricks"))));
+            new Block(AbstractBlock.Settings.copy(DRIPSTONE_BRICKS)));
     public static final Block DARK_DRIPSTONE_BRICK_STAIRS = registerBlock("dark_dripstone_brick_stairs",
             new StairsBlock(ModBlocks.DARK_DRIPSTONE_BRICKS.getDefaultState(),
-                    AbstractBlock.Settings.copy(DRIPSTONE_BRICKS)
-                            .registryKey(createBlockRegistryKey("dark_dripstone_brick_stairs"))));
+                    AbstractBlock.Settings.copy(DRIPSTONE_BRICKS)));
     public static final Block DARK_DRIPSTONE_BRICK_SLAB = registerBlock("dark_dripstone_brick_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BRICKS)
-                    .registryKey(createBlockRegistryKey("dark_dripstone_brick_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(DRIPSTONE_BRICKS)));
     public static final Block DARK_DRIPSTONE_BRICK_WALL = registerBlock("dark_dripstone_brick_wall",
-            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BRICKS)
-                    .registryKey(createBlockRegistryKey("dark_dripstone_brick_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(DRIPSTONE_BRICKS)));
 
     public static final Block POINTED_DARK_DRIPSTONE = registerBlock("pointed_dark_dripstone",
             new PointedDarkDripstoneBlock(AbstractBlock.Settings.create()
@@ -157,87 +127,63 @@ public class ModBlocks {
                     .dynamicBounds()
                     .offset(AbstractBlock.OffsetType.XZ)
                     .pistonBehavior(PistonBehavior.DESTROY)
-                    .solidBlock(Blocks::never)
-                    .registryKey(createBlockRegistryKey("pointed_dark_dripstone"))));
+                    .solidBlock(Blocks::never)));
 
     public static final Block CHISELED_PRISMARINE_BRICKS = registerBlock("chiseled_prismarine_bricks",
             new ChiseledPrismarineBricksBlock(AbstractBlock.Settings.create().mapColor(MapColor.CYAN)
                     .instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(1.5F, 6.0F)
-                    .luminance(state -> state.get(ChiseledPrismarineBricksBlock.ACTIVE) ? 12 : 0)
-                    .registryKey(createBlockRegistryKey("chiseled_prismarine_bricks"))));
+                    .luminance(state -> state.get(ChiseledPrismarineBricksBlock.ACTIVE) ? 12 : 0)));
     public static final Block PRISMARINE_TILES = registerBlock("prismarine_tiles",
-            new Block(AbstractBlock.Settings.copy(PRISMARINE)
-                    .registryKey(createBlockRegistryKey("prismarine_tiles"))));
+            new Block(AbstractBlock.Settings.copy(PRISMARINE)));
     public static final Block PRISMARINE_TILE_STAIRS = registerBlock("prismarine_tile_stairs",
             new StairsBlock(ModBlocks.PRISMARINE_TILES.getDefaultState(),
-                    AbstractBlock.Settings.copy(PRISMARINE)
-                            .registryKey(createBlockRegistryKey("prismarine_tile_stairs"))));
+                    AbstractBlock.Settings.copy(PRISMARINE)));
     public static final Block PRISMARINE_TILE_SLAB = registerBlock("prismarine_tile_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(PRISMARINE)
-                    .registryKey(createBlockRegistryKey("prismarine_tile_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(PRISMARINE)));
     public static final Block PRISMARINE_TILE_WALL = registerBlock("prismarine_tile_wall",
-            new WallBlock(AbstractBlock.Settings.copy(PRISMARINE)
-                    .registryKey(createBlockRegistryKey("prismarine_tile_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(PRISMARINE)));
 
     public static final Block MIXED_PRISMARINE_TILES = registerBlock("mixed_prismarine_tiles",
-            new Block(AbstractBlock.Settings.copy(PRISMARINE)
-                    .registryKey(createBlockRegistryKey("mixed_prismarine_tiles"))));
+            new Block(AbstractBlock.Settings.copy(PRISMARINE)));
     public static final Block POLISHED_DRIPSTONE_TILES = registerBlock("polished_dripstone_tiles",
-            new Block(AbstractBlock.Settings.copy(POLISHED_DARK_DRIPSTONE)
-                    .registryKey(createBlockRegistryKey("polished_dripstone_tiles"))));
+            new Block(AbstractBlock.Settings.copy(POLISHED_DARK_DRIPSTONE)));
     public static final Block CHISELED_DARK_PRISMARINE = registerBlock("chiseled_dark_prismarine",
             new ChiseledDarkPrismarineBlock(AbstractBlock.Settings.create().mapColor(MapColor.DIAMOND_BLUE)
-                    .instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(1.5F, 6.0F)
-                    .registryKey(createBlockRegistryKey("chiseled_dark_prismarine"))));
+                    .instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(1.5F, 6.0F)));
     public static final Block DARK_PRISMARINE_WALL = registerBlock("dark_prismarine_wall",
-            new WallBlock(AbstractBlock.Settings.copy(DARK_PRISMARINE)
-                    .registryKey(createBlockRegistryKey("dark_prismarine_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(DARK_PRISMARINE)));
 
     public static final Block LIMESTONE = registerBlock("limestone",
-            new Block(AbstractBlock.Settings.copy(TUFF)
-                    .registryKey(createBlockRegistryKey("limestone"))));
+            new Block(AbstractBlock.Settings.copy(TUFF)));
     public static final Block LIMESTONE_STAIRS = registerBlock("limestone_stairs",
             new StairsBlock(ModBlocks.LIMESTONE.getDefaultState(),
-                    AbstractBlock.Settings.copy(TUFF)
-                            .registryKey(createBlockRegistryKey("limestone_stairs"))));
+                    AbstractBlock.Settings.copy(TUFF)));
     public static final Block LIMESTONE_SLAB = registerBlock("limestone_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(TUFF)
-                    .registryKey(createBlockRegistryKey("limestone_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(TUFF)));
     public static final Block LIMESTONE_WALL = registerBlock("limestone_wall",
-            new WallBlock(AbstractBlock.Settings.copy(TUFF)
-                    .registryKey(createBlockRegistryKey("limestone_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(TUFF)));
     public static final Block POLISHED_LIMESTONE = registerBlock("polished_limestone",
-            new Block(AbstractBlock.Settings.copy(POLISHED_TUFF)
-                    .registryKey(createBlockRegistryKey("polished_limestone"))));
+            new Block(AbstractBlock.Settings.copy(POLISHED_TUFF)));
     public static final Block POLISHED_LIMESTONE_STAIRS = registerBlock("polished_limestone_stairs",
             new StairsBlock(ModBlocks.POLISHED_LIMESTONE.getDefaultState(),
-                    AbstractBlock.Settings.copy(POLISHED_TUFF)
-                            .registryKey(createBlockRegistryKey("polished_limestone_stairs"))));
+                    AbstractBlock.Settings.copy(POLISHED_TUFF)));
     public static final Block POLISHED_LIMESTONE_SLAB = registerBlock("polished_limestone_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(POLISHED_TUFF)
-                    .registryKey(createBlockRegistryKey("polished_limestone_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(POLISHED_TUFF)));
     public static final Block POLISHED_LIMESTONE_WALL = registerBlock("polished_limestone_wall",
-            new WallBlock(AbstractBlock.Settings.copy(POLISHED_TUFF)
-                    .registryKey(createBlockRegistryKey("polished_limestone_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(POLISHED_TUFF)));
     public static final Block LIMESTONE_BRICKS = registerBlock("limestone_bricks",
-            new Block(AbstractBlock.Settings.copy(TUFF_BRICKS)
-                    .registryKey(createBlockRegistryKey("limestone_bricks"))));
+            new Block(AbstractBlock.Settings.copy(TUFF_BRICKS)));
     public static final Block LIMESTONE_BRICK_STAIRS = registerBlock("limestone_brick_stairs",
             new StairsBlock(ModBlocks.LIMESTONE_BRICKS.getDefaultState(),
-                    AbstractBlock.Settings.copy(TUFF_BRICKS)
-                            .registryKey(createBlockRegistryKey("limestone_brick_stairs"))));
+                    AbstractBlock.Settings.copy(TUFF_BRICKS)));
     public static final Block LIMESTONE_BRICK_SLAB = registerBlock("limestone_brick_slab",
-            new SlabBlock(AbstractBlock.Settings.copy(TUFF_BRICKS)
-                    .registryKey(createBlockRegistryKey("limestone_brick_slab"))));
+            new SlabBlock(AbstractBlock.Settings.copy(TUFF_BRICKS)));
     public static final Block LIMESTONE_BRICK_WALL = registerBlock("limestone_brick_wall",
-            new WallBlock(AbstractBlock.Settings.copy(TUFF_BRICKS)
-                    .registryKey(createBlockRegistryKey("limestone_brick_wall"))));
+            new WallBlock(AbstractBlock.Settings.copy(TUFF_BRICKS)));
     public static final Block LIMESTONE_PILLAR = registerBlock("limestone_pillar",
-            new PillarBlock(AbstractBlock.Settings.copy(LIMESTONE)
-                    .registryKey(createBlockRegistryKey("limestone_pillar"))));
+            new PillarBlock(AbstractBlock.Settings.copy(LIMESTONE)));
     public static final Block CHISELED_LIMESTONE_BRICKS = registerBlock("chiseled_limestone_bricks",
-            new Block(AbstractBlock.Settings.copy(LIMESTONE_BRICKS)
-                    .registryKey(createBlockRegistryKey("chiseled_limestone_bricks"))));
+            new Block(AbstractBlock.Settings.copy(LIMESTONE_BRICKS)));
 
     public static final Block OXYGEN_BLOCK = registerBlock("oxygen_block",
             new OxygenBlock(AbstractBlock.Settings.create()
@@ -248,8 +194,7 @@ public class ModBlocks {
                     .strength(0.5F)
                     .allowsSpawning((state, world, pos, entityType) -> entityType.isFireImmune())
                     .postProcess(Blocks::always)
-                    .emissiveLighting(Blocks::always)
-                    .registryKey(createBlockRegistryKey("oxygen_block"))));
+                    .emissiveLighting(Blocks::always)));
 
     public static final Block OXYGEN_BUBBLE = registerBlock("oxygen_bubble",
             new OxygenBubbleBlock(AbstractBlock.Settings.create()
@@ -259,8 +204,7 @@ public class ModBlocks {
                     .dropsNothing()
                     .pistonBehavior(PistonBehavior.DESTROY)
                     .liquid()
-                    .sounds(BlockSoundGroup.INTENTIONALLY_EMPTY)
-                    .registryKey(createBlockRegistryKey("oxygen_bubble"))));
+                    .sounds(BlockSoundGroup.INTENTIONALLY_EMPTY)));
 
     public static final Block REINFORCED_SPAWNER = registerBlock("reinforced_spawner",
             new ReinforcedSpawnerBlock(AbstractBlock.Settings.create()
@@ -272,7 +216,6 @@ public class ModBlocks {
                     .nonOpaque()
                     .pistonBehavior(PistonBehavior.BLOCK)
                     .luminance(state -> state.get(ReinforcedSpawnerBlock.ACTIVE) ? 4 : 0)
-                    .registryKey(createBlockRegistryKey("reinforced_spawner"))
             )
     );
 
@@ -286,7 +229,7 @@ public class ModBlocks {
     }
 
     private static void customBuildingBlocks(FabricItemGroupEntries entries) {
-        entries.addBefore(IRON_CHAIN, STEEL_BLOCK);
+        entries.addBefore(CHAIN, STEEL_BLOCK);
         entries.addAfter(CHISELED_TUFF_BRICKS, DRIPSTONE_BLOCK);
         entries.addAfter(DRIPSTONE_BLOCK, DRIPSTONE_STAIRS);
         entries.addAfter(DRIPSTONE_STAIRS, DRIPSTONE_SLAB);
@@ -354,11 +297,8 @@ public class ModBlocks {
     }
 
     private static void registerBlockItem(String name, Block block) {
-        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(EarthWater.MOD_ID, name));
-        Registry.register(Registries.ITEM, itemKey,
-                new BlockItem(block, new Item.Settings()
-                        .useBlockPrefixedTranslationKey()
-                        .registryKey(itemKey)));
+        Registry.register(Registries.ITEM, Identifier.of(EarthWater.MOD_ID, name),
+                new BlockItem(block, new Item.Settings()));
     }
 
     public static void registerModBlocks () {

@@ -13,9 +13,8 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -75,9 +74,9 @@ public class BrineEntity extends HostileWaterCreatureEntity {
 
     public static DefaultAttributeContainer.Builder createBrineAttributes() {
         return WaterCreatureEntity.createMobAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 30.0D)
-                .add(EntityAttributes.ATTACK_DAMAGE, 6.0D)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.23000000417232513);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 30.0D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23000000417232513);
     }
 
     @Override
@@ -201,7 +200,7 @@ public class BrineEntity extends HostileWaterCreatureEntity {
         }
 
         private void chooseWaterTarget() {
-            Vec3d currentPos = this.brine.getEntityPos();
+            Vec3d currentPos = this.brine.getPos();
             int range = 15;
             int minDistance = 7;
 
@@ -350,7 +349,7 @@ public class BrineEntity extends HostileWaterCreatureEntity {
                 this.brine.setYaw(this.wrapDegrees(this.brine.getYaw(), h, 90.0F));
                 this.brine.bodyYaw = this.brine.getYaw();
 
-                float i = (float)(this.speed * this.brine.getAttributeValue(EntityAttributes.MOVEMENT_SPEED));
+                float i = (float)(this.speed * this.brine.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
                 float j = MathHelper.lerp(0.125F, this.brine.getMovementSpeed(), i);
                 this.brine.setMovementSpeed(j);
 
@@ -719,7 +718,7 @@ public class BrineEntity extends HostileWaterCreatureEntity {
             this.brine.setYaw(this.wrapDegrees(this.brine.getYaw(), targetYaw, 90.0F));
             this.brine.bodyYaw = this.brine.getYaw();
 
-            float baseSpeed = (float)(this.speed * this.brine.getAttributeValue(EntityAttributes.MOVEMENT_SPEED));
+            float baseSpeed = (float)(this.speed * this.brine.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
             float lerpedSpeed = MathHelper.lerp(0.125F, this.brine.getMovementSpeed(), baseSpeed);
             this.brine.setMovementSpeed(lerpedSpeed);
 
@@ -808,7 +807,7 @@ public class BrineEntity extends HostileWaterCreatureEntity {
         }
 
         private void pickNewTarget() {
-            Vec3d pos = this.brine.getEntityPos();
+            Vec3d pos = this.brine.getPos();
             int range = 15;
 
             for (int i = 0; i < 30; i++) {
@@ -856,7 +855,7 @@ public class BrineEntity extends HostileWaterCreatureEntity {
 
     private void updateMovementTracking() {
         if (lastShootPosition != null) {
-            Vec3d currentPos = this.getEntityPos();
+            Vec3d currentPos = this.getPos();
             if (currentPos != null) {
                 double distanceMoved = currentPos.distanceTo(lastShootPosition);
 
@@ -913,8 +912,8 @@ public class BrineEntity extends HostileWaterCreatureEntity {
 
             Vec3d avoidanceDirection = Vec3d.ZERO;
             for (WaterChargeProjectileEntity projectile : projectiles) {
-                if (projectile != null && projectile.getEntityPos() != null) {
-                    Vec3d directionAway = this.getEntityPos().subtract(projectile.getEntityPos()).normalize();
+                if (projectile != null && projectile.getPos() != null) {
+                    Vec3d directionAway = this.getPos().subtract(projectile.getPos()).normalize();
                     double weight = (projectile.getOwner() instanceof BrineEntity) ? 1.5 : 1.0;
                     avoidanceDirection = avoidanceDirection.add(directionAway.multiply(weight));
                 }
@@ -952,7 +951,7 @@ public class BrineEntity extends HostileWaterCreatureEntity {
 
         shootCooldown = 40 + this.random.nextInt(20);
         this.setBrineState(BrineState.SHOOTING);
-        lastShootPosition = this.getEntityPos();
+        lastShootPosition = this.getPos();
         hasMovedEnoughToShoot = false;
         shootingDelay = 5 + this.random.nextInt(10);
     }
@@ -964,7 +963,7 @@ public class BrineEntity extends HostileWaterCreatureEntity {
         Vec3d targetPos = predictTargetPosition(target);
         if (targetPos == null) return;
 
-        Vec3d direction = targetPos.subtract(this.getEntityPos()).normalize();
+        Vec3d direction = targetPos.subtract(this.getPos()).normalize();
 
         try {
             WaterChargeProjectileEntity charge = new WaterChargeProjectileEntity(ModEntities.WATER_CHARGE, this.getEntityWorld());
@@ -978,7 +977,7 @@ public class BrineEntity extends HostileWaterCreatureEntity {
 
     private Vec3d predictTargetPosition(LivingEntity target) {
         if (target == null || !target.isAlive() || target.isRemoved()) {
-            return this.getEntityPos();
+            return this.getPos();
         }
 
         try {
@@ -991,10 +990,10 @@ public class BrineEntity extends HostileWaterCreatureEntity {
             double distance = this.distanceTo(target);
             double timeToHit = distance / projectileSpeed;
 
-            Vec3d predictedPos = target.getEntityPos().add(targetVelocity.multiply(timeToHit));
+            Vec3d predictedPos = target.getPos().add(targetVelocity.multiply(timeToHit));
             return predictedPos.add(0, target.getStandingEyeHeight() - 1.0, 0);
         } catch (Exception e) {
-            return target.getEntityPos();
+            return target.getPos();
         }
     }
 
@@ -1019,7 +1018,7 @@ public class BrineEntity extends HostileWaterCreatureEntity {
         @Override
         public void tick() {
             if (avoidanceDirection != null) {
-                Vec3d targetPos = brine.getEntityPos().add(avoidanceDirection.multiply(6.0));
+                Vec3d targetPos = brine.getPos().add(avoidanceDirection.multiply(6.0));
                 brine.getMoveControl().moveTo(targetPos.x, targetPos.y, targetPos.z, 1.5);
             }
         }
@@ -1092,8 +1091,8 @@ public class BrineEntity extends HostileWaterCreatureEntity {
     }
 
     @Override
-    public void writeCustomData(WriteView nbt) {
-        super.writeCustomData(nbt);
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
         nbt.putString("BrineState", brineState.name());
         nbt.putBoolean("HasMovedEnoughToShoot", hasMovedEnoughToShoot);
         nbt.putInt("ShootingDelay", shootingDelay);
@@ -1113,14 +1112,14 @@ public class BrineEntity extends HostileWaterCreatureEntity {
     }
 
     @Override
-    public void readCustomData(ReadView nbt) {
-        super.readCustomData(nbt);
-        String stateString = nbt.getString("BrineState", "UNDERWATER_IDLE");
-        if (!stateString.equals("UNDERWATER_IDLE")) {
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        String stateString = nbt.getString("BrineState");
+        if (!stateString.isEmpty() && !stateString.equals("UNDERWATER_IDLE")) {
             try {
                 BrineState loadedState = BrineState.valueOf(stateString);
                 this.brineState = loadedState;
-                if (!this.getEntityWorld().isClient()) {
+                if (!this.getWorld().isClient()) {
                     this.dataTracker.set(DATA_ID_STATE, loadedState.ordinal());
                 }
             } catch (IllegalArgumentException e) {
@@ -1128,24 +1127,23 @@ public class BrineEntity extends HostileWaterCreatureEntity {
             }
         }
 
-        this.hasMovedEnoughToShoot = nbt.getBoolean("HasMovedEnoughToShoot", false);
-        this.shootingDelay = nbt.getInt("ShootingDelay", 0);
-        this.shootCooldown = nbt.getInt("ShootCooldown", 0);
+        this.hasMovedEnoughToShoot = nbt.getBoolean("HasMovedEnoughToShoot");
+        this.shootingDelay = nbt.getInt("ShootingDelay");
+        this.shootCooldown = nbt.getInt("ShootCooldown");
 
-        double lastShootX = nbt.getDouble("LastShootX", Double.NaN);
-        if (!Double.isNaN(lastShootX)) {
+        if (nbt.contains("LastShootX")) {
             this.lastShootPosition = new Vec3d(
-                    lastShootX,
-                    nbt.getDouble("LastShootY", 0.0),
-                    nbt.getDouble("LastShootZ", 0.0)
+                    nbt.getDouble("LastShootX"),
+                    nbt.getDouble("LastShootY"),
+                    nbt.getDouble("LastShootZ")
             );
         }
 
         if (nbt.contains("HomeX")) {
             this.homePos = new BlockPos(
-                    nbt.getInt("HomeX", 0),
-                    nbt.getInt("HomeY", 0),
-                    nbt.getInt("HomeZ", 0)
+                    nbt.getInt("HomeX"),
+                    nbt.getInt("HomeY"),
+                    nbt.getInt("HomeZ")
             );
         }
     }

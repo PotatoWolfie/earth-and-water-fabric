@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:dark_prismarine",
+  "ingredient": {
+    "item": "minecraft:dark_prismarine"
+  },
   "result": {
     "count": 1,
     "id": "earth-and-water:chiseled_dark_prismarine"

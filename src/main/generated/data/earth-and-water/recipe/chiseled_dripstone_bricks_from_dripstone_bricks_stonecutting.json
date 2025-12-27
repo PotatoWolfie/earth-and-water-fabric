@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "earth-and-water:dripstone_bricks",
+  "ingredient": {
+    "item": "earth-and-water:dripstone_bricks"
+  },
   "result": {
     "count": 1,
     "id": "earth-and-water:chiseled_dripstone_bricks"

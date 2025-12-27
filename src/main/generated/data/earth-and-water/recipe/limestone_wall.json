@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "earth-and-water:limestone"
+    "#": {
+      "item": "earth-and-water:limestone"
+    }
   },
   "pattern": [
     "###",

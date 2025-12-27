@@ -1,45 +1,72 @@
 package potatowolfie.earth_and_water.item.custom;
 
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.TooltipDisplayComponent;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.UseAction;
+import net.minecraft.world.World;
 import potatowolfie.earth_and_water.damage.ModDamageTypes;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class SpikedShieldItem extends ShieldItem {
 
+    public static final int field_30918 = 5;
+    public static final float MIN_DAMAGE_AMOUNT_TO_BREAK = 3.0F;
+
     public SpikedShieldItem(Item.Settings settings) {
         super(settings);
+        DispenserBlock.registerBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip1"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.tooltipempty"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip1"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip2"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.armor_trim_template.tooltip3"));
-        textConsumer.accept(Text.translatable("tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip3"));
-        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+    public String getTranslationKey(ItemStack stack) {
+        DyeColor dyeColor = stack.get(DataComponentTypes.BASE_COLOR);
+        return dyeColor != null ? this.getTranslationKey() + "." + dyeColor.getName() : super.getTranslationKey(stack);
     }
 
-    public Text getName(ItemStack stack) {
-        DyeColor dyeColor = (DyeColor)stack.get(DataComponentTypes.BASE_COLOR);
-        if (dyeColor != null) {
-            String var10000 = this.translationKey;
-            return Text.translatable(var10000 + "." + dyeColor.getId());
-        } else {
-            return super.getName(stack);
-        }
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
+        BannerItem.appendBannerTooltip(stack, tooltip);
+    }
+
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.BLOCK;
+    }
+
+    @Override
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+        return 72000;
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack itemStack = user.getStackInHand(hand);
+        user.setCurrentHand(hand);
+        return TypedActionResult.consume(itemStack);
+    }
+
+    @Override
+    public boolean canRepair(ItemStack stack, ItemStack ingredient) {
+        return ingredient.isIn(ItemTags.PLANKS) || super.canRepair(stack, ingredient);
+    }
+
+    @Override
+    public EquipmentSlot getSlotType() {
+        return EquipmentSlot.OFFHAND;
     }
 
     public boolean handleExplosiveDamage(LivingEntity user, DamageSource damageSource, float amount) {
@@ -54,11 +81,11 @@ public class SpikedShieldItem extends ShieldItem {
                 if (user.getEntityWorld() instanceof ServerWorld serverWorld) {
                     DamageSource spikedShieldDamage = new DamageSource(
                             serverWorld.getRegistryManager()
-                                    .getOrThrow(RegistryKeys.DAMAGE_TYPE)
+                                    .get(RegistryKeys.DAMAGE_TYPE)
                                     .getEntry(ModDamageTypes.SPIKED_SHIELD.getValue()).get(),
                             user
                     );
-                    attacker.damage(serverWorld, spikedShieldDamage, amount);
+                    attacker.damage(spikedShieldDamage, amount);
                 }
 
                 return true;

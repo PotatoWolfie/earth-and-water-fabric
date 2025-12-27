@@ -14,7 +14,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.block.WireOrientation;
 import potatowolfie.earth_and_water.EarthWater;
 
 import java.util.List;
@@ -49,19 +48,19 @@ public class ChiseledDarkDripstoneBricksBlock extends Block {
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, net.minecraft.util.math.random.Random random) {
-        if (!world.isClient()) {
+        if (!world.isClient) {
             double x = pos.getX();
             double y = pos.getY();
             double z = pos.getZ();
             Box box = new Box(x - 5, y - 5, z - 5, x + 5, y + 5, z + 5);
             List<PlayerEntity> players = world.getEntitiesByType(EntityType.PLAYER, box,
-                    player -> !player.isSpectator() && !player.isInvisible());
+                    player -> !player.isSpectator() | !player.isInvisible());
             boolean playerNearby = !players.isEmpty();
             boolean wasPowered = state.get(POWERED);
 
             if (playerNearby != wasPowered) {
                 world.setBlockState(pos, state.with(POWERED, playerNearby));
-                world.updateNeighborsAlways(pos, this, WireOrientation.fromOrdinal(0));
+                world.updateNeighborsAlways(pos, this);
                 if (playerNearby && !wasPowered) {
                     spawnParticleBurst(world, pos);
                 }
@@ -113,7 +112,7 @@ public class ChiseledDarkDripstoneBricksBlock extends Block {
     }
 
     @Override
-    protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return state.get(POWERED) ? 15 : 0;
     }
 }

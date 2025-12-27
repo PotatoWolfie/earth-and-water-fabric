@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "earth-and-water:prismarine_tiles"
+    "#": {
+      "item": "earth-and-water:prismarine_tiles"
+    }
   },
   "pattern": [
     "###",

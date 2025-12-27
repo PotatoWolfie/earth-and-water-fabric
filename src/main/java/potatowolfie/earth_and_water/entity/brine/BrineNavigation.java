@@ -58,7 +58,7 @@ public class BrineNavigation extends EntityNavigation {
     @Override
     public boolean isValidPosition(BlockPos pos) {
         if (this.entity.isTouchingWater()) {
-            return !this.world.getBlockState(pos).isOpaqueFullCube();
+            return !this.world.getBlockState(pos).isOpaqueFullCube(this.world, pos);
         } else {
             return this.world.getBlockState(pos.down()).hasSolidTopSurface(this.world, pos.down(), this.entity);
         }
@@ -106,10 +106,5 @@ public class BrineNavigation extends EntityNavigation {
 
     @Override
     public void setCanSwim(boolean canSwim) {
-    }
-
-    @Override
-    public boolean canControlOpeningDoors() {
-        return false;
     }
 }
