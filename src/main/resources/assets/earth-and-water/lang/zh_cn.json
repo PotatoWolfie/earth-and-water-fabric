@@ -1,0 +1,221 @@
+{
+  "item.earth-and-water.battle_axe": "战斧",
+  "item.earth-and-water.whip": "鞭子",
+
+  "item.earth-and-water.reinforced_key": "强化钥匙",
+
+  "item.earth-and-water.bore_spawn_egg": "钻岩人刷怪蛋",
+  "item.earth-and-water.brine_spawn_egg": "盐潮人刷怪蛋",
+  "item.earth-and-water.bore_rod": "钻岩棒",
+  "item.earth-and-water.brine_rod": "盐潮棒",
+  "item.earth-and-water.earth_charge": "岩土弹",
+  "item.earth-and-water.water_charge": "水爆弹",
+
+  "item.earth-and-water.steel_ingot": "钢锭",
+  "item.earth-and-water.steel_nugget": "钢粒",
+
+  "item.earth-and-water.spiked_shield": "尖刺盾牌",
+  "item.earth-and-water.spiked_shield.black": "黑色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.blue": "蓝色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.brown": "棕色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.cyan": "青色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.gray": "灰色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.green": "绿色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.light_blue": "淡蓝色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.light_gray": "淡灰色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.lime": "黄绿色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.magenta": "品红色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.orange": "橙色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.pink": "粉色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.purple": "紫色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.red": "红色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.white": "白色尖刺盾牌",
+  "item.earth-and-water.spiked_shield.yellow": "黄色尖刺盾牌",
+
+  "item.earth-and-water.steel_upgrade_smithing_template": "钢升级",
+  "item.earth-and-water.smithing_template.steel_upgrade.applies_to": "盾牌",
+  "item.earth-and-water.smithing_template.steel_upgrade.ingredients": "钢锭",
+
+  "item.earth-and-water.block_armor_trim_smithing_template": "方块盔甲纹饰",
+  "item.earth-and-water.guard_armor_trim_smithing_template": "守卫盔甲纹饰",
+
+  "trim_pattern.earth-and-water.block": "方块盔甲纹饰",
+  "trim_pattern.earth-and-water.guard": "守卫盔甲纹饰",
+
+  "trim_material.earth-and-water.steel": "钢质",
+
+  "block.earth-and-water.dripstone_pillar": "暗滴水石柱",
+  "block.earth-and-water.dripstone_slab": "暗滴水石台阶",
+  "block.earth-and-water.dripstone_stairs": "暗滴水石楼梯",
+  "block.earth-and-water.dripstone_wall": "暗滴水石墙",
+  "block.earth-and-water.dripstone_bricks": "暗滴水石砖",
+  "block.earth-and-water.dripstone_brick_slab": "暗滴水石砖台阶",
+  "block.earth-and-water.dripstone_brick_stairs": "暗滴水石砖楼梯",
+  "block.earth-and-water.dripstone_brick_wall": "暗滴水石砖墙",
+  "block.earth-and-water.chiseled_dripstone_bricks": "雕纹暗滴水石砖",
+
+  "block.earth-and-water.pointed_dark_dripstone": "暗滴水石锥",
+
+  "block.earth-and-water.dark_dripstone_block": "暗滴水石块",
+  "block.earth-and-water.dark_dripstone_pillar": "暗滴水石柱",
+  "block.earth-and-water.dark_dripstone_slab": "暗滴水石台阶",
+  "block.earth-and-water.dark_dripstone_stairs": "暗滴水石楼梯",
+  "block.earth-and-water.dark_dripstone_wall": "暗滴水石墙",
+  "block.earth-and-water.dark_dripstone_bricks": "暗滴水石砖",
+  "block.earth-and-water.dark_dripstone_brick_slab": "暗滴水石砖台阶",
+  "block.earth-and-water.dark_dripstone_brick_stairs": "暗滴水石砖楼梯",
+  "block.earth-and-water.dark_dripstone_brick_wall": "暗滴水石砖墙",
+  "block.earth-and-water.chiseled_dark_dripstone_bricks": "雕纹暗滴水石砖",
+
+  "block.earth-and-water.polished_dripstone": "磨制暗滴水石",
+  "block.earth-and-water.polished_dark_dripstone": "磨制暗滴水石",
+  "block.earth-and-water.polished_dripstone_tiles": "磨制暗滴水石瓦",
+
+  "block.earth-and-water.polished_dripstone_slab": "磨制暗滴水石台阶",
+  "block.earth-and-water.polished_dripstone_stairs": "磨制暗滴水石楼梯",
+  "block.earth-and-water.polished_dripstone_wall": "磨制暗滴水石墙",
+
+  "block.earth-and-water.polished_dark_dripstone_slab": "磨制暗滴水石台阶",
+  "block.earth-and-water.polished_dark_dripstone_stairs": "磨制暗滴水石楼梯",
+  "block.earth-and-water.polished_dark_dripstone_wall": "磨制暗滴水石墙",
+
+  "block.earth-and-water.limestone": "石灰岩",
+  "block.earth-and-water.limestone_pillar": "石灰岩柱",
+  "block.earth-and-water.limestone_slab": "石灰岩台阶",
+  "block.earth-and-water.limestone_stairs": "石灰岩楼梯",
+  "block.earth-and-water.limestone_wall": "石灰岩墙",
+  "block.earth-and-water.limestone_bricks": "石灰岩砖",
+  "block.earth-and-water.limestone_brick_slab": "石灰岩砖台阶",
+  "block.earth-and-water.limestone_brick_stairs": "石灰岩砖楼梯",
+  "block.earth-and-water.limestone_brick_wall": "石灰岩砖墙",
+  "block.earth-and-water.chiseled_limestone_bricks": "雕纹石灰岩砖",
+
+  "block.earth-and-water.polished_limestone": "磨制石灰岩",
+  "block.earth-and-water.polished_limestone_slab": "磨制石灰岩台阶",
+  "block.earth-and-water.polished_limestone_stairs": "磨制石灰岩楼梯",
+  "block.earth-and-water.polished_limestone_wall": "磨制石灰岩墙",
+
+  "block.earth-and-water.prismarine_pillar": "海晶石柱",
+  "block.earth-and-water.prismarine_tiles": "海晶石瓦",
+  "block.earth-and-water.prismarine_tile_slab": "海晶石瓦台阶",
+  "block.earth-and-water.prismarine_tile_stairs": "海晶石瓦楼梯",
+  "block.earth-and-water.prismarine_tile_wall": "海晶石瓦墙",
+  "block.earth-and-water.chiseled_prismarine_bricks": "雕纹海晶石砖",
+
+  "block.earth-and-water.dark_prismarine_pillar": "暗海晶石柱",
+  "block.earth-and-water.dark_prismarine_wall": "暗海晶石墙",
+  "block.earth-and-water.chiseled_dark_prismarine": "雕纹暗海晶石",
+
+  "block.earth-and-water.mixed_prismarine_tiles": "混合海晶石瓦",
+
+  "block.earth-and-water.reinforced_spawner": "强化刷怪笼",
+
+  "block.earth-and-water.steel_block": "钢块",
+
+  "block.earth-and-water.oxygen_block": "液氧块",
+  "block.earth-and-water.oxygen_bubble": "氧气气泡",
+
+  "effect.earth-and-water.breath_giving": "供氧",
+  "effect.earth-and-water.stun": "眩晕",
+
+  "tag.item.earth-and-water.needs_prismarine_tool": "需要海晶石质工具",
+  "tag.item.earth-and-water.incorrect_for_prismarine_tool": "不适合海晶石质工具",
+  "tag.item.earth-and-water.needs_steel_tool": "需要钢质工具",
+  "tag.item.earth-and-water.incorrect_for_steel_tool": "不适合钢质工具",
+
+  "tag.item.earth-and-water.e_w_conduit_frame_blocks": "潮涌核心启动框架方块",
+  "tag.item.earth-and-water.has_steel": "有钢",
+  "tag.item.earth-and-water.has_a_dripstone_block": "有滴水石系列方块",
+  "tag.item.earth-and-water.has_a_dark_dripstone_block": "有暗滴水石系列方块",
+  "tag.item.earth-and-water.has_a_prismarine_block": "有海晶石系列方块",
+  "tag.item.earth-and-water.has_a_dark_prismarine_block": "有暗海晶石系列方块",
+  "tag.item.earth-and-water.is_ancient_ruins": "属于远古废墟",
+  "tag.item.earth-and-water.battle_axe": "战斧",
+  "tag.item.earth-and-water.battle_axe_enchantable": "可附魔战斧",
+  "tag.item.earth-and-water.spiked_shield": "尖刺盾牌",
+  "tag.item.earth-and-water.steel_repair": "用钢修复",
+  "tag.item.earth-and-water.prismarine_repair": "用海晶石修复",
+
+  "tooltip.earth-and-water.tooltipempty": "",
+
+  "tooltip.earth-and-water.armor_trim_template.tooltip1": "§7可应用于：",
+  "tooltip.earth-and-water.armor_trim_template.tooltip3": "§7所需原材料：",
+
+  "tooltip.earth-and-water.battle_axe.tooltip1": "§7按下鼠标右键时：",
+  "tooltip.earth-and-water.battle_axe.tooltip2": " §2向前冲锋",
+
+  "tooltip.earth-and-water.whip.tooltip1": "§7在水下攻击时",
+  "tooltip.earth-and-water.whip.tooltip2": " §2击晕目标",
+  "tooltip.earth-and-water.whip.tooltip3": "§7在陆地攻击时：",
+  "tooltip.earth-and-water.whip.tooltip4": " §c-50% 攻击伤害",
+
+  "tooltip.earth-and-water.reinforced_key": "用于激活或关闭强化刷怪笼。有 2 种用途。",
+
+  "tooltip.earth-and-water.reinforced_spawner.desc2": " 设置生物类型",
+  "tooltip.earth-and-water.reinforced_spawner.tooltip1": "§7用刷怪蛋交互时：",
+  "tooltip.earth-and-water.reinforced_spawner.tooltip2": " §9设置生物类型",
+  "tooltip.earth-and-water.reinforced_spawner.tooltip3": "§7用强化钥匙交互时：",
+  "tooltip.earth-and-water.reinforced_spawner.tooltip4": " §9调整",
+  "tooltip.earth-and-water.reinforced_spawner.tooltipempty": " ",
+
+  "tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip1": "§7尖刺盾牌升级",
+  "tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip2": " §9盾牌",
+  "tooltip.earth-and-water.spiked_shield_upgrade_smithing_template.tooltip3": " §9钢",
+
+  "entity.earth-and-water.bore": "钻岩人",
+  "entity.earth-and-water.brine": "盐潮人",
+  "entity.earth-and-water.earth_charge": "岩土弹",
+  "entity.earth-and-water.water_charge": "水爆弹",
+
+  "sounds.earth-and-water.battle_axe_dash": "战斧：冲锋",
+
+  "sounds.earth-and-water.bore_ambient": "钻岩人：隆隆",
+  "sounds.earth-and-water.bore_hurt": "钻岩人：受伤",
+  "sounds.earth-and-water.bore_death": "钻岩人：死亡",
+
+  "sounds.earth-and-water.brine_ambient": "盐潮人：嗡嗡作响",
+  "sounds.earth-and-water.brine_hurt": "盐潮人：受伤",
+  "sounds.earth-and-water.brine_death": "盐潮人：死亡",
+  "sounds.earth-and-water.brine_underwater_ambient": "盐潮人：嗡嗡作响",
+  "sounds.earth-and-water.brine_underwater_hurt": "盐潮人：受伤",
+  "sounds.earth-and-water.brine_underwater_death": "盐潮人：死亡",
+
+  "death.attack.battle_axe": "%1$s被%2$s劈裂了",
+  "death.attack.battle_axe.item": "%1$s被%2$s用%3$s劈裂了",
+  "death.attack.whip": "%1$s被%2$s鞭笞了",
+  "death.attack.whip.item": "%1$s被%2$s用%3$s鞭笞了",
+  "death.attack.earth_charge": "%1$s被岩土弹扎了个透心凉",
+  "death.attack.water_charge": "%1$s被%2$s卡住了",
+  "death.attack.spiked_shield": "%1$s被%2$s的尖刺盾牌刺穿了",
+  "death.attack.spiked_shield.item": "%1$s在尝试攻击被%2$s的%3$s时被刺穿了",
+
+  "advancement.earth-and-water.atlantean_eye.title": "亚特兰蒂斯之眼",
+  "advancement.earth-and-water.atlantean_eye.description": "发现潮涌纪念碑",
+  "advancement.earth-and-water.boreing.title": "无聊透顶",
+  "advancement.earth-and-water.boreing.description": "击杀钻岩人",
+  "advancement.earth-and-water.long_ago.title": "很久以前……",
+  "advancement.earth-and-water.long_ago.description": "收集来自以下四种生物的元素棒：钻岩人、咸潮人、旋风人和烈焰人",
+  "advancement.earth-and-water.mob_lock.title": "生物锁",
+  "advancement.earth-and-water.mob_lock.description": "使用强化钥匙关闭强化刷怪笼",
+  "advancement.earth-and-water.stalactite_sanctum.title": "钟乳石圣所",
+  "advancement.earth-and-water.stalactite_sanctum.description": "发现古老的远古废墟",
+
+  "modmenu.nameTranslation.earth-and-water": "土与水",
+  "modmenu.descriptionTranslation.earth-and-water": "既然可以集齐土、水、气、火四大元素，为什么要止步于烈焰人和旋风人呢？?",
+
+  "modmenu.planet_minecraft": "Planet Minecraft",
+
+  "splash.earth-and-water.b_o_r_e": "Does he know about the B-O-R-E?",
+  "splash.earth-and-water.bore_d": "I was Bore-d.",
+  "splash.earth-and-water.bore_you": "I don’t mean to Bore you.",
+  "splash.earth-and-water.drowning": "Drowning in delight!",
+  "splash.earth-and-water.hardlyknower": "Underwater? I hardly even know ‘er!",
+  "splash.earth-and-water.herobrine": "You were supposed to be a hero, Brine!",
+  "splash.earth-and-water.removed_the_brine": "Removed the 'Brine.'",
+  "splash.earth-and-water.september": "Earth, Wind & Fire!",
+  "splash.earth-and-water.splash": "Putting the “splash” in splash text!",
+  "splash.earth-and-water.sticks_stone": "Sticks and stones may break my bones, but more stones will shatter them probably.",
+  "splash.earth-and-water.sun_tzu": "Bore-dom is meant to be weaponized. -Sun Tzu, the Art of Bore",
+  "splash.earth-and-water.sweet_carobrine": "SWEEEEET CARO-BRINE!",
+  "splash.earth-and-water.w_e_f_a": "Water. Earth. Fire. Air."
+}
