@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": "earth-and-water:steel_ingot",
+    "C": "earth-and-water:steel_nugget",
+    "S": "earth-and-water:reinforced_key"
+  },
+  "pattern": [
+    "#C#",
+    "CSC",
+    "#C#"
+  ],
+  "result": {
+    "count": 2,
+    "id": "earth-and-water:reinforced_key"
+  }
+}

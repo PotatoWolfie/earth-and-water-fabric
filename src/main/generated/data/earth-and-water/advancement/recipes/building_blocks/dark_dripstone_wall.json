@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "earth-and-water:dark_dripstone_wall"
+        "recipes": "earth-and-water:dark_dripstone_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

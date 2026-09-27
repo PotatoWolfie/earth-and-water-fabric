@@ -1,34 +1,30 @@
 package potatowolfie.earth_and_water.world.feature.custom;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import potatowolfie.earth_and_water.block.ModBlocks;
 
-public class OxygenFeature extends Feature<OxygenFeatureConfig> {
+public record OxygenFeature() implements Feature {
+    public static final MapCodec<OxygenFeature> CODEC = MapCodec.unit(OxygenFeature::new);
 
-    public OxygenFeature(Codec<OxygenFeatureConfig> codec) {
-        super(codec);
+    public MapCodec<OxygenFeature> codec() {
+        return CODEC;
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<OxygenFeatureConfig> context) {
-        WorldGenLevel world = context.level();
-        BlockPos pos = context.origin();
-        RandomSource random = context.random();
-
+    public boolean place(WorldGenLevel world, ChunkGenerator chunkGenerator, RandomSource random, BlockPos pos) {
         BlockPos oceanFloor = findOceanFloorPosition(world, pos);
         if (oceanFloor == null) {
             return false;
         }
 
         generateCrossPattern(world, oceanFloor);
-
         return true;
     }
 

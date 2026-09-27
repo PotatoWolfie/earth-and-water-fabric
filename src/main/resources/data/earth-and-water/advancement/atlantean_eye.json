@@ -3,17 +3,15 @@
   "criteria": {
     "find_conduit_monument": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "location": {
-                "structures": "earth-and-water:conduit_monument"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "earth-and-water:conduit_monument"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     }

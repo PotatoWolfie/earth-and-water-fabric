@@ -1,9 +1,10 @@
 package potatowolfie.earth_and_water.trim;
 
-import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
+import net.minecraft.resources.Identifier;
+import potatowolfie.earth_and_water.EarthWater;
 
 public class ModTrimAssets {
-    public static final MaterialAssetGroup STEEL = MaterialAssetGroup.create("steel");
+    public static final Identifier STEEL = Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "trim/steel");
 
     public static void register() {
     }

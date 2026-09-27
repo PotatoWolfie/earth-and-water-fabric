@@ -22,9 +22,9 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.structure.StructurePieceAccessor;
 import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
@@ -102,7 +102,7 @@ public class AncientRuinsGenerator {
             StructureTemplateManager manager,
             BlockPos pos,
             Rotation rotation,
-            StructurePieceAccessor holder,
+            StructurePiecesBuilder holder,
             RandomSource random,
             AncientRuinsStructure structure
     ) {
@@ -129,7 +129,7 @@ public class AncientRuinsGenerator {
     private static void addOuterWallPieces(
             StructureTemplateManager manager,
             BlockPos basePos,
-            StructurePieceAccessor holder,
+            StructurePiecesBuilder holder,
             RandomSource random
     ) {
         Identifier northWall = OUTER_WALL_ENTRANCE;
@@ -174,7 +174,7 @@ public class AncientRuinsGenerator {
             RandomSource random,
             BlockPos centerPos,
             AncientRuinsStructure structure,
-            StructurePieceAccessor pieces,
+            StructurePiecesBuilder pieces,
             int count
     ) {
         int interiorMinX = centerPos.getX() - 37;

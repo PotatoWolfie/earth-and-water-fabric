@@ -11,15 +11,15 @@ import net.minecraft.util.valueproviders.ClampedNormalInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
+import net.minecraft.world.level.levelgen.placement.OffsetPlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
-import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import potatowolfie.earth_and_water.EarthWater;
 
@@ -34,7 +34,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> LIMESTONE_ROCK_PLACED = registerKey("limestone_rock");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
-        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+        HolderGetter<Feature> configuredFeatures = context.lookup(Registries.FEATURE);
 
         register(context, DARK_DRIPSTONE_CLUSTER_PLACED,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.DARK_DRIPSTONE_CLUSTER),
@@ -56,7 +56,7 @@ public class ModPlacedFeatures {
                 InSquarePlacement.spread(),
                 PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
                 CountPlacement.of(UniformInt.of(1, 5)),
-                RandomOffsetPlacement.of(
+                OffsetPlacement.of(
                         ClampedNormalInt.of(0.0F, 3.0F, -10, 10),
                         ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),
                 BiomeFilter.biome());
@@ -83,7 +83,7 @@ public class ModPlacedFeatures {
     }
 
     private static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-                                 Holder<ConfiguredFeature<?, ?>> configuration,
+                                 Holder<Feature> configuration,
                                  PlacementModifier... modifiers) {
         context.register(key, new PlacedFeature(configuration, List.of(modifiers)));
     }

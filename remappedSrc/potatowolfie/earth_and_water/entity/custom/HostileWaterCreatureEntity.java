@@ -1,4 +1,4 @@
-package potatowolfie.earth_and_water.entity.custom;
+package potatowolfie.earth_and_water.entity.goals;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;

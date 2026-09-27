@@ -11,9 +11,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -25,7 +24,7 @@ import potatowolfie.earth_and_water.sound.ModSounds;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class BattleAxeItem extends AxeItem {
+public class BattleAxeItem extends Item {
     private static final int DASH_COOLDOWN = 45;
     private static final int CREATIVE_DASH_COOLDOWN = 10;
     private static final float DASH_STRENGTH = 1.1383f;
@@ -36,8 +35,8 @@ public class BattleAxeItem extends AxeItem {
     private static final float MAX_HORIZONTAL_MULTIPLIER = 1.414f;
     private static final float MAX_VERTICAL_MULTIPLIER = 0.5f;
 
-    public BattleAxeItem(ToolMaterial material, float attackDamage, float attackSpeed, Properties settings) {
-        super(material, attackDamage, attackSpeed, settings);
+    public BattleAxeItem(final Item.Properties properties) {
+        super(properties);
     }
 
     @Override

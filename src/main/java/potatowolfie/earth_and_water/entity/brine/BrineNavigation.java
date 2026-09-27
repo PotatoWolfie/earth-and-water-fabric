@@ -8,7 +8,7 @@ import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.pathfinder.SwimNodeEvaluator;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import net.minecraft.world.phys.Vec3;
-import potatowolfie.earth_and_water.entity.custom.HostileWaterCreatureEntity;
+import potatowolfie.earth_and_water.entity.goals.HostileWaterCreatureEntity;
 
 public class BrineNavigation extends PathNavigation {
     private boolean wasInWater;

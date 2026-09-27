@@ -11,8 +11,9 @@ import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
+import org.joml.Matrix4f;
 import potatowolfie.earth_and_water.EarthWater;
-import potatowolfie.earth_and_water.entity.client.ModEntityModelLayers;
+import potatowolfie.earth_and_water.entity.ModEntityModelLayers;
 
 @Environment(EnvType.CLIENT)
 public class WaterChargeProjectileRenderer extends EntityRenderer<WaterChargeProjectileEntity, WaterChargeProjectileRenderState> {
@@ -40,21 +41,20 @@ public class WaterChargeProjectileRenderer extends EntityRenderer<WaterChargePro
             if (state.isStuck) {
 
                 if (state.isStuckToEntity) {
-                    poseStack.mulPose(Axis.YP.rotationDegrees(state.renderingRotation));
+                    poseStack.mulPose(new Matrix4f().rotation(Axis.YP.rotationDegrees(state.renderingRotation)));
                 } else {
-                    poseStack.mulPose(Axis.YP.rotationDegrees(state.yaw));
-                    poseStack.mulPose(Axis.XP.rotationDegrees(state.pitch));
+                    poseStack.mulPose(new Matrix4f().rotation(Axis.YP.rotationDegrees(state.yaw)));
+                    poseStack.mulPose(new Matrix4f().rotation(Axis.XP.rotationDegrees(state.pitch)));
                 }
 
             } else if (state.isGrounded) {
-                poseStack.mulPose(Axis.YP.rotationDegrees(state.yaw));
-                poseStack.mulPose(Axis.XP.rotationDegrees(state.pitch));
+                poseStack.mulPose(new Matrix4f().rotation(Axis.YP.rotationDegrees(state.yaw)));
+                poseStack.mulPose(new Matrix4f().rotation(Axis.XP.rotationDegrees(state.pitch)));
             }
-
-            poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
+            poseStack.mulPose(new Matrix4f().rotation(Axis.XP.rotationDegrees(180.0F)));
 
             if (!state.isStuck) {
-                poseStack.mulPose(Axis.YP.rotationDegrees(state.renderingRotation));
+                poseStack.mulPose(new Matrix4f().rotation(Axis.YP.rotationDegrees(state.renderingRotation)));
             }
 
             this.model.setAngles(state);
@@ -65,10 +65,7 @@ public class WaterChargeProjectileRenderer extends EntityRenderer<WaterChargePro
                     this.model.renderType(TEXTURE),
                     state.lightCoords,
                     OverlayTexture.NO_OVERLAY,
-                    null,
-                    -1,
-                    null,
-                    0
+                    null
             );
 
             poseStack.popPose();

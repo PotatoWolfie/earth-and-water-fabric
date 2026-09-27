@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import potatowolfie.earth_and_water.entity.custom.HostileWaterCreatureEntity;
+import potatowolfie.earth_and_water.entity.goals.HostileWaterCreatureEntity;
 
 public class BrineNavigation extends EntityNavigation {
     private boolean wasInWater;

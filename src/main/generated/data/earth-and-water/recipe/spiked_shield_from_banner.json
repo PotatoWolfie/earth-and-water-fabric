@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "earth-and-water:spiked_shield",
+    "#minecraft:banners"
+  ],
+  "result": {
+    "id": "earth-and-water:spiked_shield"
+  }
+}

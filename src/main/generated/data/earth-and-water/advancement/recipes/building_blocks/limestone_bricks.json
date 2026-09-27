@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "earth-and-water:limestone_bricks"
+        "recipes": "earth-and-water:limestone_bricks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

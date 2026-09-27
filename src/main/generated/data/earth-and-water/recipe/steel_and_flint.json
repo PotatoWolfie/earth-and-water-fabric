@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "earth-and-water:steel_ingot",
+    "minecraft:flint"
+  ],
+  "result": {
+    "id": "minecraft:flint_and_steel"
+  }
+}

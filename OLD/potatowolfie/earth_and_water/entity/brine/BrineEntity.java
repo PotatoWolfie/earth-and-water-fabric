@@ -24,7 +24,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.registry.tag.FluidTags;
 import potatowolfie.earth_and_water.entity.ModEntities;
-import potatowolfie.earth_and_water.entity.custom.HostileWaterCreatureEntity;
+import potatowolfie.earth_and_water.entity.goals.HostileWaterCreatureEntity;
 import potatowolfie.earth_and_water.entity.water_charge.WaterChargeProjectileEntity;
 import potatowolfie.earth_and_water.sound.ModSounds;
 

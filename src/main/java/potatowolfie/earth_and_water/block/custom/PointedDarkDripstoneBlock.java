@@ -50,12 +50,6 @@ import potatowolfie.earth_and_water.block.ModBlocks;
 
 public class PointedDarkDripstoneBlock extends SpeleothemBlock {
 
-    public static final MapCodec<PointedDarkDripstoneBlock> CODEC = RecordCodecBuilder.mapCodec((i) -> {
-        return i.group(BlockState.CODEC.fieldOf("block_to_grow_on").forGetter((b) -> {
-            return b.blockToGrowOn;
-        }), propertiesCodec()).apply(i, PointedDarkDripstoneBlock::new);
-    });
-
     private static final int MAX_SEARCH_LENGTH_WHEN_CHECKING_DRIP_TYPE = 11;
     private static final float DRIP_PROBABILITY_PER_ANIMATE_TICK = 0.02F;
     private static final float DRIP_PROBABILITY_PER_ANIMATE_TICK_IF_UNDER_LIQUID_SOURCE = 0.12F;
@@ -73,10 +67,6 @@ public class PointedDarkDripstoneBlock extends SpeleothemBlock {
     private static final VoxelShape FRUSTUM_SHAPE;
     private static final VoxelShape MIDDLE_SHAPE;
     private static final float MAX_HORIZONTAL_MODEL_OFFSET;
-
-    public MapCodec<PointedDarkDripstoneBlock> codec() {
-        return CODEC;
-    }
 
     public PointedDarkDripstoneBlock(final BlockState blockToGrowOn, final BlockBehaviour.Properties properties) {
         super(blockToGrowOn, properties);
@@ -153,7 +143,7 @@ public class PointedDarkDripstoneBlock extends SpeleothemBlock {
             BlockPos blockPos = hit.getBlockPos();
             if (world instanceof ServerLevel serverWorld) {
                 if (projectile.mayInteract(serverWorld, blockPos)
-                        && projectile.mayBreak(serverWorld)
+                        && projectile.mayBreak(serverWorld, blockPos)
                         && projectile instanceof ThrownTrident
                         && projectile.getDeltaMovement().length() > 0.6) {
                     world.destroyBlock(blockPos, true);
@@ -214,7 +204,6 @@ public class PointedDarkDripstoneBlock extends SpeleothemBlock {
                         BlockPos stalactiteTipPos = findTip(state, level, pos, 11, false);
                         if (stalactiteTipPos != null) {
                             if (fluidInfo.get().sourceState.is(Blocks.MUD) && fluid == Fluids.WATER) {
-                                // Mud + dripping water = clay
                                 BlockState newState = Blocks.CLAY.defaultBlockState();
                                 level.setBlockAndUpdate(fluidInfo.get().pos, newState);
                                 Block.pushEntitiesUp(fluidInfo.get().sourceState, newState, level, fluidInfo.get().pos);

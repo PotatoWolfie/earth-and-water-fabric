@@ -1,27 +1,24 @@
 package potatowolfie.earth_and_water.world.feature.custom.limestone_rock;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import potatowolfie.earth_and_water.block.ModBlocks;
 
-public class LimestoneRockFeature extends Feature<LimestoneRockFeatureConfig> {
+public record LimestoneRockFeature() implements Feature {
+    public static final MapCodec<LimestoneRockFeature> CODEC = MapCodec.unit(LimestoneRockFeature::new);
 
-    public LimestoneRockFeature(Codec<LimestoneRockFeatureConfig> codec) {
-        super(codec);
+    public MapCodec<LimestoneRockFeature> codec() {
+        return CODEC;
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<LimestoneRockFeatureConfig> context) {
-        WorldGenLevel world = context.level();
-        BlockPos pos = context.origin();
-        RandomSource random = context.random();
-
+    public boolean place(WorldGenLevel world, ChunkGenerator chunkGenerator, RandomSource random, BlockPos pos) {
         BlockPos oceanFloor = findOceanFloorPosition(world, pos);
         if (oceanFloor == null) {
             return false;

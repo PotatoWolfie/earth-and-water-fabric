@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "earth-and-water:polished_limestone"
+        "recipes": "earth-and-water:polished_limestone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "earth-and-water:polished_limestone_wall_from_limestone_stonecutting"
+        "recipes": "earth-and-water:polished_limestone_wall_from_limestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.resources.Identifier;
 import potatowolfie.earth_and_water.EarthWater;
-import potatowolfie.earth_and_water.entity.client.ModEntityModelLayers;
+import potatowolfie.earth_and_water.entity.ModEntityModelLayers;
 
 @Environment(EnvType.CLIENT)
 public class BrineEntityRenderer extends MobRenderer<BrineEntity, BrineEntityRenderState, BrineEntityModel> {

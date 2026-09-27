@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "earth-and-water:prismarine_tiles"
+        "recipes": "earth-and-water:prismarine_tiles"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

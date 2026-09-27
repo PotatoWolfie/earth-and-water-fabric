@@ -11,8 +11,9 @@ import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
+import org.joml.Matrix4f;
 import potatowolfie.earth_and_water.EarthWater;
-import potatowolfie.earth_and_water.entity.client.ModEntityModelLayers;
+import potatowolfie.earth_and_water.entity.ModEntityModelLayers;
 
 @Environment(EnvType.CLIENT)
 public class EarthChargeProjectileRenderer extends EntityRenderer<EarthChargeProjectileEntity, EarthChargeProjectileRenderState> {
@@ -34,10 +35,9 @@ public class EarthChargeProjectileRenderer extends EntityRenderer<EarthChargePro
         if (state.ageInTicks >= 2 || state.distanceFromCamera >= field_52258) {
 
             poseStack.pushPose();
-
             poseStack.translate(0.0, 1.525, 0.0);
-            poseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
-            poseStack.mulPose(Axis.YP.rotationDegrees(state.renderingRotation));
+            poseStack.mulPose(new Matrix4f().rotation(Axis.XP.rotationDegrees(180.0F)));
+            poseStack.mulPose(new Matrix4f().rotation(Axis.YP.rotationDegrees(state.renderingRotation)));
 
             this.model.setAngles(state);
 
@@ -47,10 +47,7 @@ public class EarthChargeProjectileRenderer extends EntityRenderer<EarthChargePro
                     this.model.renderType(TEXTURE),
                     state.lightCoords,
                     OverlayTexture.NO_OVERLAY,
-                    null,
-                    -1,
-                    null,
-                    0
+                    null
             );
 
             poseStack.popPose();

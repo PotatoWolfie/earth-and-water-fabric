@@ -28,7 +28,7 @@ public class EarthWaterDataGenerator implements DataGeneratorEntrypoint {
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {
 		registryBuilder.add(Registries.TRIM_MATERIAL, ModTrimMaterials::bootstrap);
 		registryBuilder.add(Registries.TRIM_PATTERN, ModTrimPatterns::bootstrap);
-		registryBuilder.add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
+		registryBuilder.add(Registries.FEATURE, ModConfiguredFeatures::bootstrap);
 		registryBuilder.add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
 	}
 }

@@ -1,6 +1,5 @@
 package potatowolfie.earth_and_water.block.custom;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -95,7 +94,7 @@ public class ReinforcedSpawnerBlock extends BaseEntityBlock implements SimpleWat
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player,
-                                 BlockHitResult hit) {
+                                               BlockHitResult hit) {
         if (world.isClientSide()) return InteractionResult.SUCCESS;
         ItemStack stack = player.getMainHandItem();
 
@@ -166,10 +165,5 @@ public class ReinforcedSpawnerBlock extends BaseEntityBlock implements SimpleWat
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return null;
     }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "earth-and-water:limestone_brick_slab_from_limestone_stonecutting"
+        "recipes": "earth-and-water:limestone_brick_slab_from_limestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

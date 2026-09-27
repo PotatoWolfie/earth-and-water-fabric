@@ -1,5 +1,6 @@
 package potatowolfie.earth_and_water.block.entity.custom;
 
+import net.minecraft.world.item.component.TypedEntityData;
 import potatowolfie.earth_and_water.EarthWater;
 import potatowolfie.earth_and_water.block.custom.ReinforcedSpawnerBlock;
 import potatowolfie.earth_and_water.block.entity.ModBlockEntities;
@@ -517,6 +518,11 @@ public class ReinforcedSpawnerBlockEntity extends BlockEntity implements Spawner
         this.entityType = type;
         this.cachedDisplayEntity = null;
         this.setChanged();
+    }
+
+    @Override
+    public void setEntityData(TypedEntityData<EntityType<?>> entityData, RandomSource random) {
+
     }
 
     public BaseSpawner getSpawner() {

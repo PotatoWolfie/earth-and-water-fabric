@@ -1,6 +1,5 @@
 package potatowolfie.earth_and_water.block.custom;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -26,7 +25,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class OxygenBubbleBlock extends Block implements SimpleWaterloggedBlock {
-    public static final MapCodec<OxygenBubbleBlock> CODEC = simpleCodec(OxygenBubbleBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final int SCHEDULED_TICK_DELAY = 2;
 
@@ -38,11 +36,6 @@ public class OxygenBubbleBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(WATERLOGGED);
-    }
-
-    @Override
-    public MapCodec<OxygenBubbleBlock> codec() {
-        return CODEC;
     }
 
     @Override
@@ -109,7 +102,7 @@ public class OxygenBubbleBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView,
-                                                BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+                                  BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
         if (state.getValue(WATERLOGGED)) {
             tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }

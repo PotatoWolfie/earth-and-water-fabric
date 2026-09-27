@@ -1,7 +1,7 @@
 {
-  "asset_name": "steel",
   "description": {
     "color": "#AFC9C9",
     "translate": "trim_material.earth-and-water.steel"
-  }
+  },
+  "palette_id": "earth-and-water:trim/steel"
 }

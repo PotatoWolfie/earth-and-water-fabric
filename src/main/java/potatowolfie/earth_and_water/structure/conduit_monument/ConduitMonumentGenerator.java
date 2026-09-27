@@ -28,9 +28,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.structure.StructurePieceAccessor;
 import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -89,7 +89,7 @@ public class ConduitMonumentGenerator {
             StructureTemplateManager manager,
             BlockPos pos,
             Rotation rotation,
-            StructurePieceAccessor holder,
+            StructurePiecesBuilder holder,
             RandomSource random,
             ConduitMonumentStructure structure
     ) {
@@ -108,7 +108,7 @@ public class ConduitMonumentGenerator {
             Rotation centerRotation,
             BlockPos centerPos,
             ConduitMonumentStructure structure,
-            StructurePieceAccessor pieces,
+            StructurePiecesBuilder pieces,
             int count
     ) {
         BlockPos blockPos = new BlockPos(centerPos.getX(), 90, centerPos.getZ());
@@ -408,7 +408,7 @@ public class ConduitMonumentGenerator {
                 float progress = (float)(y - terrainY) / (float)pillarHeight;
 
                 double noiseScale = 0.1;
-                double noise = noiseSampler.getValue(centerX * noiseScale, y * noiseScale * 0.5, centerZ * noiseScale);
+                double noise = noiseSampler.get(centerX * noiseScale, y * noiseScale * 0.5, centerZ * noiseScale);
                 float noiseOffset = (float)noise * 0.5f;
                 float radiusFloat = (1.0f - (float)Math.pow(progress, taperingCurve)) * baseRadiusMultiplier + noiseOffset;
                 int radius = Math.max(0, (int)Math.ceil(radiusFloat));
@@ -419,7 +419,7 @@ public class ConduitMonumentGenerator {
                         int actualZ = centerZ + dz;
 
                         double distance = Math.sqrt(dx * dx + dz * dz);
-                        double edgeNoise = noiseSampler.getValue(actualX * 0.3, y * 0.2, actualZ * 0.3);
+                        double edgeNoise = noiseSampler.get(actualX * 0.3, y * 0.2, actualZ * 0.3);
                         float edgeVariation = (float)edgeNoise * 0.8f;
 
                         float threshold = radius + 0.5f + edgeVariation;

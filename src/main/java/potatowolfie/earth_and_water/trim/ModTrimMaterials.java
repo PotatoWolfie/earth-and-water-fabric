@@ -10,7 +10,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import potatowolfie.earth_and_water.EarthWater;
 
@@ -29,9 +28,9 @@ public class ModTrimMaterials {
         return material != null ? Optional.of(material) : Optional.empty();
     }
 
-    private static void register(BootstrapContext<TrimMaterial> registry, ResourceKey<TrimMaterial> key, Style style, MaterialAssetGroup assets) {
+    private static void register(BootstrapContext<TrimMaterial> registry, ResourceKey<TrimMaterial> key, Style style, Identifier paletteId) {
         Component text = Component.translatable(Util.makeDescriptionId("trim_material", key.identifier())).withStyle(style);
-        registry.register(key, new TrimMaterial(assets, text));
+        registry.register(key, new TrimMaterial(paletteId, text));
     }
 
     private static ResourceKey<TrimMaterial> of(String id) {

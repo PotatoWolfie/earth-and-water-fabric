@@ -33,7 +33,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import potatowolfie.earth_and_water.entity.ModEntities;
-import potatowolfie.earth_and_water.entity.custom.HostileWaterCreatureEntity;
+import potatowolfie.earth_and_water.entity.goals.HostileWaterCreatureEntity;
 import potatowolfie.earth_and_water.entity.water_charge.WaterChargeProjectileEntity;
 import potatowolfie.earth_and_water.sound.ModSounds;
 

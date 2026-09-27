@@ -14,10 +14,10 @@
       }
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "earth-and-water:steel_upgrade"
-      }
+        "recipes": "earth-and-water:steel_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [

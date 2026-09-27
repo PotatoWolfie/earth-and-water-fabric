@@ -76,8 +76,8 @@ public class ModItems {
                             .setId(createItemRegistryKey("whip"))
             ));
     public static final Item BATTLE_AXE = registerItem("battle_axe",
-            new BattleAxeItem(ModToolMaterials.STEEL, 5.0F, -3.2F,
-                    new Item.Properties()
+            new BattleAxeItem(new Item.Properties()
+                            .axe(ModToolMaterials.STEEL, 5.0F, -3.2F)
                             .rarity(Rarity.UNCOMMON)
                             .setId(createItemRegistryKey("battle_axe"))
     ));

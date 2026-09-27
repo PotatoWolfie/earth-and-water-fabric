@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "earth-and-water:guard"
+        "recipes": "earth-and-water:guard"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

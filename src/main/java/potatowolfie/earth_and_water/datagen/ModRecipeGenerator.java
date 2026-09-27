@@ -2,17 +2,22 @@ package potatowolfie.earth_and_water.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import potatowolfie.earth_and_water.EarthWater;
@@ -29,11 +34,11 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
     }
 
     @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput exporter) {
-        return new RecipeProvider(registryLookup, exporter) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, BootstrapContext<Recipe<?>> bootstrapContext, BootstrapContext<Advancement> bootstrapContext1) {
+        return new RecipeProvider(bootstrapContext, bootstrapContext1) {
             @Override
             public void buildRecipes() {
-                HolderLookup.RegistryLookup<Item> itemLookup = registries.lookupOrThrow(Registries.ITEM);
+                HolderLookup.RegistryLookup<Item> itemLookup = provider.lookupOrThrow(Registries.ITEM);
 
                 nineBlockStorageRecipes(RecipeCategory.BUILDING_BLOCKS, ModItems.STEEL_INGOT, RecipeCategory.MISC, ModBlocks.STEEL_BLOCK);
 
@@ -75,6 +80,136 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                         ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "block")));
                 trimSmithing(ModItems.GUARD_ARMOR_TRIM_SMITHING_TEMPLATE, ModTrimPatterns.GUARD,
                         ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "guard")));
+
+                shaped(RecipeCategory.COMBAT, ModItems.BATTLE_AXE)
+                        .pattern("# #")
+                        .pattern("#X#")
+                        .pattern(" X ")
+                        .define('#', ModItems.STEEL_INGOT)
+                        .define('X', ModItems.BORE_ROD)
+                        .unlockedBy(getHasName(ModItems.STEEL_INGOT), has(ModItems.STEEL_INGOT))
+                        .save(output);
+
+                shaped(RecipeCategory.MISC, ModItems.BLOCK_ARMOR_TRIM_SMITHING_TEMPLATE, 2)
+                        .pattern("#S#")
+                        .pattern("#C#")
+                        .pattern("###")
+                        .define('#', Items.DIAMOND)
+                        .define('C', Blocks.DRIPSTONE_BLOCK)
+                        .define('S', ModItems.BLOCK_ARMOR_TRIM_SMITHING_TEMPLATE)
+                        .unlockedBy(getHasName(ModItems.BLOCK_ARMOR_TRIM_SMITHING_TEMPLATE), has(ModItems.BLOCK_ARMOR_TRIM_SMITHING_TEMPLATE))
+                        .save(output);
+
+                twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_BLOCK, ModBlocks.POINTED_DARK_DRIPSTONE);
+
+                shapeless(RecipeCategory.COMBAT, ModItems.EARTH_CHARGE, 2)
+                        .requires(ModItems.BORE_ROD)
+                        .unlockedBy(getHasName(ModItems.BORE_ROD), has(ModItems.BORE_ROD))
+                        .save(output);
+
+                shaped(RecipeCategory.COMBAT, ModItems.EARTH_CHARGE, 4)
+                        .pattern(" D ")
+                        .pattern("DBD")
+                        .pattern(" D ")
+                        .define('D', Items.POINTED_DRIPSTONE)
+                        .define('B', Blocks.DRIPSTONE_BLOCK)
+                        .unlockedBy(getHasName(Items.POINTED_DRIPSTONE), has(Items.POINTED_DRIPSTONE))
+                        .save(output, String.valueOf(Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "earth_charge_dripstone")));
+
+                shaped(RecipeCategory.MISC, ModItems.GUARD_ARMOR_TRIM_SMITHING_TEMPLATE, 2)
+                        .pattern("#S#")
+                        .pattern("#C#")
+                        .pattern("###")
+                        .define('#', Items.DIAMOND)
+                        .define('C', Blocks.PRISMARINE)
+                        .define('S', ModItems.GUARD_ARMOR_TRIM_SMITHING_TEMPLATE)
+                        .unlockedBy(getHasName(ModItems.GUARD_ARMOR_TRIM_SMITHING_TEMPLATE), has(ModItems.GUARD_ARMOR_TRIM_SMITHING_TEMPLATE))
+                        .save(output);
+
+                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MIXED_PRISMARINE_TILES, 4)
+                        .pattern("X#")
+                        .pattern("#X")
+                        .define('#', ModBlocks.PRISMARINE_TILES)
+                        .define('X', Blocks.DARK_PRISMARINE)
+                        .group("mixed_prismarine_tiles")
+                        .unlockedBy(getHasName(ModBlocks.PRISMARINE_TILES), has(ModBlocks.PRISMARINE_TILES))
+                        .save(output);
+
+                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MIXED_PRISMARINE_TILES, 4)
+                        .pattern("#X")
+                        .pattern("X#")
+                        .define('#', ModBlocks.PRISMARINE_TILES)
+                        .define('X', Blocks.DARK_PRISMARINE)
+                        .group("mixed_prismarine_tiles")
+                        .unlockedBy(getHasName(ModBlocks.PRISMARINE_TILES), has(ModBlocks.PRISMARINE_TILES))
+                        .save(output, String.valueOf(Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "mixed_prismarine_tiles_2")));
+
+                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DRIPSTONE_TILES, 4)
+                        .pattern("#X")
+                        .pattern("X#")
+                        .define('#', ModBlocks.POLISHED_DRIPSTONE)
+                        .define('X', ModBlocks.POLISHED_DARK_DRIPSTONE)
+                        .group("polished_dripstone_tiles")
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_DRIPSTONE), has(ModBlocks.POLISHED_DRIPSTONE))
+                        .save(output);
+
+                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DRIPSTONE_TILES, 4)
+                        .pattern("X#")
+                        .pattern("#X")
+                        .define('#', ModBlocks.POLISHED_DRIPSTONE)
+                        .define('X', ModBlocks.POLISHED_DARK_DRIPSTONE)
+                        .group("polished_dripstone_tiles")
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_DRIPSTONE), has(ModBlocks.POLISHED_DRIPSTONE))
+                        .save(output, String.valueOf(Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "polished_dripstone_tiles_2")));
+
+                shaped(RecipeCategory.MISC, ModItems.REINFORCED_KEY, 2)
+                        .pattern("#C#")
+                        .pattern("CSC")
+                        .pattern("#C#")
+                        .define('#', ModItems.STEEL_INGOT)
+                        .define('C', ModItems.STEEL_NUGGET)
+                        .define('S', ModItems.REINFORCED_KEY)
+                        .unlockedBy(getHasName(ModItems.REINFORCED_KEY), has(ModItems.REINFORCED_KEY))
+                        .save(output, String.valueOf(Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "reinforced_key_dupli")));
+
+                shapeless(RecipeCategory.COMBAT, ModItems.SPIKED_SHIELD)
+                        .requires(ModItems.SPIKED_SHIELD)
+                        .requires(ItemTags.BANNERS)
+                        .unlockedBy(getHasName(ModItems.SPIKED_SHIELD), has(ModItems.SPIKED_SHIELD))
+                        .save(output, String.valueOf(Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "spiked_shield_from_banner")));
+
+                shapeless(RecipeCategory.TOOLS, Items.FLINT_AND_STEEL)
+                        .requires(ModItems.STEEL_INGOT)
+                        .requires(Items.FLINT)
+                        .unlockedBy(getHasName(ModItems.STEEL_INGOT), has(ModItems.STEEL_INGOT))
+                        .save(output, String.valueOf(Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "steel_and_flint")));
+
+                shaped(RecipeCategory.MISC, ModItems.STEEL_UPGRADE_SMITHING_TEMPLATE, 2)
+                        .pattern("#S#")
+                        .pattern("#C#")
+                        .pattern("###")
+                        .define('#', Items.DIAMOND)
+                        .define('C', ModBlocks.STEEL_BLOCK)
+                        .define('S', ModItems.STEEL_UPGRADE_SMITHING_TEMPLATE)
+                        .unlockedBy(getHasName(ModItems.STEEL_UPGRADE_SMITHING_TEMPLATE), has(ModItems.STEEL_UPGRADE_SMITHING_TEMPLATE))
+                        .save(output, String.valueOf(Identifier.fromNamespaceAndPath(EarthWater.MOD_ID, "steel_upgrade_dupli")));
+
+                shaped(RecipeCategory.COMBAT, ModItems.WATER_CHARGE, 4)
+                        .pattern(" K ")
+                        .pattern("KBK")
+                        .pattern(" K ")
+                        .define('K', Items.KELP)
+                        .define('B', ModBlocks.OXYGEN_BLOCK)
+                        .unlockedBy(getHasName(ModBlocks.OXYGEN_BLOCK), has(ModBlocks.OXYGEN_BLOCK));
+
+                shaped(RecipeCategory.COMBAT, ModItems.WHIP)
+                        .pattern("  X")
+                        .pattern(" X#")
+                        .pattern("X# ")
+                        .define('#', Items.STRING)
+                        .define('X', ModItems.BRINE_ROD)
+                        .unlockedBy(getHasName(ModItems.BRINE_ROD), has(ModItems.BRINE_ROD))
+                        .save(output);
 
                 generateDripstoneRecipes();
                 generateDarkDripstoneRecipes();

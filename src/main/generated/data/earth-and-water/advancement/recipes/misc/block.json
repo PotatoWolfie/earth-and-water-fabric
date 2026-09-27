@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "earth-and-water:block"
+        "recipes": "earth-and-water:block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

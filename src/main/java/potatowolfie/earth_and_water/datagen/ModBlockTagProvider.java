@@ -122,6 +122,15 @@ public class ModBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(
                         key(ModBlocks.OXYGEN_BUBBLE)
                 );
+
+        builder(BlockTags.CONDUIT_EFFECT_BLOCK)
+                .add(
+                        key(ModBlocks.CHISELED_PRISMARINE_BRICKS),
+                        key(ModBlocks.PRISMARINE_TILES),
+                        key(ModBlocks.MIXED_PRISMARINE_TILES),
+                        key(ModBlocks.CHISELED_DARK_PRISMARINE),
+                        key(ModBlocks.PRISMARINE_PILLAR)
+                );
     }
 
     private static ResourceKey<Block> key(Block block) {

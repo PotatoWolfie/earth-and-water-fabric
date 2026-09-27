@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "earth-and-water:polished_dark_dripstone_stairs_from_dark_dripstone_block_stonecutting"
+        "recipes": "earth-and-water:polished_dark_dripstone_stairs_from_dark_dripstone_block_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

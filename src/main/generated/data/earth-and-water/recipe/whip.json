@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "minecraft:string",
+    "X": "earth-and-water:brine_rod"
+  },
+  "pattern": [
+    "  X",
+    " X#",
+    "X# "
+  ],
+  "result": {
+    "id": "earth-and-water:whip"
+  }
+}

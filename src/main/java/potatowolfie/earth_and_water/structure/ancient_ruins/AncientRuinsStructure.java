@@ -3,6 +3,7 @@ package potatowolfie.earth_and_water.structure.ancient_ruins;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.world.level.biome.BiomeResolver;
 import potatowolfie.earth_and_water.structure.ModStructureTypes;
 
 import java.util.Optional;
@@ -70,6 +71,9 @@ public class AncientRuinsStructure extends Structure {
         int attempts = 0;
         int maxAttempts = 50;
 
+        BiomeResolver biomeResolver = context.chunkGenerator().getBiomeSource()
+                .createCachingResolver(context.randomState());
+
         while (attempts < maxAttempts) {
             int randomY = context.random().nextInt(51) - 50;
 
@@ -79,11 +83,10 @@ public class AncientRuinsStructure extends Structure {
                     context.chunkPos().getMiddleBlockZ()
             );
 
-            Holder<Biome> biome = context.chunkGenerator().getBiomeSource().getNoiseBiome(
+            Holder<Biome> biome = biomeResolver.getNoiseBiome(
                     testPos.getX() >> 2,
                     testPos.getY() >> 2,
-                    testPos.getZ() >> 2,
-                    context.randomState().sampler()
+                    testPos.getZ() >> 2
             );
 
             if (biome.is(Biomes.DRIPSTONE_CAVES)) {

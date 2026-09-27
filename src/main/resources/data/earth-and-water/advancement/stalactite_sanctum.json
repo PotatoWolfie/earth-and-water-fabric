@@ -3,17 +3,15 @@
   "criteria": {
     "find_ancient_ruins": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "location": {
-                "structures": "earth-and-water:ancient_ruins"
-              }
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:location": {
+              "structures": "earth-and-water:ancient_ruins"
             }
           }
-        ]
+        }
       },
       "trigger": "minecraft:location"
     }
