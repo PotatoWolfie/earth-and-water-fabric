@@ -2,13 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "earth-and-water:limestone"
+    "S": "earth-and-water:limestone"
   },
   "pattern": [
-    "##",
-    "##"
+    "SS",
+    "SS"
   ],
   "result": {
+    "count": 4,
     "id": "earth-and-water:polished_limestone"
   }
 }
