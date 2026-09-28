@@ -91,7 +91,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DRIPSTONE_SLAB, Blocks.DRIPSTONE_BLOCK, 2);
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DRIPSTONE_WALL, Blocks.DRIPSTONE_BLOCK);
 
-                twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DRIPSTONE, Blocks.DRIPSTONE_BLOCK);
+                polished(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DRIPSTONE, Blocks.DRIPSTONE_BLOCK);
                 stairBuilder(ModBlocks.POLISHED_DRIPSTONE_STAIRS, Ingredient.of(ModBlocks.POLISHED_DRIPSTONE));
                 slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DRIPSTONE_SLAB, Ingredient.of(ModBlocks.POLISHED_DRIPSTONE));
                 wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DRIPSTONE_WALL, ModBlocks.POLISHED_DRIPSTONE);
@@ -104,7 +104,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DRIPSTONE_WALL, ModBlocks.POLISHED_DRIPSTONE);
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DRIPSTONE_WALL, Blocks.DRIPSTONE_BLOCK);
 
-                twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DRIPSTONE_BRICKS, ModBlocks.POLISHED_DRIPSTONE);
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DRIPSTONE_BRICKS, Ingredient.of(ModBlocks.POLISHED_DRIPSTONE)).unlockedBy(getHasName(ModBlocks.POLISHED_DRIPSTONE), has(ModBlocks.POLISHED_DRIPSTONE)).save(output);
                 stairBuilder(ModBlocks.DRIPSTONE_BRICK_STAIRS, Ingredient.of(ModBlocks.DRIPSTONE_BRICKS));
                 slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DRIPSTONE_BRICK_SLAB, Ingredient.of(ModBlocks.DRIPSTONE_BRICKS));
                 wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DRIPSTONE_BRICK_WALL, ModBlocks.DRIPSTONE_BRICKS);
@@ -142,7 +142,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_PILLAR, Ingredient.of(ModBlocks.DARK_DRIPSTONE_SLAB));
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_PILLAR, ModBlocks.DARK_DRIPSTONE_BLOCK);
 
-                twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE, ModBlocks.DARK_DRIPSTONE_BLOCK);
+                polished(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE, ModBlocks.DARK_DRIPSTONE_BLOCK);
                 stairBuilder(ModBlocks.POLISHED_DARK_DRIPSTONE_STAIRS, Ingredient.of(ModBlocks.POLISHED_DARK_DRIPSTONE));
                 slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE_SLAB, Ingredient.of(ModBlocks.POLISHED_DARK_DRIPSTONE));
                 wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE_WALL, ModBlocks.POLISHED_DARK_DRIPSTONE);
@@ -160,7 +160,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE_WALL, ModBlocks.POLISHED_DARK_DRIPSTONE);
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DARK_DRIPSTONE_WALL, ModBlocks.DARK_DRIPSTONE_BLOCK);
 
-                twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_BRICKS, ModBlocks.POLISHED_DARK_DRIPSTONE);
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_BRICKS, Ingredient.of(ModBlocks.POLISHED_DARK_DRIPSTONE)).unlockedBy(getHasName(ModBlocks.POLISHED_DARK_DRIPSTONE), has(ModBlocks.POLISHED_DARK_DRIPSTONE)).save(output);
                 stairBuilder(ModBlocks.DARK_DRIPSTONE_BRICK_STAIRS, Ingredient.of(ModBlocks.DARK_DRIPSTONE_BRICKS));
                 slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_BRICK_SLAB, Ingredient.of(ModBlocks.DARK_DRIPSTONE_BRICKS));
                 wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DARK_DRIPSTONE_BRICK_WALL, ModBlocks.DARK_DRIPSTONE_BRICKS);
@@ -182,7 +182,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PRISMARINE_TILE_SLAB, Ingredient.of(ModBlocks.PRISMARINE_TILES));
                 wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PRISMARINE_TILE_WALL, ModBlocks.PRISMARINE_TILES);
 
-                twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PRISMARINE_TILES, Blocks.PRISMARINE_BRICKS);
+                tilesBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PRISMARINE_TILES, Ingredient.of(Blocks.PRISMARINE_BRICKS)).unlockedBy(getHasName(Blocks.PRISMARINE_BRICKS), has(Blocks.PRISMARINE_BRICKS)).save(output);
                 stairBuilder(ModBlocks.PRISMARINE_TILE_STAIRS, Ingredient.of(ModBlocks.PRISMARINE_TILES));
 
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PRISMARINE_TILES, Blocks.PRISMARINE_BRICKS);
@@ -224,7 +224,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_SLAB, ModBlocks.LIMESTONE, 2);
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_WALL, ModBlocks.LIMESTONE);
 
-                twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_LIMESTONE, ModBlocks.LIMESTONE);
+                polished(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_LIMESTONE, ModBlocks.LIMESTONE);
                 stairBuilder(ModBlocks.POLISHED_LIMESTONE_STAIRS, Ingredient.of(ModBlocks.POLISHED_LIMESTONE));
                 slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_LIMESTONE_SLAB, Ingredient.of(ModBlocks.POLISHED_LIMESTONE));
                 wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_LIMESTONE_WALL, ModBlocks.POLISHED_LIMESTONE);
@@ -237,7 +237,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_LIMESTONE_WALL, ModBlocks.POLISHED_LIMESTONE);
                 createStonecuttingRecipe(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_LIMESTONE_WALL, ModBlocks.LIMESTONE);
 
-                twoByTwoPacker(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_BRICKS, ModBlocks.POLISHED_LIMESTONE);
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_BRICKS, Ingredient.of(ModBlocks.POLISHED_LIMESTONE)).unlockedBy(getHasName(ModBlocks.POLISHED_LIMESTONE), has(ModBlocks.POLISHED_LIMESTONE)).save(output);
                 stairBuilder(ModBlocks.LIMESTONE_BRICK_STAIRS, Ingredient.of(ModBlocks.LIMESTONE_BRICKS));
                 slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_BRICK_SLAB, Ingredient.of(ModBlocks.LIMESTONE_BRICKS));
                 wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_BRICK_WALL, ModBlocks.LIMESTONE_BRICKS);
