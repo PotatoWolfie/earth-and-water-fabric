@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "earth-and-water:oxygen_block",
+    "K": "minecraft:kelp"
+  },
+  "pattern": [
+    " K ",
+    "KBK",
+    " K "
+  ],
+  "result": {
+    "count": 4,
+    "id": "earth-and-water:water_charge"
+  }
+}

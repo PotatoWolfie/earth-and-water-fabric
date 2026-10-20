@@ -132,6 +132,7 @@ b19bc670fdb481196ddcc8d8c058ec4932a32a57 data/earth-and-water/advancement/recipe
 d4ce87b1c4fd9055c3b673743ed33172f46e969f data/earth-and-water/advancement/recipes/misc/steel_nugget_from_blasting_battle_axe.json
 2ab79ad83abd9c06f4000965cffa4553a949784e data/earth-and-water/advancement/recipes/misc/steel_nugget_from_smelting_battle_axe.json
 8d35ddf1197d667f722b864a77e6d3c44e79a037 data/earth-and-water/advancement/recipes/misc/steel_upgrade_dupli.json
+25d87c6927bd85fc2e281302a12a61f274ac1fd7 data/earth-and-water/advancement/recipes/misc/water_charge.json
 4ae8a6cea415bee1509955564e3ea0c031c9060c data/earth-and-water/advancement/recipes/tools/steel_and_flint.json
 f76d48f5ed0b3291178c1a5cdd293ca3c72e9492 data/earth-and-water/recipe/battle_axe.json
 cb34e6c826da5b20c56c783dc68ce6f966f80e6d data/earth-and-water/recipe/block.json
@@ -266,4 +267,5 @@ c224bf388a7d3ee36474a46e3fc462f9ddd161f6 data/earth-and-water/recipe/steel_ingot
 44bd9f865e7498bd75c2d71572b2da7d9d6dda59 data/earth-and-water/recipe/steel_nugget_from_blasting_battle_axe.json
 fac9035b42466335a6d19a0f1d31973b06dc28b9 data/earth-and-water/recipe/steel_nugget_from_smelting_battle_axe.json
 54cbdf58e4b3875cdb3c51a0cdc13b0f091d24d0 data/earth-and-water/recipe/steel_upgrade_dupli.json
+5895ad5c9a68cf3d67ff68238ebdbde266766389 data/earth-and-water/recipe/water_charge.json
 ee96f4a861c88f01d4228bb47b7a695c19440b80 data/earth-and-water/recipe/whip.json

@@ -42,6 +42,15 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
 
                 nineBlockStorageRecipes(RecipeCategory.BUILDING_BLOCKS, ModItems.STEEL_INGOT, RecipeCategory.MISC, ModBlocks.STEEL_BLOCK);
 
+                shaped(RecipeCategory.MISC, ModItems.WATER_CHARGE, 4)
+                        .pattern(" K ")
+                        .pattern("KBK")
+                        .pattern(" K ")
+                        .define('K', Items.KELP)
+                        .define('B', ModBlocks.OXYGEN_BLOCK)
+                        .unlockedBy(getHasName(Items.KELP), has(Items.KELP))
+                        .save(output);
+
                 shaped(RecipeCategory.MISC, ModItems.STEEL_INGOT, 1)
                         .pattern("XXX")
                         .pattern("XXX")
